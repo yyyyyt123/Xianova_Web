@@ -1,0 +1,53 @@
+name: Sync deployment repository
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: sync-deployment-main
+  cancel-in-progress: true
+
+jobs:
+  sync:
+    name: Push main to deployment mirror
+    if: github.repository == 'Xianova-Robotics/website'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Check out the complete repository history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Configure the deployment key
+        env:
+          DEPLOY_REPO_SSH_KEY: ${{ secrets.XIANOVA_WEB_DEPLOY_KEY }}
+        run: |
+          if [ -z "${DEPLOY_REPO_SSH_KEY:-}" ]; then
+            echo "Missing Actions secret: XIANOVA_WEB_DEPLOY_KEY" >&2
+            exit 1
+          fi
+
+          install -m 600 /dev/null "${RUNNER_TEMP}/xianova_web_deploy_key"
+          printf '%s\n' "${DEPLOY_REPO_SSH_KEY}" > "${RUNNER_TEMP}/xianova_web_deploy_key"
+
+          curl --fail --silent --show-error https://api.github.com/meta \
+            | jq -r '.ssh_keys[] | "github.com " + .' \
+            > "${RUNNER_TEMP}/github_known_hosts"
+          chmod 600 "${RUNNER_TEMP}/github_known_hosts"
+
+      - name: Push the source commit to the deployment mirror
+        env:
+          GIT_SSH_COMMAND: >-
+            ssh -i ${{ runner.temp }}/xianova_web_deploy_key
+            -o IdentitiesOnly=yes
+            -o StrictHostKeyChecking=yes
+            -o UserKnownHostsFile=${{ runner.temp }}/github_known_hosts
+        run: git push git@github.com:yyyyyt123/Xianova_Web.git HEAD:main
