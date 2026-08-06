@@ -149,8 +149,6 @@
     "metaDesc": "ORGA 以物体为中心的表征泛化架构：物体中心表征 → 几何约束提取 → 零样本迁移。",
     "heroTitle": "ORGA 技术架构",
     "heroDesc": "以物体为中心，提取可迁移的几何约束与空间结构，实现零样本泛化操作",
-    "diagramTitle": "架构示意",
-    "diagramPlaceholder": "ORGA 架构图占位",
     "principlesLabel": "技术原理",
     "principles": [
       {
@@ -169,27 +167,45 @@
         "desc": "在新物体、新场景、新本体上直接泛化，无需针对每个实例重新训练"
       }
     ],
-    "demoTitle": "泛化对比 Demo",
-    "demoDesc": "传统方法 vs ORGA：同一技能在未见物体与场景上的表现",
+    "demoTitle": "泛化 Demo",
+    "demoDesc": "从以人为中心的示教采集，到跨场景扩展与跨本体动作迁移 —— 同一套技能理解如何在新环境与新机器人上落地",
     "demos": [
-      { "title": "削皮任务 · 跨物体", "tag": "传统方法失败 / ORGA 成功" },
-      { "title": "抓取放置 · 跨场景", "tag": "新布局零样本" },
-      { "title": "双臂协同 · 跨本体", "tag": "统一技能模型" },
-      { "title": "精细操作 · 结构理解", "tag": "几何约束驱动" }
-    ],
-    "pubsTitle": "学术背书",
-    "pubsDesc": "相关工作发表于顶级机器人与视觉会议 / 期刊",
-    "pubs": [
-      { "venue": "RA-L", "title": "Robotics and Automation Letters" },
-      { "venue": "T-ASE", "title": "IEEE Trans. on Automation Science and Engineering" },
-      { "venue": "IROS", "title": "IEEE/RSJ International Conference on Intelligent Robots and Systems" },
-      { "venue": "CVPR", "title": "IEEE/CVF Conference on Computer Vision and Pattern Recognition" }
+      {
+        "tag": "数据采集",
+        "title": "以人为中心的全模态示教",
+        "desc": "穿戴式传感记录操作中的视觉、触觉与运动信号，为泛化模型提供高质量原始示教"
+      },
+      {
+        "tag": "跨场景",
+        "title": "一条示教，覆盖千变场景",
+        "desc": "基于物体中心表征，将单次示教扩展到姿态、布局与光照各异的新环境，无需重新采集"
+      },
+      {
+        "tag": "跨本体",
+        "title": "桌面操作迁移到人形双臂",
+        "desc": "在帕西尼人形机器人上完成抓取与放置，验证同一技能在不同本体上的零样本迁移"
+      },
+      {
+        "tag": "动作重定向",
+        "title": "人体动作一键映射到人形机器人",
+        "desc": "SparkUMR 将人的喝水等日常动作实时重定向到傅利叶 GR3，保持接触与姿态一致"
+      },
+      {
+        "tag": "精细操作",
+        "title": "复杂桌面整理的跨本体复现",
+        "desc": "把整理手机、笔记本等桌面物品的人体动作迁移到 GR3，展示精细操作的可迁移性"
+      },
+      {
+        "tag": "多机型复用",
+        "title": "厨房搅拌技能的统一驱动",
+        "desc": "同一套搅拌与盛装动作可驱动不同人形本体，体现统一技能模型的跨平台能力"
+      }
     ]
   },
   "footer": {
     "company": "深圳夏仙创新科技有限公司",
     "companyEn": "Xianova Robotics",
-    "email": "contact@xianova.ai",
+    "email": "support@xianova.ai",
     "address": "中国 · 深圳",
     "icp": "备案号待定",
     "rights": "保留所有权利"

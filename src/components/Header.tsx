@@ -47,23 +47,23 @@ export function Header() {
           : "bg-transparent"
       }`}
     >
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 md:px-12">
+      <div className="flex h-20 w-full items-center justify-between px-5 md:px-8 lg:px-10">
         <Link
           href="/"
           className="inline-flex items-center no-underline"
           aria-label="Xianova Robotics"
         >
-          <Logo inverted={onDark} priority className="!h-9 md:!h-10" />
+          <Logo inverted={onDark} priority className="!h-11 md:!h-12 lg:!h-14" />
         </Link>
 
-        <nav className="hidden items-center gap-0.5 md:flex">
+        <nav className="hidden items-center gap-1 md:flex">
           {links.map((link) => {
             const active = pathname === link.href;
             return (
               <Link
                 key={link.href}
                 href={link.href}
-                className={`label-mono relative inline-flex h-9 items-center px-3.5 no-underline transition-colors ${
+                className={`relative inline-flex h-11 items-center px-4 font-mono text-sm font-semibold uppercase tracking-[0.12em] no-underline transition-colors ${
                   onDark
                     ? active
                       ? "text-white"
@@ -76,7 +76,7 @@ export function Header() {
                 {link.label}
                 {active && (
                   <span
-                    className={`absolute inset-x-3.5 -bottom-0.5 h-px ${
+                    className={`absolute inset-x-4 -bottom-0.5 h-px ${
                       onDark ? "bg-sky" : "bg-brand"
                     }`}
                   />
@@ -87,7 +87,7 @@ export function Header() {
           <Link
             href={pathname}
             locale={otherLocale}
-            className={`label-mono ml-1 inline-flex h-9 items-center px-3 no-underline transition-colors ${
+            className={`ml-1 inline-flex h-11 items-center px-3.5 font-mono text-sm font-semibold uppercase tracking-[0.12em] no-underline transition-colors ${
               onDark
                 ? "text-sky hover:bg-white/10"
                 : "text-brand hover:bg-surface-dim"
@@ -97,7 +97,7 @@ export function Header() {
           </Link>
           <Link
             href="/contact"
-            className={`label-mono ml-2 inline-flex h-9 items-center px-4 no-underline transition ${
+            className={`ml-2 inline-flex h-11 items-center px-5 font-mono text-sm font-semibold uppercase tracking-[0.12em] no-underline transition ${
               onDark
                 ? "bg-sky text-deep hover:bg-white"
                 : "bg-ink text-white hover:bg-brand"

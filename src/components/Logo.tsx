@@ -1,7 +1,7 @@
 import Image from "next/image";
 
 type LogoProps = {
-  /** Invert to white for dark backgrounds */
+  /** Use white mark for dark backgrounds */
   inverted?: boolean;
   className?: string;
   priority?: boolean;
@@ -16,13 +16,13 @@ type LogoProps = {
 export function Logo({ inverted = false, className = "", priority }: LogoProps) {
   return (
     <Image
-      src="/logo.png?v=2"
+      src={inverted ? "/logo_white.png" : "/logo.png"}
       alt="夏仙创新 Xianova Robotics"
-      width={1024}
-      height={397}
+      width={1600}
+      height={622}
       priority={priority}
       unoptimized
-      className={`h-8 w-auto md:h-9 ${inverted ? "brightness-0 invert" : ""} ${className}`}
+      className={`h-8 w-auto md:h-9 ${className}`}
     />
   );
 }

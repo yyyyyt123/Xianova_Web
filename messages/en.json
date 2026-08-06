@@ -149,8 +149,6 @@
     "metaDesc": "ORGA — object-centric representation for generalization: object-centric features → geometric constraint extraction → zero-shot transfer.",
     "heroTitle": "ORGA Architecture",
     "heroDesc": "Object-centric extraction of transferable geometric constraints and spatial structure for zero-shot manipulation",
-    "diagramTitle": "Architecture overview",
-    "diagramPlaceholder": "ORGA diagram placeholder",
     "principlesLabel": "How it works",
     "principles": [
       {
@@ -170,26 +168,44 @@
       }
     ],
     "demoTitle": "Generalization demos",
-    "demoDesc": "Classic methods vs ORGA — same skill on unseen objects and scenes",
+    "demoDesc": "From human-centric multimodal capture to cross-scene expansion and cross-embodiment retargeting — how one skill understanding transfers to new environments and robot platforms",
     "demos": [
-      { "title": "Peeling · across objects", "tag": "Baseline fails / ORGA succeeds" },
-      { "title": "Pick & place · across scenes", "tag": "Zero-shot on new layouts" },
-      { "title": "Bimanual · across embodiments", "tag": "Unified skill model" },
-      { "title": "Fine manipulation · structure", "tag": "Constraint-driven" }
-    ],
-    "pubsTitle": "Publications",
-    "pubsDesc": "Related work at top robotics and vision venues",
-    "pubs": [
-      { "venue": "RA-L", "title": "Robotics and Automation Letters" },
-      { "venue": "T-ASE", "title": "IEEE Trans. on Automation Science and Engineering" },
-      { "venue": "IROS", "title": "IEEE/RSJ International Conference on Intelligent Robots and Systems" },
-      { "venue": "CVPR", "title": "IEEE/CVF Conference on Computer Vision and Pattern Recognition" }
+      {
+        "tag": "Data capture",
+        "title": "Human-centric multimodal teaching",
+        "desc": "Wearable sensing records vision, touch, and motion during manipulation — high-quality demos for generalization models"
+      },
+      {
+        "tag": "Across scenes",
+        "title": "One demo, a thousand scene variants",
+        "desc": "Object-centric representation expands a single demonstration across new poses, layouts, and lighting — no re-collection"
+      },
+      {
+        "tag": "Across embodiments",
+        "title": "Tabletop skills on a bimanual humanoid",
+        "desc": "Pick-and-place on a Paxini humanoid shows the same skill transferring zero-shot across robot bodies"
+      },
+      {
+        "tag": "Motion retargeting",
+        "title": "Map human motion onto a humanoid",
+        "desc": "SparkUMR retargets everyday actions like drinking onto Fourier GR3 while preserving contact and posture"
+      },
+      {
+        "tag": "Fine manipulation",
+        "title": "Desktop organization, retargeted",
+        "desc": "Human motions for arranging a phone and laptop transfer to GR3 — fine manipulation that travels with the skill"
+      },
+      {
+        "tag": "Multi-platform",
+        "title": "One kitchen skill, many robots",
+        "desc": "The same mixing and scooping routine drives different humanoid platforms — a unified skill model across embodiments"
+      }
     ]
   },
   "footer": {
     "company": "Shenzhen Xianova Innovation Technology Co., Ltd.",
     "companyEn": "Xianova Robotics",
-    "email": "contact@xianova.ai",
+    "email": "support@xianova.ai",
     "address": "Shenzhen, China",
     "icp": "ICP pending",
     "rights": "All rights reserved"
