@@ -1,0 +1,197 @@
+{
+  "meta": {
+    "title": "夏仙创新 Xianova Robotics | 机器人操作零样本泛化",
+    "description": "夏仙创新专注机器人操作零样本泛化，提出 ORGA 架构，让机器人从少量示教中理解物体结构与交互关系，在新物体、新场景、新本体中举一反三完成操作。",
+    "keywords": "具身智能,零样本泛化,机器人操作,ORGA,Xianova,夏仙创新"
+  },
+  "nav": {
+    "technology": "技术",
+    "solutions": "产品与方案",
+    "about": "关于我们",
+    "contact": "联系我们",
+    "cta": "联系合作"
+  },
+  "home": {
+    "previewTitle": "从技术壁垒到落地价值",
+    "pillars": ["跨物体泛化", "跨场景迁移", "跨本体统一"],
+    "entries": [
+      {
+        "title": "技术",
+        "desc": "ORGA 架构：物体中心表征、几何约束与零样本迁移",
+        "href": "/technology"
+      },
+      {
+        "title": "产品与方案",
+        "desc": "面向本体厂、数据平台与工业服务场景的部署价值",
+        "href": "/solutions"
+      },
+      {
+        "title": "关于我们",
+        "desc": "团队背景与公司定位",
+        "href": "/about"
+      }
+    ]
+  },
+  "hero": {
+    "brand": "Xianova",
+    "brandZh": "夏仙创新",
+    "title": "让机器人学会举一反三",
+    "subtitle": "从少量示教到零样本泛化操作 —— 理解物体结构与交互关系，而非死记动作轨迹",
+    "ctaPrimary": "了解 ORGA 技术",
+    "ctaSecondary": "联系合作",
+    "learnMore": "深入了解 ORGA 技术",
+    "scrollHint": "继续阅读"
+  },
+  "why": {
+    "label": "问题定义",
+    "title": "真实世界无法被数据穷尽",
+    "items": [
+      {
+        "title": "长尾场景",
+        "desc": "位姿、颜色、形状、光照千变万化，穷举采集永远不够"
+      },
+      {
+        "title": "部署成本高",
+        "desc": "每换一个场景都要重新采数据、重新训练，周期漫长"
+      },
+      {
+        "title": "死记轨迹",
+        "desc": "传统模仿学习记住见过的动作，无法迁移到新物体"
+      }
+    ]
+  },
+  "orga": {
+    "title": "ORGA：以物体为中心的表征泛化架构",
+    "desc": "从少量示教数据中提取隐含的几何约束与空间结构，让机器人从「记住见过的轨迹」变成「理解可迁移的操作规律」",
+    "capabilities": [
+      {
+        "title": "跨物体",
+        "desc": "学会削黄瓜，就会削胡萝卜"
+      },
+      {
+        "title": "跨场景",
+        "desc": "新位置、新光照、新布局无需重训"
+      },
+      {
+        "title": "跨本体",
+        "desc": "统一模型驱动不同机器人学会同一技能"
+      }
+    ]
+  },
+  "solutions": {
+    "metaTitle": "产品与方案 | 夏仙创新 Xianova Robotics",
+    "metaDesc": "降低非结构化场景部署成本：少采数据、少调模型、更快上线。面向本体厂、数据平台与工业服务场景。",
+    "label": "产品与方案",
+    "title": "降低非结构化场景的部署成本",
+    "desc": "少采数据、少调模型、更快部署",
+    "audiences": [
+      {
+        "title": "机器人本体厂",
+        "desc": "为不同机型快速赋予可迁移操作能力"
+      },
+      {
+        "title": "数据采集平台",
+        "desc": "以更少示教样本覆盖更广任务分布"
+      },
+      {
+        "title": "工业与服务场景",
+        "desc": "在变化环境中稳定落地，缩短上线周期"
+      }
+    ]
+  },
+  "team": {
+    "title": "团队",
+    "desc": "具身智能、大模型 Infra 与资本市场交叉背景",
+    "members": [
+      {
+        "name": "刘浚嘉 博士",
+        "role": "创始人 & CEO",
+        "bio": "香港中文大学机器人博士，长期深耕具身智能与机器人操作，具备人形机器人、双臂协同、灵巧手控制、模仿学习与强化学习经验，ORGA 架构提出者"
+      },
+      {
+        "name": "杨益滔 博士",
+        "role": "CTO",
+        "bio": "港中文大模型与 AI Infra 方向博士，曾任微软亚洲研究院研究员，主导字节跳动 Infra 部门 Agentic 自动化运维系统规模化落地"
+      },
+      {
+        "name": "曹圣婷 博士",
+        "role": "市场 / 法务总监",
+        "bio": "香港中文大学法学 JD，5 年+资本市场经验，经手 80+ 融资项目，曾深度参与管理超 10 亿美元基金"
+      }
+    ]
+  },
+  "about": {
+    "metaTitle": "关于我们 | 夏仙创新 Xianova Robotics",
+    "metaDesc": "夏仙创新专注机器人操作零样本泛化，提出以物体为中心的 ORGA 架构。",
+    "label": "关于我们",
+    "title": "关于夏仙创新",
+    "company": "夏仙创新专注机器人操作零样本泛化，提出以物体为中心的 ORGA 架构，让机器人从少量示教中理解物体结构、空间约束与交互关系，而非死记动作轨迹，从而在新物体、新场景、新本体中举一反三完成操作。"
+  },
+  "contact": {
+    "metaTitle": "联系我们 | 夏仙创新 Xianova Robotics",
+    "metaDesc": "欢迎投资人、本体厂与场景方洽谈合作。",
+    "label": "联系我们",
+    "title": "联系我们",
+    "desc": "欢迎投资人、本体厂与场景方洽谈合作",
+    "name": "姓名",
+    "company": "公司",
+    "email": "邮箱",
+    "intent": "合作意向",
+    "intentPlaceholder": "请简述您的合作方向…",
+    "submit": "发送留言",
+    "success": "感谢您的留言，我们会尽快回复。",
+    "emailLabel": "商务邮箱",
+    "wechatLabel": "微信",
+    "wechatPlaceholder": "二维码占位"
+  },
+  "technology": {
+    "metaTitle": "ORGA 技术 | 夏仙创新 Xianova Robotics",
+    "metaDesc": "ORGA 以物体为中心的表征泛化架构：物体中心表征 → 几何约束提取 → 零样本迁移。",
+    "heroTitle": "ORGA 技术架构",
+    "heroDesc": "以物体为中心，提取可迁移的几何约束与空间结构，实现零样本泛化操作",
+    "diagramTitle": "架构示意",
+    "diagramPlaceholder": "ORGA 架构图占位",
+    "principlesLabel": "技术原理",
+    "principles": [
+      {
+        "step": "01",
+        "title": "物体中心表征",
+        "desc": "将操作理解锚定在物体几何与交互关系上，而非相机坐标系下的绝对轨迹"
+      },
+      {
+        "step": "02",
+        "title": "几何约束提取",
+        "desc": "从少量示教中提炼隐含的空间约束与结构规律，形成可复用的操作先验"
+      },
+      {
+        "step": "03",
+        "title": "零样本迁移",
+        "desc": "在新物体、新场景、新本体上直接泛化，无需针对每个实例重新训练"
+      }
+    ],
+    "demoTitle": "泛化对比 Demo",
+    "demoDesc": "传统方法 vs ORGA：同一技能在未见物体与场景上的表现",
+    "demos": [
+      { "title": "削皮任务 · 跨物体", "tag": "传统方法失败 / ORGA 成功" },
+      { "title": "抓取放置 · 跨场景", "tag": "新布局零样本" },
+      { "title": "双臂协同 · 跨本体", "tag": "统一技能模型" },
+      { "title": "精细操作 · 结构理解", "tag": "几何约束驱动" }
+    ],
+    "pubsTitle": "学术背书",
+    "pubsDesc": "相关工作发表于顶级机器人与视觉会议 / 期刊",
+    "pubs": [
+      { "venue": "RA-L", "title": "Robotics and Automation Letters" },
+      { "venue": "T-ASE", "title": "IEEE Trans. on Automation Science and Engineering" },
+      { "venue": "IROS", "title": "IEEE/RSJ International Conference on Intelligent Robots and Systems" },
+      { "venue": "CVPR", "title": "IEEE/CVF Conference on Computer Vision and Pattern Recognition" }
+    ]
+  },
+  "footer": {
+    "company": "深圳夏仙创新科技有限公司",
+    "companyEn": "Xianova Robotics",
+    "email": "contact@xianova.ai",
+    "address": "中国 · 深圳",
+    "icp": "备案号待定",
+    "rights": "保留所有权利"
+  }
+}

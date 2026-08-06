@@ -3,21 +3,102 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f7f8fa;
+  --foreground: #13213c;
+  --deep: #080d16;
+  --sky: #84c3ff;
+  --brand: #0f7d76;
+  --line: #d8e0e9;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-noto), var(--font-space), system-ui, sans-serif;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: rgba(15, 125, 118, 0.22);
+  color: #13213c;
+}
+
+:focus-visible {
+  outline: 2px solid #0f7d76;
+  outline-offset: 3px;
+}
+
+@layer components {
+  .section-pad {
+    @apply px-8 py-20 md:px-12 md:py-28 lg:px-16;
+  }
+
+  .max-site {
+    @apply mx-auto max-w-6xl;
+  }
+
+  .max-prose-site {
+    @apply mx-auto max-w-prose;
+  }
+
+  .label-mono {
+    @apply font-mono text-[11px] font-semibold uppercase tracking-[0.14em];
+  }
+
+  .section-rule {
+    @apply mb-8 flex items-center gap-3;
+  }
+
+  .section-num {
+    @apply flex h-7 w-7 shrink-0 items-center justify-center font-mono text-[11px] font-semibold text-white tabular-nums;
+    background-color: #0f7d76;
+  }
+
+  .btn-primary {
+    @apply inline-flex h-11 items-center justify-center bg-ink px-6 font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-white no-underline transition duration-300;
+  }
+
+  .btn-primary:hover {
+    @apply bg-brand;
+  }
+
+  .btn-sky {
+    @apply inline-flex h-11 items-center justify-center bg-sky px-6 font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-deep no-underline transition duration-300;
+  }
+
+  .btn-sky:hover {
+    @apply bg-white;
+  }
+
+  .btn-ghost {
+    @apply inline-flex h-11 items-center justify-center border border-white/25 px-6 font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-white no-underline transition duration-300;
+  }
+
+  .btn-ghost:hover {
+    @apply border-white/55 bg-white/10;
+  }
+
+  .card-grid {
+    @apply grid grid-cols-1 gap-px overflow-hidden border border-line bg-line;
+  }
+
+  .card-cell {
+    @apply border-line bg-surface transition duration-300;
+  }
+
+  .grain {
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
+    opacity: 0.35;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+  }
 }
 
 @layer utilities {

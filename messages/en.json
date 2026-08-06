@@ -1,0 +1,197 @@
+{
+  "meta": {
+    "title": "Xianova Robotics | Zero-Shot Generalization for Robot Manipulation",
+    "description": "Xianova Robotics focuses on zero-shot generalization for robot manipulation. Our ORGA architecture enables robots to understand object structure and interaction from few demonstrations — and transfer across objects, scenes, and embodiments.",
+    "keywords": "embodied AI,zero-shot generalization,robot manipulation,ORGA,Xianova"
+  },
+  "nav": {
+    "technology": "Technology",
+    "solutions": "Solutions",
+    "about": "About",
+    "contact": "Contact",
+    "cta": "Partner with us"
+  },
+  "home": {
+    "previewTitle": "From technical moat to deployment value",
+    "pillars": ["Across objects", "Across scenes", "Across embodiments"],
+    "entries": [
+      {
+        "title": "Technology",
+        "desc": "ORGA — object-centric representation, geometric constraints, zero-shot transfer",
+        "href": "/technology"
+      },
+      {
+        "title": "Solutions",
+        "desc": "Deployment value for OEMs, data platforms, and industrial & service scenes",
+        "href": "/solutions"
+      },
+      {
+        "title": "About",
+        "desc": "Team background and company focus",
+        "href": "/about"
+      }
+    ]
+  },
+  "hero": {
+    "brand": "Xianova",
+    "brandZh": "夏仙创新",
+    "title": "Teach robots to extrapolate",
+    "subtitle": "From few demos to zero-shot manipulation — understand structure and interaction, not memorize trajectories",
+    "ctaPrimary": "Explore ORGA",
+    "ctaSecondary": "Get in touch",
+    "learnMore": "Dive deeper into ORGA",
+    "scrollHint": "Read on"
+  },
+  "why": {
+    "label": "The problem",
+    "title": "The real world cannot be exhausted by data",
+    "items": [
+      {
+        "title": "Long-tail scenes",
+        "desc": "Pose, color, shape, and lighting vary endlessly — exhaustive collection never catches up"
+      },
+      {
+        "title": "High deployment cost",
+        "desc": "Every new scene demands fresh data and retraining, stretching timelines"
+      },
+      {
+        "title": "Trajectory memorization",
+        "desc": "Classic imitation learning remembers seen motions and fails on novel objects"
+      }
+    ]
+  },
+  "orga": {
+    "title": "ORGA: Object-centric Representation for Generalization",
+    "desc": "Extract latent geometric constraints and spatial structure from few demonstrations — so robots move from memorizing trajectories to understanding transferable manipulation principles",
+    "capabilities": [
+      {
+        "title": "Across objects",
+        "desc": "Learn to peel a cucumber — then peel a carrot"
+      },
+      {
+        "title": "Across scenes",
+        "desc": "New poses, lighting, and layouts — no retraining"
+      },
+      {
+        "title": "Across embodiments",
+        "desc": "One model teaches the same skill to different robots"
+      }
+    ]
+  },
+  "solutions": {
+    "metaTitle": "Solutions | Xianova Robotics",
+    "metaDesc": "Cut deployment cost in unstructured settings — less data, less tuning, faster rollout for OEMs, data platforms, and industrial & service customers.",
+    "label": "Solutions",
+    "title": "Cut deployment cost in unstructured settings",
+    "desc": "Less data, less tuning, faster rollout",
+    "audiences": [
+      {
+        "title": "Robot OEMs",
+        "desc": "Rapidly endow platforms with transferable manipulation skills"
+      },
+      {
+        "title": "Data platforms",
+        "desc": "Cover broader task distributions with fewer demonstrations"
+      },
+      {
+        "title": "Industrial & service",
+        "desc": "Stable deployment in changing environments, shorter time-to-production"
+      }
+    ]
+  },
+  "team": {
+    "title": "Team",
+    "desc": "Embodied AI, foundation-model infra, and capital markets",
+    "members": [
+      {
+        "name": "Dr. Junjia Liu",
+        "role": "Founder & CEO",
+        "bio": "PhD in Robotics, CUHK. Deep expertise in embodied intelligence and robot manipulation — humanoids, bimanual coordination, dexterous hands, imitation & reinforcement learning. Creator of the ORGA architecture."
+      },
+      {
+        "name": "Dr. Yitao Yang",
+        "role": "CTO",
+        "bio": "PhD in large models & AI infra, CUHK. Former researcher at Microsoft Research Asia. Led large-scale Agentic automated ops systems in ByteDance Infra."
+      },
+      {
+        "name": "Dr. Shengting Cao",
+        "role": "Head of Market & Legal",
+        "bio": "JD, CUHK. 5+ years in capital markets, 80+ financing deals, and deep involvement managing funds exceeding USD 1B."
+      }
+    ]
+  },
+  "about": {
+    "metaTitle": "About | Xianova Robotics",
+    "metaDesc": "Xianova Robotics focuses on zero-shot generalization for robot manipulation with the object-centric ORGA architecture.",
+    "label": "About",
+    "title": "About Xianova",
+    "company": "Xianova Robotics focuses on zero-shot generalization for robot manipulation. We propose the object-centric ORGA architecture so robots understand object structure, spatial constraints, and interaction from few demonstrations — instead of memorizing motion trajectories — and extrapolate across novel objects, scenes, and embodiments."
+  },
+  "contact": {
+    "metaTitle": "Contact | Xianova Robotics",
+    "metaDesc": "Investors, OEMs, and scene partners — let's talk.",
+    "label": "Contact",
+    "title": "Contact",
+    "desc": "Investors, OEMs, and scene partners — let's talk",
+    "name": "Name",
+    "company": "Company",
+    "email": "Email",
+    "intent": "Intent",
+    "intentPlaceholder": "Briefly describe how you'd like to collaborate…",
+    "submit": "Send message",
+    "success": "Thanks — we'll get back to you soon.",
+    "emailLabel": "Business email",
+    "wechatLabel": "WeChat",
+    "wechatPlaceholder": "QR placeholder"
+  },
+  "technology": {
+    "metaTitle": "ORGA Technology | Xianova Robotics",
+    "metaDesc": "ORGA — object-centric representation for generalization: object-centric features → geometric constraint extraction → zero-shot transfer.",
+    "heroTitle": "ORGA Architecture",
+    "heroDesc": "Object-centric extraction of transferable geometric constraints and spatial structure for zero-shot manipulation",
+    "diagramTitle": "Architecture overview",
+    "diagramPlaceholder": "ORGA diagram placeholder",
+    "principlesLabel": "How it works",
+    "principles": [
+      {
+        "step": "01",
+        "title": "Object-centric representation",
+        "desc": "Anchor manipulation understanding in object geometry and interaction — not absolute trajectories in camera space"
+      },
+      {
+        "step": "02",
+        "title": "Geometric constraint extraction",
+        "desc": "Distill latent spatial constraints and structural priors from few demonstrations into reusable manipulation knowledge"
+      },
+      {
+        "step": "03",
+        "title": "Zero-shot transfer",
+        "desc": "Generalize to novel objects, scenes, and embodiments without per-instance retraining"
+      }
+    ],
+    "demoTitle": "Generalization demos",
+    "demoDesc": "Classic methods vs ORGA — same skill on unseen objects and scenes",
+    "demos": [
+      { "title": "Peeling · across objects", "tag": "Baseline fails / ORGA succeeds" },
+      { "title": "Pick & place · across scenes", "tag": "Zero-shot on new layouts" },
+      { "title": "Bimanual · across embodiments", "tag": "Unified skill model" },
+      { "title": "Fine manipulation · structure", "tag": "Constraint-driven" }
+    ],
+    "pubsTitle": "Publications",
+    "pubsDesc": "Related work at top robotics and vision venues",
+    "pubs": [
+      { "venue": "RA-L", "title": "Robotics and Automation Letters" },
+      { "venue": "T-ASE", "title": "IEEE Trans. on Automation Science and Engineering" },
+      { "venue": "IROS", "title": "IEEE/RSJ International Conference on Intelligent Robots and Systems" },
+      { "venue": "CVPR", "title": "IEEE/CVF Conference on Computer Vision and Pattern Recognition" }
+    ]
+  },
+  "footer": {
+    "company": "Shenzhen Xianova Innovation Technology Co., Ltd.",
+    "companyEn": "Xianova Robotics",
+    "email": "contact@xianova.ai",
+    "address": "Shenzhen, China",
+    "icp": "ICP pending",
+    "rights": "All rights reserved"
+  }
+}
