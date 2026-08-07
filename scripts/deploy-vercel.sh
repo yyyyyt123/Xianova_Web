@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Deploy Xianova website to Vercel and attach www.xianova.ai
 set -euo pipefail
-cd "$(dirname "$0")"
+cd "$(dirname "$0")/.."
 
 if ! npx vercel whoami >/dev/null 2>&1; then
   echo "Please login first: npx vercel login"

@@ -78,6 +78,10 @@ unrelated repositories.
 After that, every push to the source repository's `main` branch updates the
 deployment mirror. Vercel sees that push and creates a production deployment.
 
+Before updating the deployment mirror, the workflow performs a clean dependency
+install and a production build. It also reconciles the mirror once per hour so
+a transient GitHub-hosted runner scheduling failure is retried automatically.
+
 > **Visibility note:** Keep the deployment mirror public unless all source
 > commit authors have access to the Vercel project. For private Git repositories,
 > Vercel checks commit-author access; on a Hobby team, the commit author must be
