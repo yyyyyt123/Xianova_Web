@@ -63,7 +63,10 @@ export default async function LocaleLayout({ children, params }: Props) {
         <meta name="keywords" content={t("keywords")} />
         <meta name="theme-color" content="#F7F8FA" />
       </head>
-      <body className="min-h-screen bg-page font-sans text-ink antialiased">
+      <body
+        className="min-h-screen bg-page font-sans text-ink antialiased"
+        data-deployment-check="mirror-pipeline-20260807"
+      >
         <NextIntlClientProvider messages={messages}>
           <Header />
           <main>{children}</main>
