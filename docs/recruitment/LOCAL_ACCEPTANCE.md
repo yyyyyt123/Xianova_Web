@@ -2,7 +2,7 @@
 
 日期：2026-10-29  
 需求基线：[PRD_v2.2.md](./PRD_v2.2.md)  
-状态：本地程序已启动，使用已授权的阿里云开发库；未部署服务器。2026-10-29用户已授权将本轮代码和文档提交、推送至三仓开发分支。
+状态：本地验收后，Sparkling后端与管理后台已按后续授权部署开发服务器；官网前端未部署，生产未发布。原有本地记录保留供追溯，当前开发环境结论见第11节。
 
 ## 1. 验收入口
 
@@ -142,3 +142,7 @@ npm run dev -- --host 127.0.0.1 --port 5175
 - 附件只保留在受限内存队列中。邮件发出前异常重启可能需要HR联系候选人补交，此边界已获用户确认。未部署、提交或推送代码。
 
 ![提交成功并清空表单](./images/submission-success.png)
+
+## 11. 开发环境发布验收（2026-10-29）
+
+开发后台入口：https://dev_manage.sparklingrobo.com/#/admin/xianova-recruitment/jobs 。后端运行`ccee460`，管理后台运行`6fe473d`。使用直接API调用验证投递，不使用或部署官网；仅向已确认的测试收件邮箱发信。新申请幂等重试没有重复记录或通知，SMTP已受理；后台中文附件名、中文筛选、详情与跟进持久化已确认。最终完整本地verify包含独立演练库集成测试：234项，失败0，错误0，跳过7。开发网关及权限边界通过验证，当前启动错误0、重启0。未重复建表或建立Flyway历史，未进行生产发布。完整证据及已知限制见[开发环境发布记录](https://github.com/Synria-Robotics/Sparkling-Admin-Service/blob/codex/xianova-recruitment/docs/recruitment-dev-deployment.md)。
