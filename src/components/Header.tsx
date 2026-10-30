@@ -32,6 +32,7 @@ export function Header() {
     { href: "/technology" as const, label: t("technology") },
     { href: "/solutions" as const, label: t("solutions") },
     { href: "/about" as const, label: t("about") },
+    { href: "/careers" as const, label: t("careers") },
     { href: "/contact" as const, label: t("contact") },
   ];
 
