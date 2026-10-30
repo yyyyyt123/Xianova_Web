@@ -25,6 +25,13 @@ npm run build
 npm start
 ```
 
+The committed `.env.production` sets the recruitment API origin to
+`https://www.sparklingrobo.com`, so production builds use the live backend
+without requiring an additional Vercel environment variable. The recruitment
+contact email is returned by the backend rather than configured in the frontend.
+Existing platform environment variables take precedence. Do not copy local
+`.env.local` files into production builds; they also override `.env.production`.
+
 ## Structure
 
 - `/[locale]` — home (hero + entry links)
