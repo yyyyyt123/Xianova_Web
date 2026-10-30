@@ -146,3 +146,16 @@ npm run dev -- --host 127.0.0.1 --port 5175
 ## 11. 开发环境发布验收（2026-10-29）
 
 开发后台入口：https://dev_manage.sparklingrobo.com/#/admin/xianova-recruitment/jobs 。后端运行`ccee460`，管理后台运行`6fe473d`。使用直接API调用验证投递，不使用或部署官网；仅向已确认的测试收件邮箱发信。新申请幂等重试没有重复记录或通知，SMTP已受理；后台中文附件名、中文筛选、详情与跟进持久化已确认。最终完整本地verify包含独立演练库集成测试：234项，失败0，错误0，跳过7。开发网关及权限边界通过验证，当前启动错误0、重启0。未重复建表或建立Flyway历史，未进行生产发布。完整证据及已知限制见[开发环境发布记录](https://github.com/Synria-Robotics/Sparkling-Admin-Service/blob/codex/xianova-recruitment/docs/recruitment-dev-deployment.md)。
+
+## 12. 独立结果页本地验收（2026-10-30）
+
+本节取代第10节中“提交后仍可在原页重新填写表单”的交互。新分支为 codex/recruitment-success-page；本次仅开发官网前端，不修改后端或生产环境。
+
+- 本地隔离页面端口3002、模拟API端口18082，不连接数据库或SMTP，仅使用虚构资料和本地PDF样例。
+- 提交成功后进入独立 /apply/success 路由；页面中 form 与 input 均为0，只显示成功提示及两个返回入口。
+- 刷新后仍为结果页，不恢复表单；英文切换保留结果路由，返回岗位列表和首页均保留当前语言。
+- 模拟提交拒绝时，错误、表单字段和附件保留；模拟提交响应中断、状态查询确认已登记时，仍正确跳转结果页。
+- 隐藏申请编号、邮件技术状态及再次投递入口；页面没有依赖岗位详情或邮件状态的额外API请求。
+
+![独立申请提交结果页](./images/submission-success-page.png)
+- 验证补充：生产构建、TypeScript和lint通过，原上传校验2项通过；首次构建的Google字体下载中断在重试后恢复。当前304px窄屏无横向溢出。模拟服务已停止，保留3000本地官网供用户验收。

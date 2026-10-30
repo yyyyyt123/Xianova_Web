@@ -26,6 +26,7 @@
     "loadError": "招聘信息暂时无法加载，请稍后刷新。",
     "closed": "该岗位已停止招聘，请返回查看其他岗位。",
     "backToList": "返回岗位列表",
+    "backToHome": "返回首页",
     "backToJob": "返回职位详情",
     "responsibilities": "岗位职责",
     "requirements": "任职要求",
