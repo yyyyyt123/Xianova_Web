@@ -62,6 +62,7 @@ export default async function LocaleLayout({ children, params }: Props) {
         <meta name="description" content={t("description")} />
         <meta name="keywords" content={t("keywords")} />
         <meta name="theme-color" content="#F7F8FA" />
+        {process.env.NEXT_PUBLIC_RECRUITMENT_API_ORIGIN && <link rel="preconnect" href={process.env.NEXT_PUBLIC_RECRUITMENT_API_ORIGIN} crossOrigin="anonymous" />}
       </head>
       <body
         className="min-h-screen bg-page font-sans text-ink antialiased"
