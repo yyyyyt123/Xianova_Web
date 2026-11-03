@@ -9,26 +9,26 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        page: "#F7F8FA",
+        page: "#f9fbfc",
         deep: "#080D16",
         ink: {
-          DEFAULT: "#13213C",
-          soft: "#2B4160",
-          mute: "#546478",
-          faint: "#9CAABB",
+          DEFAULT: "#1b2c38",
+          soft: "#3b5669",
+          mute: "#536775",
+          faint: "#6c8292",
         },
-        line: "#D8E0E9",
+        line: "#d1dde5",
         sky: {
           DEFAULT: "#84C3FF",
           deep: "#223A66",
         },
         brand: {
-          DEFAULT: "#0F7D76",
-          soft: "#49CEBA",
+          DEFAULT: "#1b6578",
+          soft: "#80afc2",
         },
         surface: {
           DEFAULT: "#FFFFFF",
-          dim: "#F0F2F4",
+          dim: "#edf3f6",
           dark: "#0D1825",
         },
       },

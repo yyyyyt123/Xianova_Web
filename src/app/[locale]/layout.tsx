@@ -6,6 +6,9 @@ import { Space_Grotesk, Noto_Sans_SC, JetBrains_Mono } from "next/font/google";
 import { routing } from "@/i18n/routing";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { BrandOpeningProvider } from "@/components/BrandOpening";
+import { OPENING_BOOT_SCRIPT, OPENING_BOOT_STYLES } from "@/lib/brand-opening-boot.mjs";
+import "@/components/editorial.css";
 
 const space = Space_Grotesk({
   subsets: ["latin"],
@@ -56,12 +59,15 @@ export default async function LocaleLayout({ children, params }: Props) {
   return (
     <html
       lang={locale}
+      suppressHydrationWarning
       className={`${space.variable} ${noto.variable} ${mono.variable}`}
     >
       <head>
+        <style id="brand-opening-boot-style" dangerouslySetInnerHTML={{ __html: OPENING_BOOT_STYLES }} />
+        <script id="brand-opening-boot" dangerouslySetInnerHTML={{ __html: OPENING_BOOT_SCRIPT }} />
         <meta name="description" content={t("description")} />
         <meta name="keywords" content={t("keywords")} />
-        <meta name="theme-color" content="#F7F8FA" />
+        <meta name="theme-color" content="#f9fbfc" />
         {process.env.NEXT_PUBLIC_RECRUITMENT_API_ORIGIN && <link rel="preconnect" href={process.env.NEXT_PUBLIC_RECRUITMENT_API_ORIGIN} crossOrigin="anonymous" />}
       </head>
       <body
@@ -69,9 +75,11 @@ export default async function LocaleLayout({ children, params }: Props) {
         data-deployment-check="mirror-pipeline-20260807"
       >
         <NextIntlClientProvider messages={messages}>
+          <BrandOpeningProvider>
           <Header />
-          <main>{children}</main>
+          <main id="main-content" tabIndex={-1}>{children}</main>
           <Footer />
+          </BrandOpeningProvider>
         </NextIntlClientProvider>
       </body>
     </html>

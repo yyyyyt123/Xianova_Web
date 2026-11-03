@@ -1,95 +1,103 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { createParticleField, type ParticleField, type ParticleShape } from "@/lib/particle-field";
+import { getXianovaMarkPoints } from "@/lib/xianova-mark";
 
-/**
- * Sparse point field for dark cinematic heroes.
- */
-export function PointCloud() {
+type Props = {
+  shape?: ParticleShape;
+  animated?: boolean;
+  onAvailabilityChange?: (available: boolean) => void;
+};
+
+function fallbackPoints(shape: ParticleShape) {
+  const mark = getXianovaMarkPoints();
+  return Array.from({ length: 1050 }, (_, i) => {
+    const u = i * 2.3999632297;
+    const v = i * .963373;
+    const radius = 1 + .1 * Math.cos(u * 3);
+    let x = (radius + .26 * Math.cos(v)) * Math.cos(u);
+    let y = (radius + .26 * Math.cos(v)) * Math.sin(u);
+    let z = .26 * Math.sin(v);
+    if (shape === 0) {
+      const position = ((i * 337) % (mark.length / 2)) * 2;
+      x = mark[position];
+      y = mark[position + 1];
+    } else if (shape === 2) {
+      const twist = u * .5 + 40 * .085 + .8;
+      const across = Math.sin(v) * .46 * (1 + .12 * Math.sin(2 * u - 2));
+      x = (1.22 + across * Math.cos(twist)) * Math.cos(u);
+      y = (.92 + across * Math.cos(twist)) * Math.sin(u);
+      z = .22 * Math.sin(2 * u + .5) + across * Math.sin(twist);
+      const azimuth = .55 + .3 * Math.sin(.04 * 40);
+      const x1 = x * Math.cos(azimuth) - y * Math.sin(azimuth);
+      const y1 = x * Math.sin(azimuth) + y * Math.cos(azimuth);
+      const x2 = x1 * Math.cos(.28) + z * Math.sin(.28);
+      const z2 = z * Math.cos(.28) - x1 * Math.sin(.28);
+      x = x2;
+      y = y1 * Math.cos(-.98) - z2 * Math.sin(-.98);
+      z = y1 * Math.sin(-.98) + z2 * Math.cos(-.98);
+    }
+    const perspective = 3.8 / (3.8 + z);
+    return { x: 980 + x * 282 * perspective, y: 385 - y * 220 * perspective, opacity: .20 + (Math.sin(v) + 1) * .2 };
+  });
+}
+
+/** WebGL sculpture with an SSR-visible fallback, context recovery, and complete teardown. */
+export function PointCloud({ shape = 0, animated = false, onAvailabilityChange }: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const fieldRef = useRef<ParticleField | null>(null);
+  const configRef = useRef({ shape, animated, onAvailabilityChange });
+  const [available, setAvailable] = useState(false);
+  const fallback = useMemo(() => fallbackPoints(shape), [shape]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-
-    let raf = 0;
-    let w = 0;
-    let h = 0;
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
-
-    type Particle = { x: number; y: number; z: number; vx: number; vy: number };
-    let particles: Particle[] = [];
-
-    const resize = () => {
-      w = canvas.clientWidth;
-      h = canvas.clientHeight;
-      canvas.width = w * dpr;
-      canvas.height = h * dpr;
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      const count = Math.floor((w * h) / 11000);
-      particles = Array.from(
-        { length: Math.max(40, Math.min(count, 110)) },
-        () => ({
-          x: Math.random() * w,
-          y: Math.random() * h,
-          z: Math.random(),
-          vx: (Math.random() - 0.5) * 0.2,
-          vy: (Math.random() - 0.5) * 0.2,
-        })
-      );
+    const initialize = () => {
+      fieldRef.current?.dispose();
+      fieldRef.current = null;
+      try { fieldRef.current = createParticleField(canvas); }
+      catch (error) { console.error("Particle renderer initialization failed", error); }
+      const ready = !!fieldRef.current;
+      setAvailable(ready);
+      configRef.current.onAvailabilityChange?.(ready);
+      if (fieldRef.current) {
+        fieldRef.current.setShape(configRef.current.shape);
+        fieldRef.current.setAnimated(configRef.current.animated);
+      } else canvas.dataset.renderer = "fallback";
     };
-
-    const draw = () => {
-      ctx.clearRect(0, 0, w, h);
-      for (const p of particles) {
-        p.x += p.vx;
-        p.y += p.vy;
-        if (p.x < 0) p.x = w;
-        if (p.x > w) p.x = 0;
-        if (p.y < 0) p.y = h;
-        if (p.y > h) p.y = 0;
-        const r = 0.5 + p.z * 1.6;
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(132, 195, 255, ${0.12 + p.z * 0.45})`;
-        ctx.fill();
-      }
-      for (let i = 0; i < particles.length; i++) {
-        for (let j = i + 1; j < particles.length; j++) {
-          const a = particles[i];
-          const b = particles[j];
-          const dx = a.x - b.x;
-          const dy = a.y - b.y;
-          const dist = Math.hypot(dx, dy);
-          if (dist < 100) {
-            ctx.beginPath();
-            ctx.moveTo(a.x, a.y);
-            ctx.lineTo(b.x, b.y);
-            ctx.strokeStyle = `rgba(132, 195, 255, ${0.1 * (1 - dist / 100)})`;
-            ctx.lineWidth = 0.6;
-            ctx.stroke();
-          }
-        }
-      }
-      raf = requestAnimationFrame(draw);
+    const onLost = (event: Event) => {
+      event.preventDefault();
+      fieldRef.current?.dispose();
+      fieldRef.current = null;
+      canvas.dataset.renderer = "fallback";
+      setAvailable(false);
+      configRef.current.onAvailabilityChange?.(false);
     };
-
-    resize();
-    draw();
-    window.addEventListener("resize", resize);
+    canvas.addEventListener("webglcontextlost", onLost);
+    canvas.addEventListener("webglcontextrestored", initialize);
+    initialize();
     return () => {
-      cancelAnimationFrame(raf);
-      window.removeEventListener("resize", resize);
+      canvas.removeEventListener("webglcontextlost", onLost);
+      canvas.removeEventListener("webglcontextrestored", initialize);
+      fieldRef.current?.dispose();
+      fieldRef.current = null;
     };
   }, []);
 
+  useEffect(() => {
+    configRef.current = { shape, animated, onAvailabilityChange };
+    fieldRef.current?.setShape(shape);
+    fieldRef.current?.setAnimated(animated);
+  }, [shape, animated, onAvailabilityChange]);
+
   return (
-    <canvas
-      ref={canvasRef}
-      className="absolute inset-0 h-full w-full"
-      aria-hidden
-    />
+    <div className="particle-art" data-available={available} aria-hidden="true">
+      <svg className="particle-art-fallback" viewBox="0 0 1440 900" fill="#586e7b">
+        {fallback.map((point, i) => <circle key={i} cx={point.x} cy={point.y} r={i % 4 === 0 ? 1.2 : .8} opacity={point.opacity} />)}
+      </svg>
+      <canvas ref={canvasRef} className="particle-art-canvas" data-renderer="pending" />
+    </div>
   );
 }

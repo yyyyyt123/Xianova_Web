@@ -9,6 +9,7 @@ import {SafeJobText} from './SafeJobText';
 import {CountryCallingCodePicker} from './CountryCallingCodePicker';
 import {ApplicationSuccess} from './ApplicationSuccess';
 import {startVisibleJobsRefresh} from '@/lib/visible-jobs-refresh.mjs';
+import {PageIntro} from '../Editorial';
 
 type Credentials = {key: string; token: string};
 export function CareersPage({jobId, apply=false, initialJobs, initialJobsAt}: {jobId?: string; apply?: boolean; initialJobs?: Job[]; initialJobsAt?: number}) {
@@ -85,8 +86,8 @@ export function CareersPage({jobId, apply=false, initialJobs, initialJobsAt}: {j
   if(submitted)return <ApplicationSuccess/>;
   const title=job?jobText(job.title,locale):t('title');
   return <>
-    <section className="relative overflow-hidden bg-deep px-6 pb-14 pt-32 text-white md:px-12 md:pb-20 md:pt-40"><div className="max-site"><p className="label-mono mb-5 text-sky">XIANOVA / {t('eyebrow')}</p><h1 className="max-w-4xl text-3xl font-semibold leading-tight md:text-5xl">{apply?t('applyTitle'):title}</h1><p className="mt-5 max-w-2xl leading-8 text-white/65">{job?`${jobText(job.location,locale)} · ${t(`types.${job.employmentType}`)}`:t('intro')}</p></div></section>
-    <section className="section-pad !py-12"><div className="max-site">
+    <PageIntro index="04" label={t('eyebrow')} title={apply?t('applyTitle'):title} description={job?`${jobText(job.location,locale)} · ${t(`types.${job.employmentType}`)}`:t('intro')} variant={1}/>
+    <section className="section-pad !py-12 recruitment-body"><div className="max-site">
       {jobId&&<Link href={apply?`/careers/${jobId}`:'/careers'} className="label-mono mb-8 inline-block text-brand">← {apply?t('backToJob'):t('backToList')}</Link>}
       {loading&&<p role="status" className="py-16 text-ink-mute">{t('loading')}</p>}
       {error&&<div role="alert" className="mb-6 border-l-4 border-red-600 bg-red-50 p-5 text-red-800">{error}{!jobId&&<button type="button" disabled={listRefreshing} onClick={()=>void retryJobs.current?.()} className="ml-4 underline disabled:opacity-50">{listRefreshing?t('updatingJobs'):t('retryJobs')}</button>}</div>}

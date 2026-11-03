@@ -2,7 +2,8 @@ import { setRequestLocale } from "next-intl/server";
 import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
 import { Hero } from "@/components/sections/Hero";
-import { HomePreview } from "@/components/sections/HomePreview";
+import { ResearchNotes } from "@/components/sections/ResearchNotes";
+import { HomeStatement, HomeDemonstration, HomePathways, HomeInvitation } from "@/components/sections/HomeExperience";
 import { routing } from "@/i18n/routing";
 
 type Props = {
@@ -48,7 +49,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 /**
- * Home page — hero and entry links only.
+ * Home page — particle hero, research sketches and entry links.
  * @param params, locale params
  */
 export default async function HomePage({ params }: Props) {
@@ -58,7 +59,11 @@ export default async function HomePage({ params }: Props) {
   return (
     <>
       <Hero />
-      <HomePreview />
+      <HomeStatement />
+      <HomeDemonstration />
+      <ResearchNotes />
+      <HomePathways />
+      <HomeInvitation />
     </>
   );
 }

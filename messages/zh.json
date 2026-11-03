@@ -66,6 +66,92 @@
     "types": {"FULL_TIME":"全职","INTERNSHIP":"实习","PART_TIME":"兼职","CONTRACT":"合同制"},
     "states": {"PENDING":"申请已登记，等待处理","SENDING":"申请已登记，正在发送简历邮件","SMTP_ACCEPTED":"申请已提交，发信服务器已受理","FAILED":"申请已登记，简历邮件发送失败","UNKNOWN":"申请已登记，邮件结果待核查","REUPLOAD_REQUIRED":"申请已登记，需要重新上传简历"}
   },
+  "opening": {
+    "label": "夏仙创新品牌开场",
+    "tagline": "感知结构 · 理解关系 · 泛化行动",
+    "replay": "重播开场"
+  },
+  "particleHero": {
+    "visualSettings": "视觉设置",
+    "visualSettingsShort": "动效",
+    "titleLineOne": "让机器人学会",
+    "titleLineTwo": "举一反三",
+    "exploration": "探索泛化的形态",
+    "chooseShape": "切换粒子形态",
+    "shapes": [
+      "夏仙印记",
+      "结构感知",
+      "关系泛化"
+    ],
+    "bottomNote": "理解结构 · 迁移操作",
+    "pause": "暂停动效",
+    "play": "播放动效",
+    "fallback": "当前设备以静态图形展示"
+  },
+  "researchNotes": {
+    "title": "理解规律，才有泛化。",
+    "intro": "换一个物体，换一个场景。我们关注的是变化之中，仍然成立的结构与关系。",
+    "notes": [
+      { "title": "以物体为中心", "description": "从物体自身理解操作，而非记住世界坐标中的一条轨迹。" },
+      { "title": "寻找几何约束", "description": "从少量示教中，提炼接触、空间结构与交互关系。" },
+      { "title": "让规律走向新场景", "description": "把可迁移的操作理解，带到新的物体、场景与机器人。" }
+    ],
+    "caption": "ORGA / 技术概念手稿 · 从示教到泛化",
+    "link": "走进 ORGA"
+  },
+  "experience": {
+    "skipContent": "跳至正文",
+    "navigation": "主导航",
+    "footerNavigation": "网站导航",
+    "switchLanguage": "切换为 English",
+    "openMenu": "打开菜单",
+    "closeMenu": "关闭菜单",
+    "backTop": "回到顶部",
+    "perspective": "我们的出发点",
+    "statementSecond": "智能需要理解变化中的不变。",
+    "statementBody": "我们相信，机器人的下一步，不是记住更多动作，而是理解动作背后的结构。以物体为中心，从少量示教中寻找可以迁移的操作规律。",
+    "exploreResearch": "了解我们的技术思路",
+    "inAction": "从理解到行动",
+    "demoTitle": "让泛化发生在真实世界。",
+    "allDemos": "查看全部技术演示",
+    "selectDemo": "选择演示视频",
+    "playDemo": "播放演示",
+    "videoError": "视频暂时无法播放，请稍后重试或切换其他演示。",
+    "possibilities": "应用方向",
+    "pathwaysTitle": "让同一种理解，走向更多可能。",
+    "together": "与夏仙同行",
+    "invitationTitle": "真实世界的下一步，\n一起探索。",
+    "invitationBody": "我们期待与研究者、工程师、机器人本体厂和场景伙伴一起，把可迁移的智能带到更广阔的世界。",
+    "meetTeam": "认识夏仙团队",
+    "joinTeam": "探索开放岗位",
+    "buildTogether": "聊聊合作的可能",
+    "footerBelief": "理解结构，连接行动。让机器人学会举一反三。",
+    "aboutIntro": "从理解物体开始，让机器人走向变化的真实世界。",
+    "ourFocus": "我们关注什么",
+    "teamTitle": "不同的视角，共同的方向。",
+    "teamInvitation": "对机器人与真实世界保持好奇？我们期待与你一起探索。",
+    "principlesTitle": "从示教中，找到可以迁移的规律。",
+    "discussTask": "你希望机器人学会什么？",
+    "solutionsTitle": "从具体任务出发。",
+    "solutionDetails": [
+      "围绕物体几何、接触关系和操作约束，探索同一技能在不同机器人本体上的复用，减少对单一机型动作轨迹的依赖。",
+      "把示教中的空间结构与交互关系作为学习线索，探索跨布局、跨物体的技能扩展，让采集的数据服务于可迁移的操作理解。",
+      "面向位置、物体和环境不断变化的操作任务，讨论如何减少重复采集与场景调试，让技术验证贴近实际任务。"
+    ],
+    "collaboration": "合作路径",
+    "collaborationTitle": "先理解任务，再讨论落地。",
+    "collaborationSteps": [
+      { "title": "定义任务", "description": "交流操作目标、物体变化、环境条件与机器人本体，明确需要验证的问题。" },
+      { "title": "讨论示教", "description": "结合任务特点，讨论可用的示教数据、物体结构与关键交互关系。" },
+      { "title": "验证迁移", "description": "围绕新物体、新布局或不同本体，讨论验证方式与下一步合作。" }
+    ],
+    "contactTitle": "从一次对话，开始新的可能。",
+    "startConversation": "保持联系",
+    "contactCareers": "如果你希望加入夏仙团队，欢迎了解我们正在寻找的伙伴。",
+    "mailtoHint": "填写后将打开你的邮件客户端。请在邮件客户端中确认并发送。",
+    "prepareEmail": "生成联系邮件",
+    "emailPrepared": "邮件内容已准备好，请在邮件客户端中完成发送；也可以直接联系页面提供的邮箱。"
+  },
   "home": {
     "previewTitle": "从技术壁垒到落地价值",
     "pillars": ["跨物体泛化", "跨场景迁移", "跨本体统一"],

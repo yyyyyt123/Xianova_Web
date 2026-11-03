@@ -94,6 +94,92 @@
     "types": {"FULL_TIME":"Full-time","INTERNSHIP":"Internship","PART_TIME":"Part-time","CONTRACT":"Contract"},
     "states": {"PENDING":"Application registered","SENDING":"Application registered; sending resume","SMTP_ACCEPTED":"Application submitted; accepted by the mail server","FAILED":"Application registered; email failed","UNKNOWN":"Application registered; email outcome requires verification","REUPLOAD_REQUIRED":"Application registered; resume upload required"}
   },
+  "opening": {
+    "label": "Xianova brand introduction",
+    "tagline": "UNDERSTAND STRUCTURE · GENERALIZE ACTION",
+    "replay": "Replay intro"
+  },
+  "particleHero": {
+    "visualSettings": "Visual settings",
+    "visualSettingsShort": "Visuals",
+    "titleLineOne": "Teach robots to",
+    "titleLineTwo": "generalize.",
+    "exploration": "Explore generalization",
+    "chooseShape": "Choose a particle form",
+    "shapes": [
+      "Xianova",
+      "Structure",
+      "Generalization"
+    ],
+    "bottomNote": "UNDERSTAND STRUCTURE · TRANSFER SKILLS",
+    "pause": "Pause motion",
+    "play": "Play motion",
+    "fallback": "Static illustration on this device"
+  },
+  "researchNotes": {
+    "title": "Understand the relation. Generalize the skill.",
+    "intro": "A different object. A different scene. We look for the structure and relationships that hold through change.",
+    "notes": [
+      { "title": "Start with the object", "description": "Understand actions relative to the object, rather than memorize a trajectory in world coordinates." },
+      { "title": "Find geometric constraints", "description": "Extract contact, spatial structure and interaction relationships from a few demonstrations." },
+      { "title": "Carry the understanding forward", "description": "Transfer reusable manipulation knowledge to new objects, scenes and robots." }
+    ],
+    "caption": "ORGA / Concept sketches · From demonstration to generalization",
+    "link": "Explore ORGA"
+  },
+  "experience": {
+    "skipContent": "Skip to content",
+    "navigation": "Main navigation",
+    "footerNavigation": "Site navigation",
+    "switchLanguage": "Switch to 中文",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "backTop": "Back to top",
+    "perspective": "OUR PERSPECTIVE",
+    "statementSecond": "Find what holds through change.",
+    "statementBody": "The next step in robotics is more than memorizing more actions. It is understanding the structure behind them. Starting with the object, we look for transferable manipulation knowledge in a few demonstrations.",
+    "exploreResearch": "Explore our approach",
+    "inAction": "UNDERSTANDING IN ACTION",
+    "demoTitle": "Generalization, in the real world.",
+    "allDemos": "Explore all demonstrations",
+    "selectDemo": "Choose a demonstration",
+    "playDemo": "Play demonstration",
+    "videoError": "This video is unavailable. Try another demonstration or come back later.",
+    "possibilities": "APPLICATIONS",
+    "pathwaysTitle": "One understanding. More possibilities.",
+    "together": "EXPLORE WITH XIANOVA",
+    "invitationTitle": "The next step in the real world.\nTogether.",
+    "invitationBody": "We welcome researchers, engineers, robot makers and application partners to help bring transferable intelligence into a wider world.",
+    "meetTeam": "Meet our team",
+    "joinTeam": "Explore open positions",
+    "buildTogether": "Start a conversation",
+    "footerBelief": "Understand structure. Connect it to action. Teach robots to generalize.",
+    "aboutIntro": "Start with the object. Build for a world that keeps changing.",
+    "ourFocus": "OUR FOCUS",
+    "teamTitle": "Different perspectives. A shared direction.",
+    "teamInvitation": "Curious about robotics and the real world? We would love to explore with you.",
+    "principlesTitle": "From demonstrations to transferable knowledge.",
+    "discussTask": "What would you like your robot to learn?",
+    "solutionsTitle": "Start with the task.",
+    "solutionDetails": [
+      "Explore skill reuse across robot embodiments through object geometry, contact relationships and manipulation constraints, reducing reliance on trajectories tied to a single robot.",
+      "Use spatial structure and interaction relationships in demonstrations to explore skill transfer across layouts and objects, connecting collected data to reusable manipulation knowledge.",
+      "Discuss how to reduce repeated data collection and tuning for manipulation tasks with changing objects, positions and environments, keeping validation close to the actual task."
+    ],
+    "collaboration": "WORKING TOGETHER",
+    "collaborationTitle": "Understand the task. Explore the path forward.",
+    "collaborationSteps": [
+      { "title": "Define the task", "description": "Discuss manipulation goals, object variations, environment and robot embodiment to define what needs to be validated." },
+      { "title": "Discuss demonstrations", "description": "Consider available demonstrations, object structure and the key interaction relationships involved in the task." },
+      { "title": "Explore transfer", "description": "Discuss validation across new objects, layouts or embodiments, and the next steps for collaboration." }
+    ],
+    "contactTitle": "New possibilities start with a conversation.",
+    "startConversation": "GET IN TOUCH",
+    "contactCareers": "Interested in joining Xianova? Explore the people and skills we are looking for.",
+    "mailtoHint": "This form opens your email app. Review the draft and send it from there.",
+    "prepareEmail": "Prepare email",
+    "emailPrepared": "Your email content is ready. Send it from your email app, or contact us directly at the address shown."
+  },
   "home": {
     "previewTitle": "From technical moat to deployment value",
     "pillars": ["Across objects", "Across scenes", "Across embodiments"],

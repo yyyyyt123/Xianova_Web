@@ -1,125 +1,98 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
-import { motion } from "framer-motion";
-import { Link } from "@/i18n/routing";
 import { PointCloud } from "../PointCloud";
+import { useBrandOpening } from "../BrandOpening";
+import type { ParticleShape } from "@/lib/particle-field";
+import "./particle-hero.css";
 
-/**
- * Full-bleed cinematic hero with point cloud and brand claim.
- */
+// Lead with the spatial sculpture; retain the official mark as an optional form.
+const SHAPE_ORDER: readonly ParticleShape[] = [2, 1, 0];
+
+/** A restrained editorial stage for the live particle sculpture. */
 export function Hero() {
   const t = useTranslations("hero");
+  const p = useTranslations("particleHero");
+  const intro = useTranslations("opening");
+  const { playing, holdingHero, canReplay, replay } = useBrandOpening();
+  const [shape, setShape] = useState<ParticleShape>(2);
+  const [animated, setAnimated] = useState(false);
+  const [available, setAvailable] = useState<boolean | null>(null);
+  const settings = useRef<HTMLDetailsElement>(null);
+  const shapeLabels = p.raw("shapes") as string[];
+
+  useEffect(() => {
+    const preference = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const narrow = window.matchMedia("(max-width: 1023px)");
+    const update = () => setAnimated(!preference.matches && !narrow.matches);
+    update();
+    preference.addEventListener("change", update);
+    narrow.addEventListener("change", update);
+    return () => { preference.removeEventListener("change", update); narrow.removeEventListener("change", update); };
+  }, []);
+
+  useEffect(() => {
+    const outside = (event: PointerEvent) => {
+      if (settings.current?.open && event.target instanceof Node && !settings.current.contains(event.target)) settings.current.open = false;
+    };
+    const escape = (event: KeyboardEvent) => {
+      if (event.key === "Escape" && settings.current?.open) {
+        settings.current.open = false;
+        settings.current.querySelector("summary")?.focus();
+      }
+    };
+    document.addEventListener("pointerdown", outside);
+    document.addEventListener("keydown", escape);
+    return () => {
+      document.removeEventListener("pointerdown", outside);
+      document.removeEventListener("keydown", escape);
+    };
+  }, []);
+
+  useEffect(() => { if (playing && settings.current) settings.current.open = false; }, [playing]);
+
+  const closeSettings = () => {
+    if (!settings.current) return;
+    settings.current.open = false;
+    settings.current.querySelector("summary")?.focus({ preventScroll: true });
+  };
 
   return (
-    <section className="relative flex min-h-[100svh] w-full items-end overflow-hidden bg-deep">
-      <div className="absolute inset-0 opacity-[0.75]">
-        <PointCloud />
+    <section id="particle-hero" className={`particle-hero${playing ? " intro-active" : ""}${holdingHero ? " intro-held" : ""}`} aria-labelledby="particle-hero-title">
+      <div className="particle-stage">
+        <PointCloud shape={shape} animated={animated && !holdingHero} onAvailabilityChange={setAvailable} />
+      </div>
+      <div className="particle-hero-shade" aria-hidden="true" />
+      <div className="particle-hero-grid" aria-hidden="true" />
+      <div className="particle-hero-copy">
+        <h1 id="particle-hero-title" className="particle-title particle-arrive">
+          <span>{p("titleLineOne")}</span>
+          <span>{p("titleLineTwo")}</span>
+        </h1>
       </div>
 
-      {/* Soft geometric accent referencing the mark */}
-      <div
-        className="pointer-events-none absolute -right-[12%] top-[8%] hidden h-[70vmin] w-[70vmin] rounded-full border border-sky/15 md:block"
-        aria-hidden
-      />
-      <div
-        className="pointer-events-none absolute -right-[6%] top-[16%] hidden h-[50vmin] w-[50vmin] rounded-full border border-sky/10 md:block"
-        aria-hidden
-      />
-
-      <div
-        className="pointer-events-none absolute inset-0 z-[2]"
-        style={{
-          background:
-            "linear-gradient(to top, #080D16 0%, color-mix(in srgb, #080D16 55%, transparent) 24%, transparent 52%)",
-        }}
-      />
-      <div
-        className="pointer-events-none absolute inset-0 z-[2]"
-        style={{
-          background:
-            "linear-gradient(to right, color-mix(in srgb, #080D16 55%, transparent) 0%, transparent 38%)",
-        }}
-      />
-      <div
-        className="pointer-events-none absolute inset-0 z-[2]"
-        style={{
-          background:
-            "linear-gradient(to bottom, color-mix(in srgb, #080D16 40%, transparent) 0%, transparent 14%)",
-        }}
-      />
-      <div className="grain z-[3]" />
-
-      <div className="relative z-10 flex w-full flex-col gap-10 px-8 pb-12 md:flex-row md:items-end md:justify-between md:pb-14 lg:px-16 lg:pb-16">
-        <div className="max-w-3xl">
-          <motion.p
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-            className="mb-4 inline-flex items-center gap-3 font-mono text-sm font-semibold text-sky"
-          >
-            <span className="inline-block h-1.5 w-1.5 rounded-full bg-sky shadow-[0_0_12px_rgba(132,195,255,0.8)]" />
-            {t("brand")} · {t("brandZh")}
-          </motion.p>
-
-          <motion.h1
-            initial={{ opacity: 0, y: 18 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.75, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
-            className="text-balance font-display text-[2rem] font-semibold leading-[1.15] tracking-tight text-white sm:text-4xl md:text-5xl lg:text-[3.5rem]"
-          >
-            {t("title")}
-          </motion.h1>
-
-          <motion.p
-            initial={{ opacity: 0, y: 18 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.75, delay: 0.16, ease: [0.22, 1, 0.36, 1] }}
-            className="mt-6 max-w-xl text-base leading-relaxed text-white/65 md:text-lg"
-          >
-            {t("subtitle")}
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 18 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.75, delay: 0.26, ease: [0.22, 1, 0.36, 1] }}
-            className="mt-9 flex flex-wrap gap-3"
-          >
-            <Link href="/technology" className="btn-sky">
-              {t("ctaPrimary")}
-            </Link>
-            <Link href="/contact" className="btn-ghost">
-              {t("ctaSecondary")}
-            </Link>
-          </motion.div>
-        </div>
-
-        <motion.a
-          href="#explore"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.45 }}
-          className="group mb-1 flex shrink-0 items-center gap-2.5 self-start text-white/35 no-underline transition hover:text-white/80 md:self-end"
-        >
-          <span className="label-mono">{t("scrollHint")}</span>
-          <svg
-            width="14"
-            height="14"
-            viewBox="0 0 14 14"
-            fill="none"
-            aria-hidden
-            className="transition group-hover:translate-y-0.5"
-          >
-            <path
-              d="M7 1V11M7 11L2 6M7 11L12 6"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        </motion.a>
+      <div className="particle-hero-bottom">
+        <a href="#perspective" className="particle-read-on">{t("scrollHint")}<span aria-hidden="true">↓</span></a>
+        <details ref={settings} className="particle-settings">
+          <summary aria-label={p("visualSettings")}>
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1" aria-hidden="true"><path d="M2 5h12M2 11h12" /><circle cx="6" cy="5" r="2" fill="var(--background)" /><circle cx="10" cy="11" r="2" fill="var(--background)" /></svg>
+            {p("visualSettingsShort")}
+          </summary>
+          <div className="particle-settings-panel">
+            <div className="particle-shapes" role="group" aria-label={p("chooseShape")}>
+              {SHAPE_ORDER.map(form => <button key={form} type="button" aria-pressed={shape === form} className={shape === form ? "is-active" : ""} onClick={() => { setShape(form); closeSettings(); }}>
+                <span>{shapeLabels[form]}</span><span aria-hidden="true">{shape === form ? "✓" : ""}</span>
+              </button>)}
+            </div>
+            <div className="particle-settings-actions">
+              {available !== false ? <button type="button" className="particle-motion-control" onClick={() => { setAnimated(value => !value); closeSettings(); }} aria-pressed={animated} aria-label={animated ? p("pause") : p("play")}>
+                <span>{animated ? p("pause") : p("play")}</span><span aria-hidden="true">{animated ? "Ⅱ" : "▷"}</span>
+              </button> : <p className="particle-fallback-note">{p("fallback")}</p>}
+              {canReplay && <button type="button" className="particle-replay" onClick={() => { closeSettings(); replay(); }}><span>{intro("replay")}</span><span aria-hidden="true">↻</span></button>}
+            </div>
+          </div>
+        </details>
       </div>
     </section>
   );

@@ -1,61 +1,21 @@
 "use client";
-
+import { useId, useState } from "react";
 import { useTranslations } from "next-intl";
-import { FadeIn } from "../FadeIn";
-import { Link } from "@/i18n/routing";
+import { ArrowLink, GeometryStudy, PageIntro, SectionLabel } from "../Editorial";
 
-/**
- * Solutions audience section.
- */
 export function Solutions() {
   const t = useTranslations("solutions");
-  const nav = useTranslations("nav");
+  const ui = useTranslations("experience");
   const audiences = t.raw("audiences") as { title: string; desc: string }[];
-
-  return (
-    <>
-      <section className="relative overflow-hidden bg-deep pt-28 pb-16 md:pt-32 md:pb-20">
-        <div className="grain opacity-25" />
-        <div className="max-prose-site relative px-8 md:px-12">
-          <FadeIn>
-            <p className="font-mono text-sm font-semibold text-sky">
-              {t("label")}
-            </p>
-            <h1 className="mt-3 text-balance text-3xl font-semibold tracking-tight text-white md:text-5xl">
-              {t("title")}
-            </h1>
-            <p className="mt-5 text-lg text-sky/90">{t("desc")}</p>
-          </FadeIn>
-        </div>
-      </section>
-
-      <section className="bg-page section-pad">
-        <div className="max-prose-site">
-          <div className="card-grid md:grid-cols-3">
-            {audiences.map((item, i) => (
-              <FadeIn key={item.title} delay={i * 0.06}>
-                <div className="card-cell group h-full p-7 md:p-8">
-                  <span className="font-mono text-[11px] font-semibold tabular-nums text-ink-faint">
-                    0{i + 1}
-                  </span>
-                  <h2 className="mt-4 text-lg font-semibold text-ink transition group-hover:text-brand">
-                    {item.title}
-                  </h2>
-                  <p className="mt-3 text-sm leading-relaxed text-ink-mute">
-                    {item.desc}
-                  </p>
-                </div>
-              </FadeIn>
-            ))}
-          </div>
-
-          <FadeIn className="mt-12">
-            <Link href="/contact" className="btn-primary">
-              {nav("cta")}
-            </Link>
-          </FadeIn>
-        </div>
-      </section>
-    </>
-  );
+  const details = ui.raw("solutionDetails") as string[];
+  const steps = ui.raw("collaborationSteps") as { title: string; description: string }[];
+  const [active, setActive] = useState<number | null>(0);
+  const id = useId();
+  return <>
+    <PageIntro index="02" label={t("label")} title={t("title")} description={t("desc")} variant={1} />
+    <section className="editorial-section"><div className="editorial-wrap solutions-layout"><div className="solutions-heading"><SectionLabel number="01">{ui("possibilities")}</SectionLabel><h2 className="editorial-title">{ui("solutionsTitle")}</h2><GeometryStudy variant={active ?? 0} /></div>
+      <div className="solution-accordion">{audiences.map((item, i) => <article key={item.title} className={active === i ? "is-active" : ""}><h3><button type="button" aria-expanded={active === i} aria-controls={`${id}-${i}`} onClick={() => setActive(active === i ? null : i)}><span>0{i + 1}</span>{item.title}<span aria-hidden="true">{active === i ? "−" : "+"}</span></button></h3><div id={`${id}-${i}`} hidden={active !== i}><p className="solution-lead">{item.desc}</p><p>{details[i]}</p><ArrowLink href="/contact">{ui("discussTask")}</ArrowLink></div></article>)}</div>
+    </div></section>
+    <section className="editorial-section collaboration-section"><div className="editorial-wrap"><SectionLabel number="02">{ui("collaboration")}</SectionLabel><h2 className="editorial-title">{ui("collaborationTitle")}</h2><div className="open-columns">{steps.map((step, i) => <article className="open-column" key={step.title}><span className="eyebrow">0{i + 1}</span><h3>{step.title}</h3><p>{step.description}</p></article>)}</div><div className="section-closing"><p>{ui("discussTask")}</p><ArrowLink href="/contact">{ui("buildTogether")}</ArrowLink></div></div></section>
+  </>;
 }

@@ -3,12 +3,12 @@
 @tailwind utilities;
 
 :root {
-  --background: #f7f8fa;
-  --foreground: #13213c;
+  --background: #f9fbfc;
+  --foreground: #1b2c38;
   --deep: #080d16;
   --sky: #84c3ff;
-  --brand: #0f7d76;
-  --line: #d8e0e9;
+  --brand: #1b6578;
+  --line: #d1dde5;
 }
 
 html {
@@ -24,12 +24,12 @@ body {
 }
 
 ::selection {
-  background: rgba(15, 125, 118, 0.22);
-  color: #13213c;
+  background: rgba(27, 101, 120, 0.18);
+  color: #1b2c38;
 }
 
 :focus-visible {
-  outline: 2px solid #0f7d76;
+  outline: 2px solid #1b6578;
   outline-offset: 3px;
 }
 
@@ -55,16 +55,15 @@ body {
   }
 
   .section-num {
-    @apply flex h-7 w-7 shrink-0 items-center justify-center font-mono text-[11px] font-semibold text-white tabular-nums;
-    background-color: #0f7d76;
+    @apply flex h-7 w-7 shrink-0 items-center justify-center font-mono text-[11px] font-normal text-brand tabular-nums;
   }
 
   .btn-primary {
-    @apply inline-flex h-11 items-center justify-center bg-ink px-6 font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-white no-underline transition duration-300;
+    @apply inline-flex min-h-12 items-center justify-center bg-brand px-6 font-mono text-[12px] font-medium uppercase tracking-[0.08em] text-white no-underline transition duration-300;
   }
 
   .btn-primary:hover {
-    @apply bg-brand;
+    background-color: #144c5d;
   }
 
   .btn-sky {

@@ -1,0 +1,34 @@
+html { scrollbar-gutter: stable; }
+.brand-opening { position: fixed; inset: 0; z-index: 100; isolation: isolate; overflow: hidden; color: #1b2c38; outline: none; }
+.brand-opening-backdrop { position: absolute; inset: 0; background: #f9fbfc; transition: opacity .7s cubic-bezier(.22,1,.36,1); }
+.brand-opening.is-revealing .brand-opening-backdrop { opacity: 0; }
+.site-wordmark.intro-logo-held { visibility: hidden; }
+.brand-opening-grid { position: absolute; inset: 0; pointer-events: none; opacity: .5; background-image: linear-gradient(#8ca8b512 1px,transparent 1px),linear-gradient(90deg,#8ca8b512 1px,transparent 1px); background-size: 72px 72px; mask-image: radial-gradient(ellipse at center,#000,transparent 70%); }
+.brand-opening-lockup { position: fixed; top: 0; left: 0; width: min(440px,calc(100vw - 48px)); aspect-ratio: 1600/622; transform-origin: top left; will-change: transform; }
+.brand-opening-lockup svg { display: block; width: 100%; height: 100%; overflow: visible; }
+.brand-opening[data-phase="pending"] .brand-opening-lockup { top: calc(50% - 22px); left: 50%; transform: translate(-50%,-50%); }
+.brand-opening[data-phase="pending"] :is(circle,image,.brand-opening-caption) { animation-play-state: paused; }
+.brand-opening.is-docked .brand-opening-lockup { visibility: hidden; }
+.brand-opening.is-revealing .brand-opening-caption { visibility: hidden; }
+.brand-opening.is-docked .brand-opening-bottom { opacity: 0; transition: opacity .18s ease; }
+.brand-opening-orbit { stroke: #1b6578; stroke-width: 3; stroke-dasharray: 1; stroke-dashoffset: 1; transform: rotate(-90deg); transform-origin: 280px 313px; animation: brand-opening-orbit 1.2s ease-out both; }
+.brand-opening-upper { animation: brand-opening-upper .55s cubic-bezier(.22,1,.36,1) .12s both; }
+.brand-opening-lower { animation: brand-opening-lower .55s cubic-bezier(.22,1,.36,1) .24s both; }
+.brand-opening-type { animation: brand-opening-type .6s cubic-bezier(.22,1,.36,1) .4s both; }
+.brand-opening-caption { position: absolute; top: calc(50% + 76px); inset-inline: 24px; text-align: center; color: #536775; font: 11px var(--font-mono),var(--font-noto),sans-serif; line-height: 1.9; letter-spacing: .13em; animation: brand-opening-caption 1.5s ease .45s both; }
+.brand-opening-bottom { position: absolute; bottom: 28px; left: 5.4%; right: 5.4%; display: flex; justify-content: center; align-items: center; min-height: 61px; border-top: 1px solid #cfdae2; padding-top: 16px; }
+.brand-opening-bottom > span { font: 10px var(--font-mono),monospace; letter-spacing: .1em; color: #708592; }
+.particle-hero.intro-held .particle-arrive { animation: none; opacity: 0; }
+.particle-hero .particle-hero-bottom { transition: opacity .35s ease; }
+.particle-hero.intro-active .particle-hero-bottom { opacity: 0; transition: none; }
+.particle-motion-actions { display: flex; gap: 24px; align-items: center; }
+.particle-replay { min-height: 44px; color: #5c707f; font-size: 10px; }
+.particle-replay:hover { color: #1b6578; }
+.particle-replay > span { display: inline-block; margin-right: 8px; font-size: 14px; }
+@keyframes brand-opening-orbit { 0% { stroke-dashoffset: 1; opacity: .3; } 65% { stroke-dashoffset: 0; opacity: .7; } 100% { stroke-dashoffset: 0; opacity: 0; } }
+@keyframes brand-opening-upper { from { opacity: 0; transform: translateY(-26px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes brand-opening-lower { from { opacity: 0; transform: translateY(26px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes brand-opening-type { from { opacity: 0; transform: translateX(-20px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes brand-opening-caption { 0% { opacity: 0; translate: 0 8px; } 30%,70% { opacity: 1; translate: 0 0; } 100% { opacity: 0; translate: 0 -5px; } }
+@media (max-width: 767px) { .brand-opening-caption { top: calc(50% + 54px); font-size: 9px; letter-spacing: .08em; }.brand-opening-bottom { left: max(24px,env(safe-area-inset-left)); right: max(24px,env(safe-area-inset-right)); bottom: max(18px,env(safe-area-inset-bottom)); }.brand-opening-bottom > span { font-size: 8px; }.particle-motion-actions { gap: 16px; }.particle-replay { font-size: 9px; }.particle-replay > span { margin-right: 5px; } }
+@media (prefers-reduced-motion: reduce) { .brand-opening { display: none; }.particle-hero.intro-held .particle-arrive { opacity: 1; }.particle-hero .particle-hero-bottom { transition: none; } }

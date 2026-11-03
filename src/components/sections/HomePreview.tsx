@@ -35,7 +35,7 @@ export function HomePreview() {
           <FadeIn>
             <div className="section-rule max-w-prose">
               <span className="section-num">01</span>
-              <span className="font-mono text-sm font-semibold text-ink-mute whitespace-nowrap">
+              <span className="min-w-0 font-mono text-sm font-semibold text-ink-mute">
                 {t("previewTitle")}
               </span>
               <div className="h-px flex-1 bg-line" />

@@ -1,0 +1,71 @@
+/* One message, one live sculpture. Controls stay tucked away until requested. */
+.particle-hero {
+  position: relative; isolation: isolate; height: 100svh; min-height: 620px;
+  overflow: hidden; color: #1b2c38; background: #f9fbfc;
+}
+.particle-stage { position: absolute; inset: 0; z-index: 1; }
+.particle-art, .particle-art-canvas, .particle-art-fallback { position: absolute; inset: 0; width: 100%; height: 100%; }
+.particle-art-canvas { touch-action: pan-y; cursor: crosshair; }
+.particle-art-fallback { pointer-events: none; opacity: .85; }
+.particle-art[data-available="true"] .particle-art-fallback { opacity: 0; }
+.particle-hero-shade {
+  position: absolute; z-index: 2; inset: 0; pointer-events: none;
+  background: none;
+}
+.particle-hero-grid {
+  position: absolute; inset: 0; z-index: 0; opacity: .28; pointer-events: none;
+  background-image: linear-gradient(#2a4d6412 1px,transparent 1px),linear-gradient(90deg,#2a4d6412 1px,transparent 1px);
+  background-size: 48px 48px; mask-image: radial-gradient(ellipse at 60% 46%,#000,transparent 86%);
+}
+.particle-hero-copy { position: absolute; z-index: 3; top: 43%; left: 8.2%; max-width: 430px; transform: translateY(-50%); pointer-events: none; }
+.particle-title {
+  font-family: var(--font-space),var(--font-noto),sans-serif;
+  font-size: clamp(32px,3.4vw,52px); line-height: 1.55; font-weight: 400; letter-spacing: -.035em;
+}
+.particle-title > span { display: block; }
+.particle-title > span:last-child { color: #476b79; font-weight: 300; }
+.particle-hero-bottom {
+  position: absolute; z-index: 4; inset: auto 8.2% 22px; min-height: 44px;
+  display: flex; align-items: center; justify-content: space-between; gap: 24px;
+}
+.particle-read-on { display: inline-flex; align-items: center; gap: 15px; min-height: 44px; text-decoration: none; color: #617480; font-size: 11px; }
+.particle-read-on > span { color: #476b79; transition: transform .25s; }
+.particle-read-on:hover > span { transform: translateY(3px); }
+.particle-settings { position: relative; color: #617480; }
+.particle-settings > summary { display: flex; align-items: center; gap: 9px; min-height: 44px; cursor: pointer; list-style: none; font-size: 11px; }
+.particle-settings > summary::-webkit-details-marker { display: none; }
+.particle-settings > summary svg { width: 16px; height: 16px; }
+.particle-settings > summary:hover, .particle-settings[open] > summary { color: #1b6578; }
+.particle-settings-panel {
+  position: absolute; right: 0; bottom: calc(100% + 10px); width: min(238px,calc(100vw - 48px));
+  padding: 12px 17px; border: 1px solid #d7e1e7; background: #f9fbfcfa; backdrop-filter: blur(12px);
+  box-shadow: 0 8px 28px #1b2c3809; color: #536775;
+}
+.particle-shapes { display: grid; }
+.particle-shapes button, .particle-settings-actions button {
+  display: flex; align-items: center; justify-content: space-between; gap: 18px;
+  width: 100%; min-height: 42px; padding: 0 2px; text-align: left;
+  font: inherit; font-size: 12px; color: inherit;
+}
+.particle-shapes button:hover, .particle-settings-actions button:hover, .particle-shapes button.is-active { color: #1b6578; }
+.particle-settings-actions { margin-top: 7px; padding-top: 7px; border-top: 1px solid #d7e1e7; }
+.particle-settings .particle-replay > span { margin: 0; font-size: inherit; }
+.particle-fallback-note { padding: 12px 2px; font-size: 11px; line-height: 1.7; }
+.particle-arrive { animation: particle-arrive .9s cubic-bezier(.22,1,.36,1) .08s both; }
+@keyframes particle-arrive { from { opacity: 0; translate: 0 14px; } to { opacity: 1; translate: 0 0; } }
+@media (max-width: 1100px) and (min-width: 768px) {
+  .particle-hero-copy { left: 6%; max-width: 340px; }
+  .particle-hero-bottom { inset-inline: 6%; }
+}
+@media (max-width: 767px) {
+  .particle-hero-copy { top: 62%; left: 24px; right: 24px; max-width: none; }
+  .particle-title { font-size: 32px; line-height: 1.5; }
+  .particle-hero-bottom { inset-inline: 24px; bottom: max(16px,env(safe-area-inset-bottom)); }
+  .particle-art-fallback { width: 160%; left: -60%; top: -130px; height: 70%; }
+}
+@media (max-width: 360px) { .particle-title { font-size: 29px; } }
+@media (prefers-reduced-motion: reduce) {
+  html:has(.particle-hero) { scroll-behavior: auto; }
+  .particle-arrive { animation: none; }
+  .particle-hero a,.particle-hero button,.particle-read-on > span { transition: none; }
+}

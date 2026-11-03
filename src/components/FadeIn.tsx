@@ -1,39 +1,23 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
-import { ReactNode } from "react";
+import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
 
-type FadeInProps = {
-  children: ReactNode;
-  className?: string;
-  delay?: number;
-  y?: number;
-};
+type FadeInProps = { children: ReactNode; className?: string; delay?: number; y?: number };
 
-/**
- * Scroll-triggered fade-up wrapper.
- * @param children, content to animate
- * @param className, optional class
- * @param delay, stagger delay in seconds
- * @param y, initial translateY offset
- */
-export function FadeIn({
-  children,
-  className = "",
-  delay = 0,
-  y = 28,
-}: FadeInProps) {
-  const reduce = useReducedMotion();
-
-  return (
-    <motion.div
-      className={className}
-      initial={reduce ? false : { opacity: 0, y }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1], delay }}
-    >
-      {children}
-    </motion.div>
-  );
+/** Content remains visible without JS; only newly entering sections receive an animation. */
+export function FadeIn({ children, className = "", delay = 0, y = 28 }: FadeInProps) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [entered, setEntered] = useState(false);
+  useEffect(() => {
+    const element = ref.current;
+    if (!element || !("IntersectionObserver" in window)) return;
+    // Do not fade out text that was already visible while the page hydrated.
+    if (element.getBoundingClientRect().top < window.innerHeight) return;
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) { setEntered(true); observer.disconnect(); }
+    }, { rootMargin: "0px 0px -24px 0px" });
+    observer.observe(element);
+    return () => observer.disconnect();
+  }, []);
+  return <div ref={ref} className={`fade-in${entered ? " has-entered" : ""} ${className}`} style={{ "--reveal-y": `${y}px`, "--reveal-delay": `${delay}s` } as CSSProperties}>{children}</div>;
 }
