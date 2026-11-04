@@ -51,8 +51,8 @@ html { scroll-padding-top: 80px; }
 .site-desktop-nav a:hover::after,.site-desktop-nav a[aria-current]::after { transform: scaleX(1); }
 .site-desktop-nav a[aria-current] { color: #1b2c38; }
 .site-desktop-nav .site-locale { font-family: var(--font-mono),monospace; color: #1b6578; }
-.site-desktop-nav .site-partner { padding: 0 20px; gap: 20px; border: 1px solid #1b657866; color: var(--site-accent); background: #e8f1f5; }
-.site-desktop-nav .site-partner:hover { background: var(--site-accent); color: white; }
+.site-desktop-nav .site-partner { padding: 0 20px; gap: 20px; border: 1px solid #1b2c3826; color: var(--site-muted); background: transparent; transition: color .25s, border-color .25s, background-color .25s; }
+.site-desktop-nav .site-partner:hover { border-color: #1b657866; background: #1b657808; color: var(--site-accent); }
 .site-menu-toggle { display: none; position: relative; width: 44px; height: 44px; }
 .site-menu-toggle span { position: absolute; height: 1px; width: 23px; left: 10px; top: 18px; background: #34442f; transition: transform .25s; }
 .site-menu-toggle span:last-child { top: 26px; }
@@ -215,4 +215,4 @@ html { scroll-padding-top: 80px; }
   .site-footer { padding: 44px 24px 22px; }.footer-main { grid-template-columns: minmax(0,1fr) minmax(0,.8fr); gap: 32px; }.footer-main > div:first-child { grid-column: 1 / 3; }.footer-belief { margin-top: 17px; font-size: 13px; max-width: 250px; }.footer-email { margin-top: 19px; }.footer-nav { gap: 17px; }.footer-location { grid-column: auto; display: block; }.footer-location p { margin-top: 12px; font-size: 11px; }.footer-location .eyebrow { font-size: 8px; }.footer-top { margin-top: 22px; }.footer-large-type { font-size: 16vw; margin-top: 37px; }.footer-large-type span { font-size: 8px; margin-top: 8px; }.footer-bottom { font-size: 10px; gap: 10px; }.footer-bottom > span:last-child { width: 100%; }
   .recruitment-body { padding-inline: 24px; }.recruitment-body .max-site > div > label.text-sm { display: flex; flex-direction: column; width: 100%; gap: 10px; }.recruitment-body .max-site > div > label.text-sm > input { margin-left: 0; width: 100%; min-width: 0; }
 }
-@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; }.fade-in.has-entered { animation: none; }.site-header,.site-menu-toggle span,.site-desktop-nav a::after,.arrow-link > span,.focus-item,.demo-tabs button,.demo-play > span:first-child { transition: none; } }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; }.fade-in.has-entered { animation: none; }.site-header,.site-menu-toggle span,.site-desktop-nav a::after,.site-desktop-nav .site-partner,.arrow-link > span,.focus-item,.demo-tabs button,.demo-play > span:first-child { transition: none; } }

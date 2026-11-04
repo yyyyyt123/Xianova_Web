@@ -24,21 +24,22 @@ function fallbackPoints(shape: ParticleShape) {
       x = mark[position];
       y = mark[position + 1];
     } else if (shape === 2) {
-      const twist = u * .5 + 40 * .085 + .8;
-      const across = Math.sin(v) * .46 * (1 + .12 * Math.sin(2 * u - 2));
-      x = (1.22 + across * Math.cos(twist)) * Math.cos(u);
-      y = (.92 + across * Math.cos(twist)) * Math.sin(u);
-      z = .22 * Math.sin(2 * u + .5) + across * Math.sin(twist);
-      const azimuth = .55 + .3 * Math.sin(.04 * 40);
+      const radial = 1 + .075 * Math.cos(3 * u + .2) + .045 * Math.sin(2 * u - .6);
+      const twist = .5 * u + 1.22 + .17 * Math.sin(2 * u);
+      const across = Math.sin(v) * (.40 + .055 * Math.cos(u - .4) + .025 * Math.sin(3 * u)) * .96;
+      x = 1.13 * radial * Math.cos(u) + .07 * Math.cos(2 * u + .3) + across * Math.cos(twist) * Math.cos(u);
+      y = .92 * radial * Math.sin(u) + .045 * Math.sin(3 * u) + across * Math.cos(twist) * Math.sin(u);
+      z = .18 * Math.sin(2 * u - .4) + .06 * Math.cos(3 * u) + across * Math.sin(twist);
+      const azimuth = .72;
       const x1 = x * Math.cos(azimuth) - y * Math.sin(azimuth);
       const y1 = x * Math.sin(azimuth) + y * Math.cos(azimuth);
       const x2 = x1 * Math.cos(.28) + z * Math.sin(.28);
       const z2 = z * Math.cos(.28) - x1 * Math.sin(.28);
       x = x2;
-      y = y1 * Math.cos(-.98) - z2 * Math.sin(-.98);
-      z = y1 * Math.sin(-.98) + z2 * Math.cos(-.98);
+      y = y1 * Math.cos(-.86) - z2 * Math.sin(-.86);
+      z = y1 * Math.sin(-.86) + z2 * Math.cos(-.86);
     }
-    const perspective = 3.8 / (3.8 + z);
+    const perspective = shape === 2 ? 4.8 / (4.8 - z) : 3.8 / (3.8 + z);
     return { x: 980 + x * 282 * perspective, y: 385 - y * 220 * perspective, opacity: .20 + (Math.sin(v) + 1) * .2 };
   });
 }
