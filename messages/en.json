@@ -104,6 +104,7 @@
     "visualSettingsShort": "Visuals",
     "titleLineOne": "Teach robots to",
     "titleLineTwo": "generalize.",
+    "rotatingWords": ["generalize.", "adapt to objects.", "adapt to scenes.", "transfer skills."],
     "exploration": "Explore generalization",
     "chooseShape": "Choose a particle form",
     "shapes": [

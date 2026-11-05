@@ -1,6 +1,6 @@
 @font-face {
   font-family: "Xianova Sketch";
-  src: url("/fonts/caveat/Caveat-sketch.ttf") format("truetype");
+  src: url("../../../public/fonts/caveat/Caveat-sketch.ttf") format("truetype");
   font-style: normal;
   font-weight: 400;
   font-display: swap;

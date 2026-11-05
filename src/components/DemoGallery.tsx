@@ -2,6 +2,7 @@
 
 import { useEffect, useId, useRef, useState, KeyboardEvent } from "react";
 import { useTranslations } from "next-intl";
+import { publicAsset } from "@/lib/public-asset";
 
 export const DEMO_NAMES = ["human-centric-multimodal-data", "cross-scene-generalization", "cross-embodiment-paxini-t21", "sparkumr-to-fourier-gr3", "sparkumr-fourier-gr3-action", "sparkumr-astribot-q5-l3"] as const;
 
@@ -21,7 +22,7 @@ export function DemoGallery({ featured = false }: { featured?: boolean }) {
   const id = useId();
   const demoIndex = indices[selected];
   const demo = demos[demoIndex];
-  const src = `/videos/${DEMO_NAMES[demoIndex]}.mp4`;
+  const src = publicAsset(`/videos/${DEMO_NAMES[demoIndex]}.mp4`);
 
   useEffect(() => {
     const element = screen.current;
@@ -74,7 +75,7 @@ export function DemoGallery({ featured = false }: { featured?: boolean }) {
     </div>
     <div role="tabpanel" id={`${id}-panel`} aria-labelledby={`${id}-tab-${selected}`} tabIndex={0}>
       <div className="demo-screen" ref={screen}>
-        <video ref={video} key={src} src={src} poster={`/images/demos/${DEMO_NAMES[demoIndex]}.jpg`} controls={started} playsInline preload="none" onPlay={() => setStarted(true)} onError={() => setFailed(true)} aria-label={demo.title} />
+        <video ref={video} key={src} src={src} poster={publicAsset(`/images/demos/${DEMO_NAMES[demoIndex]}.jpg`)} controls={started} playsInline preload="none" onPlay={() => setStarted(true)} onError={() => setFailed(true)} aria-label={demo.title} />
         {!started && <button type="button" className="demo-play" onClick={() => void play()} aria-label={`${ui("playDemo")} — ${demo.title}`}><span aria-hidden="true">▷</span><span>{ui("playDemo")}</span></button>}
         <span className="demo-screen-label" aria-hidden="true">XIANOVA / IN THE REAL WORLD</span>
       </div>

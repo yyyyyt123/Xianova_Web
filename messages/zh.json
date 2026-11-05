@@ -76,6 +76,7 @@
     "visualSettingsShort": "动效",
     "titleLineOne": "让机器人学会",
     "titleLineTwo": "举一反三",
+    "rotatingWords": ["举一反三", "跨物体泛化", "跨场景迁移", "跨本体迁移"],
     "exploration": "探索泛化的形态",
     "chooseShape": "切换粒子形态",
     "shapes": [

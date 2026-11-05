@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { publicAsset } from "@/lib/public-asset";
 import { useTranslations } from "next-intl";
 import { FadeIn } from "../FadeIn";
 import { ArrowLink, PageIntro, SectionLabel } from "../Editorial";
@@ -24,7 +25,7 @@ export function About() {
       <FadeIn><div className="editorial-section-heading"><div><SectionLabel number="02">{team("title")}</SectionLabel><h2 className="editorial-title">{ui("teamTitle")}</h2></div><p className="editorial-description">{team("desc")}</p></div></FadeIn>
       <div className="team-list">{members.map((member, index) => <FadeIn key={member.name}><article className="team-member">
         <span className="team-index">0{index + 1}</span>
-        <div className="team-portrait">{index === 0 ? <Image src="/team/junjia-liu.jpg" alt={member.name} width={300} height={400} unoptimized /> : <BrandPortrait variant={index === 1 ? "orbit" : "structure"} />}</div>
+        <div className="team-portrait">{index === 0 ? <Image src={publicAsset("/team/junjia-liu.jpg")} alt={member.name} width={300} height={400} unoptimized /> : <BrandPortrait variant={index === 1 ? "orbit" : "structure"} />}</div>
         <div className="team-name"><h3>{member.name}</h3><p>{member.role}</p>{index === 0 && <div className="team-profiles">{profiles.map(([href, label]) => <a href={href} key={href} target="_blank" rel="noopener noreferrer">{label} ↗</a>)}</div>}</div>
         <p className="team-bio">{member.bio}</p>
       </article></FadeIn>)}</div>

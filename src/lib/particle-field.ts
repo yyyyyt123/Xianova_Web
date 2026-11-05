@@ -49,6 +49,21 @@ void surface(float u, float v, out vec3 point, out vec3 normal) {
 void main() {
   float angle=TAU*fract(a_surface.x+u_time*.0034);
   float across=(a_surface.y*2.-1.)*1.08;
+  // A local geometric pattern is learned, carried along the surface, and
+  // repeated in new regions: an abstract object-centric transfer sequence.
+  // Remain on the existing ribbon; never replace it with a diagram or logo.
+  float lesson=mod(u_time,24.);
+  float transfer=smoothstep(4.,7.,lesson)*(1.-smoothstep(21.,24.,lesson));
+  float progress=smoothstep(6.,20.,lesson);
+  float source=smoothstep(.88,.997,cos(angle-.70));
+  float targetA=smoothstep(.88,.997,cos(angle-2.85));
+  float targetB=smoothstep(.88,.997,cos(angle-4.95));
+  float learning=.2+.8*smoothstep(0.,2.,lesson)*(1.-smoothstep(4.,8.,lesson));
+  float learned=source*learning;
+  float reused=transfer*(targetA*smoothstep(9.,12.,lesson)+targetB*smoothstep(15.,18.,lesson));
+  float aggregation=clamp(learned+reused,0.,1.);
+  float constraint=(1.-smoothstep(.65,1.05,abs(across)))*u_weights.z;
+  across-=sin(across*9.)*.035*aggregation*constraint;
   vec3 ribbon, ribbonNormal;
   surface(angle,across,ribbon,ribbonNormal);
   float phi=a_surface.y*TAU;
@@ -57,6 +72,43 @@ void main() {
   float spatial=1.-u_weights.x;
   vec3 point=a_mark*u_weights.x+ring*u_weights.y+ribbon*u_weights.z;
   vec3 normal=normalize(vec3(0.,0.,1.)*u_weights.x+ringNormal*u_weights.y+ribbonNormal*u_weights.z);
+  // A small subset of the existing buffer draws three different objects.
+  // The same two contact anchors and constraint axis recur on each object.
+  // Object shape changes, manipulation relationships remain transferable.
+  float semantic=0., semanticActivation=0., route=0.;
+  if (a_grain.x<.025 && u_weights.z>0.) {
+    float scene=floor(a_grain.z*3.);
+    float sceneAngle=scene<.5 ? .70 : (scene<1.5 ? 2.85 : 4.95);
+    semanticActivation=scene<.5 ? learning : transfer*smoothstep(scene<1.5 ? 9. : 15.,scene<1.5 ? 12. : 18.,lesson);
+    vec3 centre, objectNormal;
+    surface(sceneAngle,0.,centre,objectNormal);
+    vec3 tangent=normalize(vec3(-sin(sceneAngle),cos(sceneAngle),.12));
+    vec3 transverse=normalize(cross(objectNormal,tangent));
+    float contourAngle=a_surface.x*TAU;
+    vec2 direction=vec2(cos(contourAngle),sin(contourAngle));
+    float exponent=scene<.5 ? .30 : (scene<1.5 ? 1. : .42);
+    vec2 contour=sign(direction)*pow(abs(direction),vec2(exponent));
+    vec2 local=contour*vec2(scene>1.5 ? .25 : .21,scene<1.5 && scene>.5 ? .18 : .15);
+    if (a_grain.x>=.017 && a_grain.x<.021) {
+      local=vec2((a_surface.x*2.-1.)*.16,0.);
+    } else if (a_grain.x>=.021) {
+      float side=a_surface.x<.5 ? -1. : 1.;
+      local=vec2(side*.16,0.)+vec2(cos(a_surface.y*TAU),sin(a_surface.y*TAU))*.010*sqrt(a_grain.y);
+    }
+    vec3 objectPoint=centre+tangent*local.x+transverse*local.y+objectNormal*.055;
+    point=mix(point,objectPoint,u_weights.z);
+    normal=normalize(mix(normal,objectNormal,u_weights.z));
+    semantic=u_weights.z;
+  }
+  if (a_grain.x>=.025 && a_grain.x<.029 && u_weights.z>0.) {
+    vec3 routePoint, routeNormal;
+    surface(.70+TAU*a_surface.x,0.,routePoint,routeNormal);
+    point=mix(point,routePoint+routeNormal*.055,u_weights.z);
+    normal=normalize(mix(normal,routeNormal,u_weights.z));
+    semantic=u_weights.z;
+    semanticActivation=transfer*(1.-smoothstep(progress,progress+.06,a_surface.x));
+    route=1.;
+  }
   float arrival=clamp(u_reveal*1.35-a_grain.w*.35,0.,1.);
   arrival=arrival*arrival*(3.-2.*arrival);
   float rim=across*across;
@@ -89,9 +141,22 @@ void main() {
   v_alpha=mix(.38,inkDensity,spatial)*softness*clearText*edgeFade*arrival
     *(1.-smoothstep(.2,1.,u_scatter))*u_density*1.6;
   v_tone=mix(.1,.8*smoothstep(.08,.95,facing),spatial);
-  float flowAngle=angle-u_time*.105;
-  float wrapped=atan(sin(flowAngle),cos(flowAngle));
-  v_signal=(exp(-wrapped*wrapped/.035)*exp(-across*across/.10)*.24+pointerLift)*u_weights.z;
+  float carrier=smoothstep(.89,.998,cos(angle-(.70+TAU*progress)))*transfer;
+  float relationLane=exp(-across*across/.18);
+  float pattern=.5+.5*cos(across*9.);
+  v_alpha*=1.+aggregation*pattern*.24*u_weights.z;
+  float objectClearance=max(source,max(targetA,targetB))*exp(-across*across/.16);
+  v_alpha*=1.-objectClearance*.68*u_weights.z;
+  v_signal=clamp((aggregation*pattern*.30+carrier*relationLane*.58+pointerLift)*u_weights.z,0.,.68);
+  float anchor=step(.021,a_grain.x);
+  float axis=step(.017,a_grain.x);
+  float trace=smoothstep(a_surface.x-.08,a_surface.x+.08,.25+.75*semanticActivation);
+  float featureAlpha=mix(.24,.64,anchor)*(.24+.76*semanticActivation)*mix(trace,1.,axis);
+  featureAlpha=mix(featureAlpha,.24*semanticActivation,route);
+  featureAlpha*=clearText*edgeFade*arrival*(1.-smoothstep(.2,1.,u_scatter));
+  v_alpha=mix(v_alpha,featureAlpha,semantic);
+  v_tone=mix(v_tone,.24,semantic);
+  v_signal=mix(v_signal,mix(.30,.92,axis)*(.4+.6*semanticActivation),semantic);
 
   // Subpixel energy compensation: fine grains do not become opaque square pixels
   // on 1x displays. Quality reduction raises density slightly, never grain size.
@@ -203,6 +268,7 @@ export function createParticleField(canvas: HTMLCanvasElement): ParticleField | 
   canvas.dataset.renderer = "webgl";
   canvas.dataset.surface = "xianova-offset-ribbon";
   canvas.dataset.grain = "soft-subpixel";
+  canvas.dataset.narrative = "different-objects-shared-constraints";
 
   const draw = () => {
     if (disposed || gl.isContextLost()) return;
@@ -340,7 +406,13 @@ export function createParticleField(canvas: HTMLCanvasElement): ParticleField | 
     setAnimated(value) {
       if (value && !hasPlayed) { hasPlayed = true; revealAge = 0; }
       animated = value;
-      if (!value) { clearTimeout(idleTimer); hoverTarget = 0; if (!hasPlayed) draw(); }
+      if (!value) {
+        clearTimeout(idleTimer);
+        hoverTarget = 0;
+        // A compact viewport may pause before the first reveal frame. Commit a
+        // visible static sculpture instead of freezing a transparent first frame.
+        if (!hasPlayed || revealAge < 1.9) { revealAge = 1.9; draw(); }
+      }
       sync();
     },
     dispose() {

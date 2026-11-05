@@ -66,7 +66,6 @@ const apple = await render(180);
 const favicon = ico([{ size: 32, bytes: small }, { size: 64, bytes: large }]);
 await Promise.all([
   writeFile(path.join(root, "src/app/favicon.ico"), favicon),
-  writeFile(path.join(root, "public/favicon.ico"), favicon),
   writeFile(path.join(root, "public/brand-icon.png"), large),
   writeFile(path.join(root, "public/apple-touch-icon.png"), apple),
 ]);

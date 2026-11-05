@@ -1,7 +1,7 @@
 /* One message, one live sculpture. Controls stay tucked away until requested. */
 .particle-hero {
   position: relative; isolation: isolate; height: 100svh; min-height: 620px;
-  overflow: hidden; color: #1b2c38; background: #f9fbfc;
+  overflow: hidden; color: var(--foreground); background: var(--background);
 }
 .particle-stage { position: absolute; inset: 0; z-index: 1; }
 .particle-art, .particle-art-canvas, .particle-art-fallback { position: absolute; inset: 0; width: 100%; height: 100%; }
@@ -13,26 +13,44 @@
   background: none;
 }
 .particle-hero-grid {
-  position: absolute; inset: 0; z-index: 0; opacity: .28; pointer-events: none;
+  position: absolute; inset: 0; z-index: 0; opacity: .20; pointer-events: none;
   background-image: linear-gradient(#2a4d6412 1px,transparent 1px),linear-gradient(90deg,#2a4d6412 1px,transparent 1px);
   background-size: 48px 48px; mask-image: radial-gradient(ellipse at 60% 46%,#000,transparent 86%);
 }
 .particle-hero-copy { position: absolute; z-index: 3; top: 43%; left: 8.2%; max-width: 430px; transform: translateY(-50%); pointer-events: none; }
 .particle-title {
   font-family: var(--font-space),var(--font-noto),sans-serif;
-  font-size: clamp(32px,3.4vw,52px); line-height: 1.55; font-weight: 400; letter-spacing: -.035em;
+  font-size: clamp(32px,3.4vw,52px); line-height: 1.55; font-weight: 500; letter-spacing: -.025em;
 }
 .particle-title > span { display: block; }
-.particle-title > span:last-child { color: #476b79; font-weight: 300; }
+.particle-title > span:last-child { color: var(--text-emphasis); font-weight: 400; }
+html:lang(zh) .particle-title { font-family: var(--font-noto),var(--font-space),sans-serif; letter-spacing: .012em; }
+.particle-title > .particle-keywords { display: grid; }
+.particle-keyword {
+  grid-area: 1 / 1; white-space: nowrap;
+}
+.particle-keyword-character {
+  display: inline-block; white-space: pre; opacity: 0;
+  animation: particle-keyword-dissolve calc(var(--keyword-count) * 6s) cubic-bezier(.4,0,.2,1) infinite;
+  animation-delay: calc((var(--keyword-index) - var(--keyword-count)) * 6s - 1.5s + var(--character-delay));
+  animation-play-state: paused;
+}
+.particle-keyword:first-child .particle-keyword-character { opacity: 1; }
+.particle-hero[data-keywords-playing="true"] .particle-keyword-character { animation-play-state: running; }
+@keyframes particle-keyword-dissolve {
+  0% { opacity: 0; filter: blur(3px); transform: translateY(.10em); }
+  6%, 20% { opacity: 1; filter: blur(0); transform: translateY(0); }
+  24%, 100% { opacity: 0; filter: blur(3px); transform: translateY(-.06em); }
+}
 .particle-hero-bottom {
   position: absolute; z-index: 4; inset: auto 8.2% 22px; min-height: 44px;
   display: flex; align-items: center; justify-content: space-between; gap: 24px;
 }
-.particle-read-on { display: inline-flex; align-items: center; gap: 15px; min-height: 44px; text-decoration: none; color: #617480; font-size: 11px; }
-.particle-read-on > span { color: #476b79; transition: transform .25s; }
+.particle-read-on { display: inline-flex; align-items: center; gap: 15px; min-height: 44px; text-decoration: none; color: var(--text-tertiary); font-size: 12px; letter-spacing: .025em; }
+.particle-read-on > span { color: var(--text-emphasis); transition: transform .25s; }
 .particle-read-on:hover > span { transform: translateY(3px); }
-.particle-settings { position: relative; color: #617480; }
-.particle-settings > summary { display: flex; align-items: center; gap: 9px; min-height: 44px; cursor: pointer; list-style: none; font-size: 11px; }
+.particle-settings { position: relative; color: var(--text-tertiary); }
+.particle-settings > summary { display: flex; align-items: center; gap: 9px; min-height: 44px; cursor: pointer; list-style: none; font-size: 12px; letter-spacing: .025em; }
 .particle-settings > summary::-webkit-details-marker { display: none; }
 .particle-settings > summary svg { width: 16px; height: 16px; }
 .particle-settings > summary:hover, .particle-settings[open] > summary { color: #1b6578; }
@@ -67,5 +85,7 @@
 @media (prefers-reduced-motion: reduce) {
   html:has(.particle-hero) { scroll-behavior: auto; }
   .particle-arrive { animation: none; }
+  .particle-keyword-character { animation: none; opacity: 0; filter: none; transform: none; }
+  .particle-keyword:first-child .particle-keyword-character { opacity: 1; }
   .particle-hero a,.particle-hero button,.particle-read-on > span { transition: none; }
 }

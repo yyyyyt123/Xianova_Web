@@ -9,6 +9,9 @@
   --sky: #84c3ff;
   --brand: #1b6578;
   --line: #d1dde5;
+  --text-secondary: #526775;
+  --text-tertiary: #607583;
+  --text-emphasis: #3e6577;
 }
 
 html {
@@ -21,6 +24,11 @@ body {
   font-family: var(--font-noto), var(--font-space), system-ui, sans-serif;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
+  font-synthesis: none;
+}
+
+html:lang(en) body {
+  font-family: var(--font-space), var(--font-noto), system-ui, sans-serif;
 }
 
 ::selection {

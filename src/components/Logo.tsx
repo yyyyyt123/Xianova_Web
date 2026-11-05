@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { publicAsset } from "@/lib/public-asset";
 
 type LogoProps = {
   /** Use white mark for dark backgrounds */
@@ -16,7 +17,7 @@ type LogoProps = {
 export function Logo({ inverted = false, className = "", priority }: LogoProps) {
   return (
     <Image
-      src={inverted ? "/logo_white.png" : "/logo.png"}
+      src={publicAsset(inverted ? "/logo_white.png" : "/logo.png")}
       alt="夏仙创新 Xianova Robotics"
       width={1600}
       height={622}

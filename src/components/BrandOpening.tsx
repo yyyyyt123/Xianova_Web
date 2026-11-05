@@ -4,6 +4,7 @@ import { createContext, useCallback, useContext, useId, useLayoutEffect, useRef,
 import { useTranslations } from "next-intl";
 import { usePathname } from "@/i18n/routing";
 import { OPENING_STORAGE_KEY } from "@/lib/brand-opening-boot.mjs";
+import { publicAsset } from "@/lib/public-asset";
 import "./brand-opening.css";
 
 let seenInDocument = false;
@@ -44,8 +45,8 @@ export function BrandOpeningProvider({ children }: { children: ReactNode }) {
     const navigation = performance.getEntriesByType("navigation")[0] as PerformanceNavigationTiming | undefined;
     const restored = navigation?.type === "back_forward";
     if (pathname === "/" && (!seen || startedHere.current)) {
-      rememberOpening();
       if ((!initialEntry || boot === "pending") && boot !== "expired" && !preference.matches && !restored && !location.hash && window.scrollY < 8 && !document.hidden) {
+        rememberOpening();
         // Preserve the initial decision through React's development effect replay.
         startedHere.current = true;
         setPhase("assembling");
@@ -132,9 +133,9 @@ export function BrandOpeningProvider({ children }: { children: ReactNode }) {
             <clipPath id={`${id}-type`}><path d="M450 140h1060v346H450z" /></clipPath>
           </defs>
           <circle className="brand-opening-orbit" cx="280" cy="313" r="173" pathLength="1" />
-          <image href="/logo.png" width="1600" height="622" clipPath={`url(#${id}-upper)`} className="brand-opening-upper" />
-          <image href="/logo.png" width="1600" height="622" clipPath={`url(#${id}-lower)`} className="brand-opening-lower" />
-          <image href="/logo.png" width="1600" height="622" clipPath={`url(#${id}-type)`} className="brand-opening-type" />
+          <image href={publicAsset("/logo.png")} width="1600" height="622" clipPath={`url(#${id}-upper)`} className="brand-opening-upper" />
+          <image href={publicAsset("/logo.png")} width="1600" height="622" clipPath={`url(#${id}-lower)`} className="brand-opening-lower" />
+          <image href={publicAsset("/logo.png")} width="1600" height="622" clipPath={`url(#${id}-type)`} className="brand-opening-type" />
         </svg>
       </div>
       <p className="brand-opening-caption">{t("tagline")}</p>

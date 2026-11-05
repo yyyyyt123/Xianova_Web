@@ -40,7 +40,8 @@ function fallbackPoints(shape: ParticleShape) {
       z = y1 * Math.sin(-.86) + z2 * Math.cos(-.86);
     }
     const perspective = shape === 2 ? 4.8 / (4.8 - z) : 3.8 / (3.8 + z);
-    return { x: 980 + x * 282 * perspective, y: 385 - y * 220 * perspective, opacity: .20 + (Math.sin(v) + 1) * .2 };
+    // Keep SSR and browser SVG attributes identical across JS math engines.
+    return { x: +(980 + x * 282 * perspective).toFixed(3), y: +(385 - y * 220 * perspective).toFixed(3), opacity: +(.20 + (Math.sin(v) + 1) * .2).toFixed(3) };
   });
 }
 

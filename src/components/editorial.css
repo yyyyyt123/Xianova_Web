@@ -1,10 +1,10 @@
 /* Shared paper, typography and interaction system for the complete website. */
 :root {
-  --site-ink: #1b2c38;
-  --site-muted: #536775;
-  --site-accent: #1b6578;
-  --site-rule: #cfdae2;
-  --site-paper: #f9fbfc;
+  --site-ink: var(--foreground);
+  --site-muted: var(--text-secondary);
+  --site-accent: var(--brand);
+  --site-rule: var(--line);
+  --site-paper: var(--background);
   --site-wash: #eff4f7;
 }
 .fade-in.has-entered { animation: editorial-reveal .65s cubic-bezier(.22,1,.36,1) var(--reveal-delay,0s) both; }
@@ -16,7 +16,7 @@ html { scroll-padding-top: 80px; }
 .editorial-wrap { width: min(100%, 1320px); margin-inline: auto; }
 .editorial-section { padding: clamp(72px,6vw,96px) 5.4%; border-top: 1px solid var(--site-rule); }
 .eyebrow, .editorial-label { font: 11px var(--font-mono), monospace; line-height: 1.7; letter-spacing: .09em; color: var(--site-muted); }
-.eyebrow > span { margin-right: 22px; color: #71806d; }
+.eyebrow > span { margin-right: 22px; color: var(--text-tertiary); }
 .editorial-label { display: flex; align-items: center; gap: 27px; margin-bottom: 30px; }
 .editorial-label > span { color: var(--site-accent); }
 .editorial-title { max-width: 750px; font-size: clamp(30px, 3.1vw, 46px); font-weight: 400; line-height: 1.45; letter-spacing: -.035em; text-wrap: balance; }
@@ -46,7 +46,8 @@ html { scroll-padding-top: 80px; }
 .site-header-bar { display: flex; justify-content: space-between; align-items: center; height: 80px; padding-inline: 3%; }
 .site-wordmark { display: inline-flex; flex-shrink: 0; }
 .site-desktop-nav { display: flex; align-items: center; gap: 30px; }
-.site-desktop-nav a { position: relative; display: inline-flex; align-items: center; min-height: 44px; font-size: 13px; letter-spacing: .035em; text-decoration: none; color: var(--site-muted); white-space: nowrap; }
+.site-desktop-nav a { position: relative; display: inline-flex; align-items: center; min-height: 44px; font-size: 13px; font-weight: 400; letter-spacing: .04em; text-decoration: none; color: var(--site-muted); white-space: nowrap; transition: color .25s; }
+.site-desktop-nav a:hover { color: var(--site-accent); }
 .site-desktop-nav a:not(.site-partner)::after { content: ""; position: absolute; height: 1px; background: #2f6379; inset: auto 0 6px; transform: scaleX(0); transform-origin: left; transition: transform .25s; }
 .site-desktop-nav a:hover::after,.site-desktop-nav a[aria-current]::after { transform: scaleX(1); }
 .site-desktop-nav a[aria-current] { color: #1b2c38; }
@@ -54,7 +55,7 @@ html { scroll-padding-top: 80px; }
 .site-desktop-nav .site-partner { padding: 0 20px; gap: 20px; border: 1px solid #1b2c3826; color: var(--site-muted); background: transparent; transition: color .25s, border-color .25s, background-color .25s; }
 .site-desktop-nav .site-partner:hover { border-color: #1b657866; background: #1b657808; color: var(--site-accent); }
 .site-menu-toggle { display: none; position: relative; width: 44px; height: 44px; }
-.site-menu-toggle span { position: absolute; height: 1px; width: 23px; left: 10px; top: 18px; background: #34442f; transition: transform .25s; }
+.site-menu-toggle span { position: absolute; height: 1px; width: 23px; left: 10px; top: 18px; background: var(--site-ink); transition: transform .25s; }
 .site-menu-toggle span:last-child { top: 26px; }
 .site-menu-toggle.is-open span:first-child { transform: translateY(4px) rotate(45deg); }
 .site-menu-toggle.is-open span:last-child { transform: translateY(-4px) rotate(-45deg); }
@@ -62,7 +63,7 @@ html { scroll-padding-top: 80px; }
 /* Homepage narrative */
 .statement-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 12%; align-items: end; }
 .statement-title { font-size: clamp(28px,3vw,46px); line-height: 1.7; font-weight: 400; letter-spacing: -.04em; text-wrap: balance; }
-.statement-title span { display: block; color: #587b91; }
+.statement-title span { display: block; color: var(--text-emphasis); }
 .statement-aside > p { font-size: 15px; color: var(--site-muted); line-height: 1.95; }
 .statement-aside .arrow-link { margin-top: 26px; }
 .home-demonstration { background: #f0f4f7; }

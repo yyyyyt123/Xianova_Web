@@ -1,3 +1,5 @@
+import { publicAsset } from "@/lib/public-asset";
+
 /** Decorative brand artwork for team members whose portraits are not provided. */
 export function BrandPortrait({ variant }: { variant: "orbit" | "structure" }) {
   return <svg viewBox="0 0 300 400" className="team-brand-portrait" aria-hidden="true" fill="none">
@@ -20,7 +22,7 @@ export function BrandPortrait({ variant }: { variant: "orbit" | "structure" }) {
         <circle cx="241" cy="291" r="2.5" fill="#4b748b" stroke="none" />
       </g>}
     </g>
-    <image href="/apple-touch-icon.png?v=emblem-1" x="101" y="151" width="98" height="98" opacity=".9" />
+    <image href={publicAsset("/apple-touch-icon.png?v=emblem-1")} x="101" y="151" width="98" height="98" opacity=".9" />
     <g stroke="#6a899b" opacity=".6" strokeWidth=".8"><path d="M22 34h14M29 27v14M264 366h14M271 359v14" /></g>
     <text x="24" y="365" fill="#617e91" fontFamily="monospace" fontSize="9" letterSpacing="2">XIANOVA</text>
     <text x="24" y="48" fill="#617e91" fontFamily="monospace" fontSize="8" letterSpacing="1.5">{variant === "orbit" ? "02 / ORBIT" : "03 / STRUCTURE"}</text>

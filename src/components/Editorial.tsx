@@ -11,7 +11,7 @@ export function GeometryStudy({ variant = 0 }: { variant?: number }) {
       const x = radius * Math.cos(u);
       const y = radius * Math.sin(u);
       const z = 35 * Math.sin(v);
-      return `${240 + x},${180 + y * .43 + z * .9 + (variant === 1 ? Math.sin(u * 3) * 19 : 0)}`;
+      return `${(240 + x).toFixed(3)},${(180 + y * .43 + z * .9 + (variant === 1 ? Math.sin(u * 3) * 19 : 0)).toFixed(3)}`;
     });
     return points.join(" ");
   });
