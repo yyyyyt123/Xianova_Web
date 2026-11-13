@@ -37,8 +37,31 @@ Existing platform environment variables take precedence. Do not copy local
 - `/[locale]` — home (hero + entry links)
 - `/[locale]/technology` — ORGA technology
 - `/[locale]/solutions` — products & solutions
+- `/[locale]/news` — updates from the Xianova WeChat Official Account
 - `/[locale]/about` — company & team
 - `/[locale]/contact` — contact form
+
+## WeChat news
+
+Open `/zh/news` or `/en/news` with `npm run dev` to view the articles listed in
+`src/lib/curated-news.ts`. To add an article manually, enter its WeChat link ID,
+title, publication date and summary, and save its cover as
+`public/images/news/<id>.jpg`. The manual list works in both development and
+production without WeChat credentials.
+
+To replace the manual list with the automatic feed, confirm that the account can call the published list
+API (`freepublish/batchget`) and that the server can reach it from an IP allowed
+by the account. Set `WECHAT_OFFICIAL_APP_ID` and `WECHAT_OFFICIAL_APP_SECRET` in
+the server environment (in `.env.local` for local testing). On Vercel, check
+the project's outbound IP setup before enabling the integration. Verify which
+articles from the account's publishing workflow appear in the API response.
+
+The page displays metadata from the latest 100 publication batches. It keeps
+the original language and links to the published WeChat article. If only an
+update time is available, it is labeled as such. Both languages share a
+10-minute cache that refreshes on visits. Failed refreshes retain the last
+successful list in the data cache. A first-load failure displays an unavailable
+state.
 
 ## Deploy
 

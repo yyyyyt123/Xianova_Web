@@ -1,0 +1,57 @@
+.news-page .page-intro > .editorial-wrap { position: relative; }
+.news-page .editorial-wrap { max-width: 1080px; }
+.news-page .page-intro { padding: 124px 5.4% 36px; }
+.news-page .page-intro h1 { margin-top: 12px; font-size: clamp(34px, 3.6vw, 50px); }
+.news-page .page-intro-description { margin-top: 12px; }
+.news-feed { padding: clamp(28px, 3vw, 44px) 5.4% clamp(56px, 7vw, 96px); }
+
+.news-feed-heading {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px 24px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--site-rule);
+}
+
+.news-feed-heading h2 { font-size: clamp(19px, 1.8vw, 23px); font-weight: 500; }
+.news-feed-heading p, .news-article-copy time { color: var(--site-muted); font-size: 13px; }
+.news-empty { padding-block: 44px; color: var(--site-muted); }
+.news-list { list-style: none; margin: 0; padding: 0; }
+.news-list li { padding-block: 24px; border-bottom: 1px solid var(--site-rule); }
+
+.news-article {
+  display: grid;
+  grid-template-columns: minmax(0, min(36%, 376px)) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(24px, 3.2vw, 42px);
+}
+
+.news-cover {
+  position: relative;
+  display: grid;
+  place-items: center;
+  aspect-ratio: 2.35 / 1;
+  overflow: hidden;
+  background-color: var(--site-wash);
+  background-image: linear-gradient(90deg, #1b65780b 1px, transparent 1px), linear-gradient(#1b65780b 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+.news-cover-wordmark { color: #547989; font: 500 clamp(14px, 2vw, 26px) var(--font-mono), monospace; letter-spacing: .18em; }
+.news-cover img { object-fit: cover; }
+.news-article-copy h3 { margin-top: 6px; font-size: clamp(20px, 1.8vw, 26px); font-weight: 500; line-height: 1.45; overflow-wrap: anywhere; }
+.news-article-copy h3 a:hover { color: var(--site-accent); }
+.news-article-copy p { margin-top: 8px; color: var(--site-muted); font-size: 15px; line-height: 1.8; overflow-wrap: anywhere; }
+.news-article-copy time { font-family: var(--font-mono), monospace; }
+.news-article-link { margin-top: 4px; gap: 14px; }
+
+@media (max-width: 700px) {
+  .news-page .page-intro { padding: 108px 24px 26px; }
+  .news-page .page-intro h1 { font-size: clamp(30px, 8.5vw, 38px); }
+  .news-feed { padding-inline: 24px; }
+  .news-list li { padding-block: 20px; }
+  .news-article { grid-template-columns: minmax(0, 1fr); gap: 14px; }
+  .news-article-copy p { font-size: 14px; }
+}

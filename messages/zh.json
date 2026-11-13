@@ -7,10 +7,21 @@
   "nav": {
     "technology": "技术",
     "solutions": "产品与方案",
+    "news": "新闻动态",
     "about": "关于我们",
     "careers": "加入我们",
     "contact": "联系我们",
     "cta": "联系合作"
+  },
+  "news": {
+    "title": "新闻动态",
+    "intro": "了解夏仙创新在具身智能、机器人操作与产业合作方面的最新进展。",
+    "list": "最新动态",
+    "source": "夏仙创新微信公众号",
+    "empty": "暂无新闻动态。",
+    "unavailable": "暂时无法加载新闻动态，请稍后再试。",
+    "read": "阅读微信原文",
+    "updated": "更新于 {date}"
   },
   "careers": {
     "title": "一起推动机器人走向真实世界",

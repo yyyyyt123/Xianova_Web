@@ -16,7 +16,7 @@ export function Header() {
   const [open, setOpen] = useState(false);
   const toggle = useRef<HTMLButtonElement>(null);
   const otherLocale = locale === "zh" ? "en" : "zh";
-  const links = [["/technology", "technology"], ["/solutions", "solutions"], ["/about", "about"], ["/careers", "careers"], ["/contact", "contact"]] as const;
+  const links = [["/technology", "technology"], ["/solutions", "solutions"], ["/news", "news"], ["/about", "about"], ["/careers", "careers"], ["/contact", "contact"]] as const;
 
   useEffect(() => {
     const scroll = () => setScrolled(window.scrollY > 24);

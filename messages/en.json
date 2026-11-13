@@ -7,10 +7,21 @@
   "nav": {
     "technology": "Technology",
     "solutions": "Solutions",
+    "news": "News",
     "about": "About",
     "careers": "Careers",
     "contact": "Contact",
     "cta": "Partner with us"
+  },
+  "news": {
+    "title": "News",
+    "intro": "Follow Xianova’s latest progress in embodied AI, robot manipulation, and industry partnerships.",
+    "list": "Latest updates",
+    "source": "Xianova on WeChat",
+    "empty": "There are no news updates yet.",
+    "unavailable": "News is temporarily unavailable. Please try again later.",
+    "read": "Read on WeChat",
+    "updated": "Updated {date}"
   },
   "careers": {
     "title": "Build robots for the real world",
