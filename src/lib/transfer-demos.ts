@@ -5,7 +5,7 @@
 export const TRANSFER_MEDIA_VERSION = "sparkumr-cinema-20261123";
 export const TRANSFER_MEDIA_ORIGIN = (
   process.env.NEXT_PUBLIC_TRANSFER_MEDIA_ORIGIN ||
-  "https://xianova-web.oss-cn-shenzhen.aliyuncs.com"
+  "https://media.sparklingrobo.com"
 ).replace(/\/+$/, "");
 
 export type TransferRobot = "fourier_gr3" | "unitree_g1" | "robotera_l3";
