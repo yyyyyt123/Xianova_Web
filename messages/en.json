@@ -168,7 +168,7 @@
     "footerBelief": "Understand structure. Connect it to action. Teach robots to generalize.",
     "aboutIntro": "Start with the object. Build for a world that keeps changing.",
     "ourFocus": "OUR FOCUS",
-    "teamTitle": "Different perspectives. A shared direction.",
+    "teamTitle": "Grounded in structure. Built for transfer.",
     "teamInvitation": "Curious about robotics and the real world? We would love to explore with you.",
     "principlesTitle": "From demonstrations to transferable knowledge.",
     "discussTask": "What would you like your robot to learn?",
@@ -282,22 +282,30 @@
   },
   "team": {
     "title": "Team",
-    "desc": "Embodied AI, foundation-model infra, and capital markets",
+    "desc": "A research and engineering team focused on embodied AI, cross-embodiment transfer, and dexterous manipulation",
+    "disciplinesLabel": "R&D DISCIPLINES",
+    "disciplines": [
+      {
+        "code": "01",
+        "title": "Object-Centric Generalization",
+        "desc": "Advancing the ORGA architecture to model object geometry and spatial constraints, enabling manipulation skills to generalize across novel objects and layouts."
+      },
+      {
+        "code": "02",
+        "title": "Cross-Embodiment Transfer",
+        "desc": "Building the SparkUMR whole-body retargeting pipeline with contact alignment and physical grounding so one human demo transfers across diverse humanoids."
+      },
+      {
+        "code": "03",
+        "title": "Bimanual & Dexterous Control",
+        "desc": "Bridging multimodal human capture, kinematic validation, and bimanual dexterous-hand policy execution toward reliable real-world deployment."
+      }
+    ],
     "members": [
       {
         "name": "Dr. Junjia Liu",
         "role": "Founder & CEO",
         "bio": "PhD in Robotics, CUHK. Deep expertise in embodied intelligence and robot manipulation — humanoids, bimanual coordination, dexterous hands, imitation & reinforcement learning. Creator of the ORGA architecture."
-      },
-      {
-        "name": "Dr. Yitao Yang",
-        "role": "CTO",
-        "bio": "PhD in large models & AI infra, CUHK. Former researcher at Microsoft Research Asia. Led large-scale Agentic automated ops systems in ByteDance Infra."
-      },
-      {
-        "name": "Dr. Shengting Cao",
-        "role": "Head of Market & Legal",
-        "bio": "JD, CUHK. 5+ years in capital markets, 80+ financing deals, and deep involvement managing funds exceeding USD 1B."
       }
     ]
   },

@@ -137,9 +137,24 @@ html { scroll-padding-top: 80px; }
 .team-brand-portrait { display: block; width: 100%; height: 100%; }
 .team-name h3 { font-size: 24px; font-weight: 500; }
 .team-name > p { font-size: 12px; margin-top: 11px; letter-spacing: .04em; color: var(--site-accent); }
-.team-profiles { display: flex; flex-wrap: wrap; gap: 8px 16px; margin-top: 30px; }
-.team-profiles a { font-size: 11px; color: var(--site-muted); text-decoration: none; border-bottom: 1px solid #6f92a870; }
+.team-profiles { display: flex; flex-wrap: wrap; gap: 10px 14px; margin-top: 28px; }
+.team-profiles a { display: inline-flex; align-items: center; padding: 7px 14px; border: 1px solid #6f92a84d; background: #f9fbfc; font-size: 12px; color: var(--site-accent); text-decoration: none; transition: border-color .2s, background-color .2s; }
+.team-profiles a:hover { border-color: var(--site-accent); background: #e8f1f5; }
 .team-bio { max-width: 560px; font-size: 15px; line-height: 1.95; color: var(--site-muted); }
+.founder-feature { display: grid; grid-template-columns: 230px minmax(0,1fr); gap: 48px; align-items: center; margin-top: 48px; padding-block: 42px; border-top: 1px solid var(--site-rule); }
+.founder-portrait { aspect-ratio: 3/4; overflow: hidden; border: 1px solid #cfdae2; background: #e4edf1; }
+.founder-portrait img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+.founder-detail { min-width: 0; max-width: 680px; }
+.founder-meta { display: flex; align-items: center; gap: 16px; font: 11px var(--font-mono),monospace; letter-spacing: .08em; color: var(--site-accent); }
+.founder-meta > span:first-child { color: #708592; }
+.founder-detail h3 { margin-top: 16px; font-size: clamp(26px,2.4vw,34px); font-weight: 500; letter-spacing: -.025em; }
+.founder-bio { margin-top: 18px; font-size: 16px; line-height: 1.95; color: var(--site-muted); }
+.team-disciplines { padding-top: 40px; border-top: 1px solid var(--site-rule); }
+.team-disciplines-label { margin-bottom: 24px; color: #708592; }
+.team-discipline-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 36px; }
+.team-discipline-card { padding-top: 20px; border-top: 1px solid #334f6324; }
+.team-discipline-card h3 { margin-top: 12px; font-size: 19px; font-weight: 500; color: var(--site-ink); }
+.team-discipline-card p { margin-top: 12px; font-size: 14px; line-height: 1.85; color: var(--site-muted); }
 /* Contact and recruitment share the same palette without altering application behavior. */
 .contact-layout { display: grid; grid-template-columns: 1fr 1.05fr; gap: 12%; }
 .contact-small-label { font-size: 11px; color: #536775; margin-top: 60px; }
@@ -191,6 +206,8 @@ html { scroll-padding-top: 80px; }
   .pathway-content strong { font-size: 21px; }
   .team-member { grid-template-columns: 25px 110px 1fr; }
   .team-bio { grid-column: 3; }
+  .founder-feature { grid-template-columns: 190px minmax(0,1fr); gap: 32px; }
+  .team-discipline-grid { grid-template-columns: minmax(0,1fr); gap: 24px; }
   .footer-main { gap: 5%; grid-template-columns: 1.3fr 1fr; }.footer-location { grid-column: 1 / 3; display: flex; align-items: center; gap: 25px; flex-wrap: wrap; }.footer-location p,.footer-top { margin: 0; }
 }
 @media (max-width: 640px) {
@@ -211,6 +228,7 @@ html { scroll-padding-top: 80px; }
   .solutions-heading .geometry-study { display: none; }.solution-accordion h3 button { font-size: 22px; min-height: 95px; gap: 15px; }.solution-accordion article > div { padding-left: 28px; }.solution-accordion .solution-lead { font-size: 15px; }
   .company-statement > div p { font-size: 19px; line-height: 1.85; }
   .team-list { margin-top: 36px; }.team-member { grid-template-columns: 24px 80px minmax(0,1fr); gap: 16px; padding-block: 28px; }.team-name h3 { font-size: 21px; }.team-name > p { font-size: 11px; }.team-bio { grid-column: 2 / 4; font-size: 14px; }.team-profiles { margin-top: 18px; gap: 7px 12px; }.team-profiles a { font-size: 10px; }
+  .founder-feature { grid-template-columns: minmax(0,1fr); gap: 24px; margin-top: 32px; padding-block: 28px; }.founder-portrait { max-width: 210px; }.founder-bio { font-size: 14px; }.team-disciplines { padding-top: 28px; }
   .contact-small-label { margin-top: 35px; }.contact-direct-email { font-size: 23px; gap: 15px; }.contact-careers { margin-top: 35px; }.contact-form-pair { grid-template-columns: minmax(0,1fr); gap: 0; }.contact-form { padding-top: 25px; border-top: 1px solid #334f6320; }
   .section-closing { align-items: flex-start; flex-direction: column; gap: 14px; margin-top: 37px; }.section-closing > p { font-size: 13px; }
   .site-footer { padding: 44px 24px 22px; }.footer-main { grid-template-columns: minmax(0,1fr) minmax(0,.8fr); gap: 32px; }.footer-main > div:first-child { grid-column: 1 / 3; }.footer-belief { margin-top: 17px; font-size: 13px; max-width: 250px; }.footer-email { margin-top: 19px; }.footer-nav { gap: 17px; }.footer-location { grid-column: auto; display: block; }.footer-location p { margin-top: 12px; font-size: 11px; }.footer-location .eyebrow { font-size: 8px; }.footer-top { margin-top: 22px; }.footer-large-type { font-size: 16vw; margin-top: 37px; }.footer-large-type span { font-size: 8px; margin-top: 8px; }.footer-bottom { font-size: 10px; gap: 10px; }.footer-bottom > span:last-child { width: 100%; }
