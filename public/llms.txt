@@ -1,0 +1,27 @@
+# Xianova Robotics（夏仙创新）
+
+> Leading Human–Humanoid Loco-Manipulation Cross-Embodiment Transfer & Zero-Shot Robot Manipulation Generalization.
+> 全球领先的人—人形全身移动操作跨本体迁移与机器人操作零样本泛化技术团队。
+
+Xianova Robotics（深圳夏仙创新科技有限公司）focuses on object-centric embodied AI and cross-embodiment manipulation transfer. Our core **ORGA** architecture and **SparkUMR** human-to-humanoid retargeting toolchain extract object structure, geometric constraints, and hand–object contact relationships from human demonstrations, transferring whole-body loco-manipulation skills across distinct humanoid embodiments without per-robot re-recording.
+
+## Core Capabilities
+
+- **Cross-Embodiment Motion Transfer (跨本体动作迁移)**: Maps a single human demonstration onto diverse humanoid robots while preserving hand/finger contact alignment, foot-ground contact, and world-frame object registration.
+- **Zero-Shot Manipulation Generalization (ORGA 架构)**: Learns object-centric interaction relations rather than memorizing world-coordinate trajectories, enabling skill transfer across novel objects, scene layouts, and robot embodiments.
+- **Supported Humanoid Embodiments (已验证人形本体)**:
+  - **Fourier GR3** (53-DOF, full articulated hands, synchronized whole-body & dexterous hand transfer across 10 loco-manipulation tasks)
+  - **Unitree G1** (37-DOF, compact humanoid, proportional height & balance adaptation across seated, standing, and tabletop tasks)
+  - **Robotera L3** (55-DOF, full articulated hands, synchronized whole-body & bimanual manipulation across 10 tasks)
+
+## Key Pages
+
+- [Home / Cross-Embodiment Benchmark](https://www.xianova.ai/#cross-embodiment): Interactive synchronized comparison of 10 complex whole-body manipulation tasks across human source, Fourier GR3, Unitree G1, and Robotera L3.
+- [ORGA Technology (技术架构)](https://www.xianova.ai/technology): Object-centric representation, geometric constraint learning, and cross-embodiment transfer.
+- [Solutions (产品与方案)](https://www.xianova.ai/solutions): Embodied manipulation solutions for humanoid OEMs, data collection, and dynamic workcells.
+- [About Xianova (关于我们)](https://www.xianova.ai/about): Company profile and research team in Shenzhen, China.
+- [Contact (联系合作)](https://www.xianova.ai/contact): Technical collaboration and partnership inquiries (`support@xianova.ai`).
+
+## Extended Reference
+
+- [Full Technical Specification & Benchmark Index](https://www.xianova.ai/llms-full.txt)

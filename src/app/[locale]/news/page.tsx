@@ -14,7 +14,7 @@ export async function generateMetadata({ params: { locale } }: Props): Promise<M
   return {
     title: `${t("title")} | Xianova Robotics`,
     description: t("intro"),
-    alternates: { languages: { zh: "/zh/news", en: "/en/news" } },
+    alternates: { canonical: "/news" },
   };
 }
 

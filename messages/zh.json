@@ -1,8 +1,8 @@
 {
   "meta": {
-    "title": "夏仙创新 Xianova Robotics | 机器人操作零样本泛化",
-    "description": "夏仙创新专注机器人操作零样本泛化，提出 ORGA 架构，让机器人从少量示教中理解物体结构与交互关系，在新物体、新场景、新本体中举一反三完成操作。",
-    "keywords": "具身智能,零样本泛化,机器人操作,ORGA,Xianova,夏仙创新"
+    "title": "夏仙创新 Xianova Robotics | 跨本体全身移动操作与机器人零样本泛化",
+    "description": "夏仙创新（Xianova Robotics）专注机器人操作零样本泛化与人—人形跨本体全身移动操作迁移，自研 ORGA 架构与 SparkUMR 工具链，支持将人类示教精确迁移至 Fourier GR3、Unitree G1、Robotera L3 等多种人形本体。",
+    "keywords": "跨本体,跨本体迁移,跨本体动作迁移,人-人形动作重定向,全身移动操作,具身智能,零样本泛化,机器人操作,SparkUMR,ORGA,Xianova,夏仙创新"
   },
   "nav": {
     "technology": "技术",
@@ -334,9 +334,9 @@
         "desc": "基于物体中心表征，将单次示教扩展到姿态、布局与光照各异的新环境，无需重新采集"
       },
       {
-        "tag": "跨本体",
+        "tag": "真机迁移",
         "title": "桌面操作迁移到人形双臂",
-        "desc": "在帕西尼人形机器人上完成抓取与放置，验证同一技能在不同本体上的零样本迁移"
+        "desc": "在帕西尼 T21 人形机器人真机上完成抓取与放置，验证同一技能在不同本体上的零样本迁移"
       },
       {
         "tag": "动作重定向",
@@ -362,5 +362,79 @@
     "address": "中国 · 深圳",
     "icp": "备案号待定",
     "rights": "保留所有权利"
+  },
+  "transfer": {
+    "leading": "全球领先的",
+    "titleOne": "人—人形全身移动操作",
+    "titleTwo": "跨本体迁移技术",
+    "description": "从行走转向，到双手协作。让同一段人类示教，在不同形态的机器人上找到属于自己的表达。",
+    "technicalTitle": "Human-Humanoid Loco-Manipulation Cross-Embodiment Transfer Technology",
+    "collection": "跨本体演示集",
+    "tasksCount": "组代表任务",
+    "robotsCount": "类人形本体",
+    "sharedSource": "同一个任务，跨越不同形态。",
+    "chooseTask": "选择操作任务",
+    "taskLibrary": "任务索引",
+    "chooseRobot": "选择目标机器人",
+    "chooseMode": "选择对比方式",
+    "split": "双画面对照",
+    "matrix": "全本体联映",
+    "wipe": "分界线对照",
+    "swap": "互换左右",
+    "matrixCode": "01 → 03",
+    "matrixTitle": "跨构型同步映射",
+    "matrixKpiUnit": "人类骨节输入",
+    "matrixHint": "零遥操作重采 · 点击任意构型放大",
+    "matrixSummaryTel": "130 人体骨节 → 3 构型同步迁移",
+    "platformTelemetry": "全身同步映射",
+    "inspectRobot": "放大对比",
+    "human": "人类原始动作",
+    "sourceMotion": "人类原始动作视频",
+    "robotMotion": "机器人迁移动作视频",
+    "divider": "拖动分界线，对比人类与机器人",
+    "dividerValue": "人类原始动作 {source}%，机器人迁移 {target}%",
+    "play": "同步播放",
+    "pause": "暂停播放",
+    "retry": "重新加载",
+    "loading": "正在准备两侧画面…",
+    "visualization": "SPARKUMR / KINEMATIC VISUALIZATION",
+    "timeline": "同步播放进度",
+    "speed": "播放速度",
+    "fullscreen": "全屏查看",
+    "exitFullscreen": "退出全屏",
+    "dofUnit": "DOF",
+    "shortcuts": "空格 播放/暂停 · ←/→ 跳转 1 秒",
+    "error": "视频暂时无法播放，请重新加载或切换任务。",
+    "sourceNote": "SparkUMR 运动学预览。场景物体沿用源动画，未验证抓取接触、平衡或实机执行。",
+    "interactionHint": "拖动分界线看迁移，切换本体保留进度对比。",
+    "pipelineLabel": "从人类示教到跨本体动作的处理路径",
+    "pipeline": {
+      "observe": "人类示教",
+      "structure": "结构与接触",
+      "retarget": "本体适配",
+      "execute": "动作迁移"
+    },
+    "faqLabel": "CROSS-EMBODIMENT FAQ / 技术问答",
+    "faqTitle": "关于人—人形跨本体全身移动操作",
+    "faqs": [
+      {
+        "question": "什么是跨本体全身移动操作迁移（Cross-Embodiment Transfer）？",
+        "answer": "跨本体迁移指将同一段人类操作示教或技能表征，无需针对每款机型重新采集遥操作数据，即可直接适配到身高、自由度与灵巧手结构各异的不同人形机器人。夏仙创新通过以物体为中心的交互结构与接触约束优化，实现坐姿、站立、行走推拉及双手工具操作在不同本体上的统一复现。"
+      },
+      {
+        "question": "夏仙创新 SparkUMR 与传统关节角度重定向有何区别？",
+        "answer": "传统关节映射容易因机器人与人体的体型差异导致手部悬空、物体错位或躯干大幅前倾。SparkUMR 将全身骨骼、手部接触约束与场景物体统一到同一世界坐标系，联合优化灵巧手精细接触、足底平放贴地与直立平衡姿态，实现坐、站、走、拿全流程自然复现。"
+      },
+      {
+        "question": "目前演示集验证了哪些机器人本体与任务类型？",
+        "answer": "当前跨本体基准包含 10 组高复杂度全身移动操作任务，覆盖桌面多物体整理、坐姿饮水、双手搅拌盛装、起身取衣、高位取放、推车转运及双手交替推行衣架，已在 Fourier GR3（53 DOF）、Unitree G1（37 DOF）与 Robotera L3（55 DOF）上完成同步验证。"
+      },
+      {
+        "question": "跨本体迁移与夏仙创新的 ORGA 零样本泛化架构如何协同？",
+        "answer": "ORGA 架构从少量示教中提炼以物体为中心的几何与接触规律，实现跨物体与跨场景的零样本泛化；SparkUMR 则负责将人类或统一技能表达高效映射到不同形态的机器人硬件上，共同构成可跨物体、跨场景、跨本体部署的具身操作底座。"
+      }
+    ],
+    "heroDescription": "全球领先的人—人形全身移动操作跨本体迁移技术。",
+    "heroLink": "看看动作如何跨越本体"
   }
 }

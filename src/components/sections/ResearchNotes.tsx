@@ -113,7 +113,7 @@ export function ResearchNotes() {
     <section ref={ref} id="research-notes" className={`research-notes${visible ? " is-visible" : ""}`} aria-labelledby="research-notes-title">
       <div className="research-paper-lines" aria-hidden="true" />
       <div className="research-heading">
-        <p className="research-label">XIANOVA / RESEARCH NOTES</p>
+        <p className="research-label">03 / RESEARCH NOTES</p>
         <h2 id="research-notes-title">{t("title")}</h2>
         <p className="research-intro">{t("intro")}</p>
       </div>

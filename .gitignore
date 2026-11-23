@@ -31,6 +31,12 @@ yarn-error.log*
 # vercel
 .vercel
 
+# staged oss media upload
+/oss-upload-transfer/
+
+# local runtime and verification logs
+/runtime-logs/
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

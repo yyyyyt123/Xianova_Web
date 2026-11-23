@@ -1,8 +1,8 @@
 {
   "meta": {
-    "title": "Xianova Robotics | Zero-Shot Generalization for Robot Manipulation",
-    "description": "Xianova Robotics focuses on zero-shot generalization for robot manipulation. Our ORGA architecture enables robots to understand object structure and interaction from few demonstrations — and transfer across objects, scenes, and embodiments.",
-    "keywords": "embodied AI,zero-shot generalization,robot manipulation,ORGA,Xianova"
+    "title": "Xianova Robotics | Cross-Embodiment Loco-Manipulation & Zero-Shot Generalization",
+    "description": "Xianova Robotics builds ORGA and SparkUMR for zero-shot robot manipulation generalization and human-to-humanoid cross-embodiment loco-manipulation transfer across Fourier GR3, Unitree G1, and Robotera L3.",
+    "keywords": "cross-embodiment,cross-embodiment transfer,human-to-humanoid retargeting,loco-manipulation,embodied AI,zero-shot generalization,robot manipulation,SparkUMR,ORGA,Xianova Robotics"
   },
   "nav": {
     "technology": "Technology",
@@ -362,9 +362,9 @@
         "desc": "Object-centric representation expands a single demonstration across new poses, layouts, and lighting — no re-collection"
       },
       {
-        "tag": "Across embodiments",
+        "tag": "Real robot",
         "title": "Tabletop skills on a bimanual humanoid",
-        "desc": "Pick-and-place on a Paxini humanoid shows the same skill transferring zero-shot across robot bodies"
+        "desc": "Pick-and-place on physical Paxini T21 hardware shows zero-shot skill transfer across real robot bodies"
       },
       {
         "tag": "Motion retargeting",
@@ -390,5 +390,79 @@
     "address": "Shenzhen, China",
     "icp": "ICP pending",
     "rights": "All rights reserved"
+  },
+  "transfer": {
+    "leading": "LOCO-MANIPULATION",
+    "titleOne": "Human–Humanoid",
+    "titleTwo": "Cross-Embodiment Transfer",
+    "description": "From walking and turning to bimanual coordination. See one human demonstration take shape across different humanoid robots.",
+    "technicalTitle": "Human-Humanoid Loco-Manipulation Cross-Embodiment Transfer Technology",
+    "collection": "Cross-embodiment collection",
+    "tasksCount": "representative tasks",
+    "robotsCount": "humanoid platforms",
+    "sharedSource": "The same task. A different embodiment.",
+    "chooseTask": "Choose a manipulation task",
+    "taskLibrary": "TASK INDEX",
+    "chooseRobot": "Choose a target robot",
+    "chooseMode": "Choose a comparison mode",
+    "split": "Side by side",
+    "matrix": "All 3 robots",
+    "wipe": "Overlay wipe",
+    "swap": "Swap sides",
+    "matrixCode": "01 → 03",
+    "matrixTitle": "Multi-embodiment sync",
+    "matrixKpiUnit": "human joints source",
+    "matrixHint": "Zero re-capture · Click any robot",
+    "matrixSummaryTel": "130 human joints → 3 morphologies",
+    "platformTelemetry": "Whole-body synchronized",
+    "inspectRobot": "Inspect",
+    "human": "Human source",
+    "sourceMotion": "Original human motion video",
+    "robotMotion": "Retargeted robot motion video",
+    "divider": "Drag to compare human and robot",
+    "dividerValue": "Human source {source}%, robot target {target}%",
+    "play": "Play in sync",
+    "pause": "Pause playback",
+    "retry": "Reload videos",
+    "loading": "Preparing both views…",
+    "visualization": "SPARKUMR / KINEMATIC VISUALIZATION",
+    "timeline": "Synchronized playback timeline",
+    "speed": "Playback speed",
+    "fullscreen": "View fullscreen",
+    "exitFullscreen": "Exit fullscreen",
+    "dofUnit": "DOF",
+    "shortcuts": "Space Play/Pause · ←/→ Seek 1s",
+    "error": "The videos could not be played. Please reload or choose another task.",
+    "sourceNote": "SparkUMR kinematic preview. Objects replay the source animation; contact, balance and hardware execution are not validated.",
+    "interactionHint": "Slide to compare. Switch robots without losing playback position.",
+    "pipelineLabel": "From human demonstration to cross-embodiment motion",
+    "pipeline": {
+      "observe": "Human demonstration",
+      "structure": "Structure & contact",
+      "retarget": "Embodiment adaptation",
+      "execute": "Motion transfer"
+    },
+    "faqLabel": "CROSS-EMBODIMENT FAQ",
+    "faqTitle": "How human–humanoid cross-embodiment transfer works",
+    "faqs": [
+      {
+        "question": "What is human–humanoid cross-embodiment loco-manipulation transfer?",
+        "answer": "Cross-embodiment transfer adapts a single human demonstration or skill representation across humanoid robots with different heights, joint DOFs, and hand morphologies without re-collecting per-robot teleoperation data. Xianova Robotics combines object-centric relation modeling with contact-constrained retargeting across seated, standing, walking, and bimanual tool-use tasks."
+      },
+      {
+        "question": "How does Xianova SparkUMR differ from naive joint-angle retargeting?",
+        "answer": "Naive joint-angle mapping breaks hand–object contacts and tilts the torso when robot proportions differ from the demonstrator. SparkUMR registers human pelvis trajectories, hand/finger contact targets, and scene props in one canonical world frame, jointly optimizing dexterous contact consistency, foot flattening, and upright posture regularization."
+      },
+      {
+        "question": "Which humanoid platforms and task categories are benchmarked?",
+        "answer": "The showcase benchmarks 10 representative whole-body manipulation tasks—including desk arrangement, seated drinking, bimanual mixing, getting out of bed to retrieve clothes, high-shelf lowering, cart transfer, and alternating-hand pushing—across Fourier GR3 (53 DOF), Unitree G1 (37 DOF), and Robotera L3 (55 DOF)."
+      },
+      {
+        "question": "How does cross-embodiment transfer connect with the ORGA architecture?",
+        "answer": "ORGA extracts object-centric geometry and interaction constraints from few demonstrations so manipulation generalizes zero-shot to new objects and layouts, while SparkUMR transfers those whole-body skills cleanly onto diverse humanoid hardware platforms."
+      }
+    ],
+    "heroDescription": "Human-Humanoid Loco-Manipulation Cross-Embodiment Transfer Technology",
+    "heroLink": "Explore cross-embodiment motion"
   }
 }

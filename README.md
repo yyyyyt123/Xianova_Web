@@ -63,6 +63,24 @@ update time is available, it is labeled as such. Both languages share a
 successful list in the data cache. A first-load failure displays an unavailable
 state.
 
+## Cross-embodiment human-to-humanoid showcase
+
+The home and technology pages include a synchronized SparkUMR kinematic
+comparison at `#cross-embodiment`: ten whole-body loco-manipulation tasks, each
+retargeted from an identical human demonstration to Fourier GR3 (53-DOF),
+Unitree G1 (37-DOF), and Robotera L3 (55-DOF). Select a task and view mode
+(`Matrix` default multi-embodiment grid, `Split` side-by-side comparison, or
+`Wipe` draggable boundary comparison), with shared play, seek and speed
+controls. Playback pauses when the player leaves the viewport or the page is
+hidden; videos load only for the active selection. Media assets (1440 × 1440 at
+24 fps H.264 MP4 + WebP posters) are hosted on Aliyun OSS and configured via
+`NEXT_PUBLIC_TRANSFER_MEDIA_ORIGIN`, with cache-busting controlled by
+`TRANSFER_MEDIA_VERSION` in `src/lib/transfer-demos.ts`.
+
+The bilingual catalog is in `src/lib/transfer-demos.ts`. These clips show
+kinematic retargeting previews; scene objects replay the source animations and
+do not by themselves validate grasp contact, balance, or hardware execution.
+
 ## Deploy
 
 The organization repository is the source of truth. Its `main` branch is

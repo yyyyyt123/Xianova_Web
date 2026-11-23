@@ -15,6 +15,7 @@ export function Hero() {
   const t = useTranslations("hero");
   const p = useTranslations("particleHero");
   const intro = useTranslations("opening");
+  const transfer = useTranslations("transfer");
   const { playing, holdingHero, canReplay, replay } = useBrandOpening();
   const [shape, setShape] = useState<ParticleShape>(2);
   const [animated, setAnimated] = useState(false);
@@ -95,10 +96,12 @@ export function Hero() {
             </span>)}
           </span>
         </h1>
+        <p className="particle-transfer-description particle-arrive">{transfer("heroDescription")}</p>
+        <a className="particle-transfer-link particle-arrive" href="#cross-embodiment">{transfer("heroLink")}<span aria-hidden="true">↗</span></a>
       </div>
 
       <div className="particle-hero-bottom">
-        <a href="#perspective" className="particle-read-on">{t("scrollHint")}<span aria-hidden="true">↓</span></a>
+        <a href="#cross-embodiment" className="particle-read-on">{t("scrollHint")}<span aria-hidden="true">↓</span></a>
         <details ref={settings} className="particle-settings">
           <summary aria-label={p("visualSettings")}>
             <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1" aria-hidden="true"><path d="M2 5h12M2 11h12" /><circle cx="6" cy="5" r="2" fill="var(--background)" /><circle cx="10" cy="11" r="2" fill="var(--background)" /></svg>

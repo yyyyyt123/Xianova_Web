@@ -6,12 +6,12 @@ import { publicAsset } from "@/lib/public-asset";
 
 export const DEMO_NAMES = ["human-centric-multimodal-data", "cross-scene-generalization", "cross-embodiment-paxini-t21", "sparkumr-to-fourier-gr3", "sparkumr-fourier-gr3-action", "sparkumr-astribot-q5-l3"] as const;
 
-/** Shared showcase; only the selected clip is mounted and playback is always opt-in. */
-export function DemoGallery({ featured = false }: { featured?: boolean }) {
+/** Shared showcase for ORGA multimodal capture, cross-scene & real-robot demos; opt-in playback. */
+export function DemoGallery() {
   const t = useTranslations("technology");
   const ui = useTranslations("experience");
   const demos = t.raw("demos") as { title: string; tag: string; desc: string }[];
-  const indices = featured ? [1, 2, 3] : [0, 1, 2, 3, 4, 5];
+  const indices = [0, 1, 2];
   const [selected, setSelected] = useState(0);
   const [started, setStarted] = useState(false);
   const [failed, setFailed] = useState(false);

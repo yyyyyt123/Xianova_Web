@@ -21,7 +21,7 @@ export function HomeDemonstration() {
   return <section className="home-demonstration editorial-section" id="demonstrations">
     <div className="editorial-wrap">
       <FadeIn><div className="editorial-section-heading"><div><SectionLabel number="02">{t("inAction")}</SectionLabel><h2 className="editorial-title">{t("demoTitle")}</h2></div><ArrowLink href="/technology">{t("allDemos")}</ArrowLink></div></FadeIn>
-      <DemoGallery featured />
+      <DemoGallery />
     </div>
   </section>;
 }

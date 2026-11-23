@@ -1,0 +1,47 @@
+# Xianova Robotics（夏仙创新）— Full Technical & Benchmark Reference
+
+- Organization: Shenzhen Xianova Innovation Technology Co., Ltd. (深圳夏仙创新科技有限公司 / Xianova Robotics)
+- Website: https://www.xianova.ai
+- Contact: support@xianova.ai
+- Location: Shenzhen, China (中国 · 深圳)
+- Primary Domains: Cross-Embodiment Motion Transfer (跨本体迁移), Human-Humanoid Loco-Manipulation (人—人形全身移动操作), Zero-Shot Robot Manipulation Generalization (机器人操作零样本泛化), Embodied AI (具身智能)
+
+## 1. Architecture & Toolchain
+
+### ORGA (Object-Centric & Relation-Guided Action Generalization)
+ORGA models manipulation around object geometry, contact regions, and spatial relations rather than fixed world-space end-effector trajectories. From a few demonstrations, policies transfer across new object instances, spatial layouts, and robot morphologies.
+
+### SparkUMR (Unified Human-Humanoid Cross-Embodiment Motion Retargeting)
+SparkUMR converts human motion capture and manipulation datasets (FBX, SMPL-H, AMASS NPZ) into kinematically consistent trajectories for heterogeneous humanoid robots:
+- **World-Frame Hips & Contact Registration**: Aligns SMPL body joints and root XY with source human hips so whole-body targets, hand/finger contact targets, and scene props share one world coordinate frame.
+- **Contact-Constrained Optimization**: Enforces multi-finger and wrist contact tracking against source object interactions.
+- **Physical Grounding & Posture Regularization**: Applies per-robot sole contact points (`foot_flatten_loss`), ground penetration constraints, and human-gated upright torso regularization.
+
+## 2. Cross-Embodiment Benchmark (10 Whole-Body Loco-Manipulation Tasks)
+
+Every task is retargeted from the identical human FBX demonstration onto three humanoid platforms (Fourier GR3 53-DOF, Unitree G1 37-DOF, Robotera L3 55-DOF) and rendered at 1440×1440 / 24 FPS with synchronized cameras and original scene object materials:
+
+1. **Task 01 (285) — 重整一张办公桌 / A desk, rearranged** (40.4s, Sequential): Arrange a phone, laptop, lamp, mug, and notebook on a desk across Fourier GR3 (53-DOF), Unitree G1 (37-DOF), and Robotera L3 (55-DOF).
+2. **Task 02 (879) — 坐姿饮水与交流 / Seated drinking and conversation** (24.8s, Seated manipulation): Coordinate seated conversation, pouring, and drinking across all three humanoid embodiments.
+3. **Task 03 (244) — 搅拌与盛装，连续协作 / Mix, scoop, transfer** (12.2s, Bimanual tool use): Stir inside a mixing bowl with a spatula and scoop onto a tray.
+4. **Task 04 (097) — 倒一杯水，再饮用 / Pour, then drink** (12.2s, Tool use): Pour from a vacuum flask into a mug and lift to drink.
+5. **Task 05 (752) — 起身、探手，再取衣 / Rise, reach, retrieve** (24.8s, Whole-body multi-stage): Stand up from bed, touch a bedside lamp, walk to a rack and grasp clothes.
+6. **Task 06 (767) — 从高层架取物 / Reach high, place low** (8.4s, High reach & lowering): Stretch to grasp a woven basket from a top shelf and lower it to the floor.
+7. **Task 07 (489) — 把厨具逐一归位 / An organized workspace** (12.2s, Multi-object organization): Grasp, transfer, and arrange multiple kitchen utensils into an organizer tray.
+8. **Task 08 (980) — 在桌与推车间往返 / From table to cart** (14.7s, Spatial transfer): Transfer a mug and side plate between a side table and a utility cart and return them.
+9. **Task 09 (798) — 花瓶的双手转运 / Two hands, one vase** (12.3s, Bimanual carry): Move a vase with both hands between a utility cart and a shelf.
+10. **Task 10 (594) — 推行中的左右手切换 / Push, switch, continue** (11.6s, Sustained contact loco-manipulation): Alternate right and left hands while pushing a rolling clothes rack back and forth.
+
+## 3. Frequently Asked Questions (FAQ)
+
+**Q: 什么是跨本体全身移动操作迁移（Cross-Embodiment Loco-Manipulation Transfer）？**
+A: 跨本体迁移是指将同一段人类操作示教或技能表征，无需针对每种机型重新采集遥操作数据，即可直接适配到体型、自由度和手部结构各异的不同机器人本体上。夏仙创新（Xianova Robotics）通过以物体为中心的交互表征与接触约束优化，实现坐姿、站立、行走推拉及双手精细工具操作在多种人形机器人上的统一复现。
+
+**Q: SparkUMR 与传统关节角度映射（Trajectory Replay）有什么区别？**
+A: 传统动作重定向仅复制局部关节角，面对身高与臂长差异时极易出现手部悬空、物体漂移或躯干前倾失真。SparkUMR 在世界坐标系下联合优化全身姿态、手部与手指接触约束、足底平放贴地以及直立平衡门控，使傅利叶 GR3、宇树 G1、星动纪元 L3 在同一交互空间内稳定复现复杂动作。
+
+**Q: 目前支持哪些机器人本体与人类示教数据格式？**
+A: 已在官网公开验证的人形本体包括 Fourier GR3（53 自由度）、Unitree G1（37 自由度）与 Robotera L3（55 自由度），并可扩展至更多人形及双臂构型；输入支持 FBX、SMPL-H、AMASS（NPZ）等人类动作与手物交互数据。
+
+**Q: 跨本体迁移和夏仙创新的 ORGA 零样本泛化架构是什么关系？**
+A: ORGA 架构聚焦于“跨物体、跨场景、跨本体”的统一操作理解：通过解耦物体几何结构与人机交互接触规律，使同一套示教理解既能泛化到新物体与新环境布局，也能通过 SparkUMR 跨本体迁移链路快速部署到不同的机器人硬件平台。

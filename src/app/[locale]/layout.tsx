@@ -2,33 +2,13 @@ import { ReactNode } from "react";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
-import { Space_Grotesk, Noto_Sans_SC, JetBrains_Mono } from "next/font/google";
 import { routing } from "@/i18n/routing";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { BrandOpeningProvider } from "@/components/BrandOpening";
 import { OPENING_BOOT_SCRIPT, OPENING_BOOT_STYLES } from "@/lib/brand-opening-boot.mjs";
+import { buildOrganizationJsonLd } from "@/lib/seo";
 import "@/components/editorial.css";
-
-const space = Space_Grotesk({
-  subsets: ["latin"],
-  variable: "--font-space",
-  display: "swap",
-});
-
-const noto = Noto_Sans_SC({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "700"],
-  variable: "--font-noto",
-  display: "swap",
-});
-
-const mono = JetBrains_Mono({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-mono",
-  display: "swap",
-});
 
 type Props = {
   children: ReactNode;
@@ -57,17 +37,19 @@ export default async function LocaleLayout({ children, params }: Props) {
   const t = await getTranslations({ locale, namespace: "meta" });
 
   return (
-    <html
-      lang={locale}
-      suppressHydrationWarning
-      className={`${space.variable} ${noto.variable} ${mono.variable}`}
-    >
+    <html lang={locale} suppressHydrationWarning>
       <head>
         <style id="brand-opening-boot-style" dangerouslySetInnerHTML={{ __html: OPENING_BOOT_STYLES }} />
         <script id="brand-opening-boot" dangerouslySetInnerHTML={{ __html: OPENING_BOOT_SCRIPT }} />
         <meta name="description" content={t("description")} />
         <meta name="keywords" content={t("keywords")} />
         <meta name="theme-color" content="#f9fbfc" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(buildOrganizationJsonLd(locale as "zh" | "en")),
+          }}
+        />
         {process.env.NEXT_PUBLIC_RECRUITMENT_API_ORIGIN && <link rel="preconnect" href={process.env.NEXT_PUBLIC_RECRUITMENT_API_ORIGIN} crossOrigin="anonymous" />}
       </head>
       <body

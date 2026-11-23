@@ -5,6 +5,14 @@ import { Hero } from "@/components/sections/Hero";
 import { ResearchNotes } from "@/components/sections/ResearchNotes";
 import { HomeStatement, HomeDemonstration, HomePathways, HomeInvitation } from "@/components/sections/HomeExperience";
 import { routing } from "@/i18n/routing";
+import { TransferShowcase } from "@/components/transfer/TransferShowcase";
+import {
+  SITE_ORIGIN,
+  buildSparkumrSoftwareJsonLd,
+  buildTransferFaqJsonLd,
+  buildTransferVideosJsonLd,
+  localizedUrl,
+} from "@/lib/seo";
 
 type Props = {
   params: Promise<{ locale: string }> | { locale: string };
@@ -21,15 +29,18 @@ export function generateStaticParams() {
  */
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await Promise.resolve(params);
+  const lang = locale === "zh" ? "zh" : "en";
   const t = await getTranslations({ locale, namespace: "meta" });
 
   return {
+    metadataBase: new URL(SITE_ORIGIN),
     title: t("title"),
     description: t("description"),
     keywords: t("keywords").split(","),
     openGraph: {
       title: t("title"),
       description: t("description"),
+      url: localizedUrl(lang),
       locale: locale === "zh" ? "zh_CN" : "en_US",
       type: "website",
       siteName: "Xianova Robotics",
@@ -40,9 +51,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: t("description"),
     },
     alternates: {
+      canonical: localizedUrl(lang),
       languages: {
-        zh: "/zh",
-        en: "/en",
+        zh: localizedUrl("zh"),
+        en: localizedUrl("en"),
       },
     },
   };
@@ -54,11 +66,25 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
  */
 export default async function HomePage({ params }: Props) {
   const { locale } = await Promise.resolve(params);
+  const lang = locale === "zh" ? "zh" : "en";
   setRequestLocale(locale);
+  const transfer = await getTranslations({ locale, namespace: "transfer" });
+  const faqs = transfer.raw("faqs") as { question: string; answer: string }[];
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify([
+            buildSparkumrSoftwareJsonLd(lang),
+            buildTransferFaqJsonLd(faqs),
+            buildTransferVideosJsonLd(lang),
+          ]),
+        }}
+      />
       <Hero />
+      <TransferShowcase />
       <HomeStatement />
       <HomeDemonstration />
       <ResearchNotes />
