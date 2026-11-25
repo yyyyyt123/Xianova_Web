@@ -35,7 +35,7 @@
   aspect-ratio: 2.35 / 1;
   overflow: hidden;
   background-color: var(--site-wash);
-  background-image: linear-gradient(90deg, #0000000d 1px, transparent 1px), linear-gradient(#0000000d 1px, transparent 1px);
+  background-image: linear-gradient(90deg, #1b65780b 1px, transparent 1px), linear-gradient(#1b65780b 1px, transparent 1px);
   background-size: 28px 28px;
 }
 

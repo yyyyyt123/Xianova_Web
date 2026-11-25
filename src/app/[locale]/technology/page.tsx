@@ -56,24 +56,11 @@ export default async function TechnologyRoute({ params }: Props) {
 
   return (
     <div className="bg-page">
-      <TechnologyDeepDive faq={
-        <section id="transfer-faq" className="transfer-faq" aria-labelledby="transfer-faq-title">
-          <p className="editorial-label"><span aria-hidden="true">↳</span>{transfer("faqLabel")}</p>
-          <h2 id="transfer-faq-title">{transfer("faqTitle")}</h2>
-          <div className="transfer-faq-list">
-            {faqs.map(({ question, answer }) => (
-              <details key={question}>
-                <summary>{question}</summary>
-                <p>{answer}</p>
-              </details>
-            ))}
-          </div>
-          <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{ __html: JSON.stringify(buildTransferFaqJsonLd(faqs)) }}
-          />
-        </section>
-      } />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(buildTransferFaqJsonLd(faqs)) }}
+      />
+      <TechnologyDeepDive />
     </div>
   );
 }

@@ -32,7 +32,7 @@ export const OPENING_BOOT_SCRIPT = createOpeningBootScript(process.env.NEXT_PUBL
 export const OPENING_BOOT_STYLES = `
 .brand-opening[data-phase="pending"]{display:none}
 html[data-brand-opening="pending"]{overflow:hidden}
-html[data-brand-opening="pending"] .brand-opening[data-phase="pending"]{display:block;position:fixed;inset:0;z-index:100;background:var(--background,#fafafa)}
+html[data-brand-opening="pending"] .brand-opening[data-phase="pending"]{display:block;position:fixed;inset:0;z-index:100;background:var(--background,#f9fbfc)}
 html[data-brand-opening="pending"] :is(.site-header,#main-content,.site-footer,.skip-link){visibility:hidden}
 @media(prefers-reduced-motion:reduce){html[data-brand-opening="pending"] .brand-opening[data-phase="pending"]{display:none}html[data-brand-opening="pending"] :is(.site-header,#main-content,.site-footer,.skip-link){visibility:visible}html[data-brand-opening="pending"]{overflow:visible}}
 `;

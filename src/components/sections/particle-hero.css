@@ -14,7 +14,7 @@
 }
 .particle-hero-grid {
   position: absolute; inset: 0; z-index: 0; opacity: .20; pointer-events: none;
-  background-image: linear-gradient(#0000000e 1px,transparent 1px),linear-gradient(90deg,#0000000e 1px,transparent 1px);
+  background-image: linear-gradient(#2a4d6412 1px,transparent 1px),linear-gradient(90deg,#2a4d6412 1px,transparent 1px);
   background-size: 48px 48px; mask-image: radial-gradient(ellipse at 60% 46%,#000,transparent 86%);
 }
 .particle-hero-copy { position: absolute; z-index: 3; top: 43%; left: 8.2%; max-width: 430px; transform: translateY(-50%); pointer-events: none; }
@@ -23,7 +23,7 @@
   font-size: clamp(32px,3.4vw,52px); line-height: 1.55; font-weight: 500; letter-spacing: -.025em;
 }
 .particle-title > span { display: block; }
-.particle-title > span:last-child { color: var(--text-emphasis); font-weight: 400; }
+.particle-title > span:last-child { color: var(--hero-emphasis); font-weight: 400; }
 html:lang(zh) .particle-title { font-family: var(--font-noto),var(--font-space),sans-serif; letter-spacing: .012em; }
 .particle-title > .particle-keywords { display: grid; }
 .particle-keyword {
@@ -56,7 +56,7 @@ html:lang(zh) .particle-title { font-family: var(--font-noto),var(--font-space),
 .particle-settings > summary:hover, .particle-settings[open] > summary { color: var(--site-accent); }
 .particle-settings-panel {
   position: absolute; right: 0; bottom: calc(100% + 10px); width: min(238px,calc(100vw - 48px));
-  padding: 12px 17px; border: 1px solid var(--site-rule); background: color-mix(in srgb, var(--site-paper) 98%, transparent); backdrop-filter: blur(12px);
+  padding: 12px 17px; border: 1px solid #d7e1e7; background: #f9fbfcfa; backdrop-filter: blur(12px);
   box-shadow: 0 8px 28px #1b2c3809; color: var(--site-muted);
 }
 .particle-shapes { display: grid; }
@@ -66,7 +66,7 @@ html:lang(zh) .particle-title { font-family: var(--font-noto),var(--font-space),
   font: inherit; font-size: 12px; color: inherit;
 }
 .particle-shapes button:hover, .particle-settings-actions button:hover, .particle-shapes button.is-active { color: var(--site-accent); }
-.particle-settings-actions { margin-top: 7px; padding-top: 7px; border-top: 1px solid var(--site-rule); }
+.particle-settings-actions { margin-top: 7px; padding-top: 7px; border-top: 1px solid #d7e1e7; }
 .particle-settings .particle-replay > span { margin: 0; font-size: inherit; }
 .particle-fallback-note { padding: 12px 2px; font-size: 11px; line-height: 1.7; }
 .particle-arrive { animation: particle-arrive .9s cubic-bezier(.22,1,.36,1) .08s both; }

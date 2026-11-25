@@ -602,6 +602,7 @@ export function TransferShowcase() {
   const [mode, setMode] = useState<Mode>("matrix");
   const [swapped, setSwapped] = useState(false);
   const demo = TRANSFER_DEMOS.find(item => item.id === task)!;
+  const faqs = t.raw("faqs") as { question: string; answer: string }[];
   const caption = useId();
 
   function handleRobotTab(nextRobot: TransferRobot) {
@@ -671,6 +672,17 @@ export function TransferShowcase() {
       <div className="transfer-benchmarks" aria-label={t("collection")}><span><b>{TRANSFER_DEMOS.length}</b>{t("tasksCount")}</span><span><b>{String(TRANSFER_ROBOTS.length).padStart(2, "0")}</b>{t("robotsCount")}</span><span className="transfer-benchmark-belief">{t("sharedSource")}<span aria-hidden="true">↗</span></span></div>
       <div className="transfer-footnote"><p>{t("sourceNote")}</p><span>{t("interactionHint")}</span></div>
       <div className="transfer-pipeline" aria-label={t("pipelineLabel")}>{["observe", "structure", "retarget", "execute"].map((step, index) => <div key={step}><span>0{index + 1}</span><strong>{t(`pipeline.${step}`)}</strong>{index < 3 && <i aria-hidden="true">→</i>}</div>)}</div>
+      <div className="transfer-faq">
+        <div className="transfer-faq-header"><p className="editorial-label"><span aria-hidden="true">↳</span>{t("faqLabel")}</p><h3>{t("faqTitle")}</h3></div>
+        <dl className="transfer-faq-grid">
+          {faqs.map((item) => (
+            <div key={item.question} className="transfer-faq-item">
+              <dt>{item.question}</dt>
+              <dd>{item.answer}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
     </div>
   </section>;
 }

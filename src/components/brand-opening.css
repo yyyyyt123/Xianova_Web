@@ -3,7 +3,7 @@ html { scrollbar-gutter: stable; }
 .brand-opening-backdrop { position: absolute; inset: 0; background: var(--background); transition: opacity .7s cubic-bezier(.22,1,.36,1); }
 .brand-opening.is-revealing .brand-opening-backdrop { opacity: 0; }
 .site-wordmark.intro-logo-held { visibility: hidden; }
-.brand-opening-grid { position: absolute; inset: 0; pointer-events: none; opacity: .5; background-image: linear-gradient(#0000000d 1px,transparent 1px),linear-gradient(90deg,#0000000d 1px,transparent 1px); background-size: 72px 72px; mask-image: radial-gradient(ellipse at center,#000,transparent 70%); }
+.brand-opening-grid { position: absolute; inset: 0; pointer-events: none; opacity: .5; background-image: linear-gradient(#8ca8b512 1px,transparent 1px),linear-gradient(90deg,#8ca8b512 1px,transparent 1px); background-size: 72px 72px; mask-image: radial-gradient(ellipse at center,#000,transparent 70%); }
 .brand-opening-lockup { position: fixed; top: 0; left: 0; width: min(440px,calc(100vw - 48px)); aspect-ratio: 1600/622; transform-origin: top left; will-change: transform; }
 .brand-opening-lockup svg { display: block; width: 100%; height: 100%; overflow: visible; }
 .brand-opening[data-phase="pending"] .brand-opening-lockup { top: calc(50% - 22px); left: 50%; transform: translate(-50%,-50%); }

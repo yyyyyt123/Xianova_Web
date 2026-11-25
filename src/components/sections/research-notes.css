@@ -11,7 +11,7 @@
   overflow: hidden;
   padding: 82px 5.4% 28px;
   color: var(--site-ink);
-  background: var(--site-surface);
+  background: #f3f6f8;
   border-block: 1px solid #334f6312;
   scroll-margin-top: 0;
 }
@@ -21,7 +21,7 @@
   inset: 0;
   pointer-events: none;
   opacity: .6;
-  background-image: repeating-linear-gradient(90deg, transparent 0, transparent 29px, #0000000b 29px, #0000000b 30px), url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Cpath fill='%23757575' opacity='.05' filter='url(%23grain)' d='M0 0h180v180H0z'/%3E%3C/svg%3E");
+  background-image: repeating-linear-gradient(90deg, transparent 0, transparent 29px, #4f68790b 29px, #4f68790b 30px), url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Cpath fill='%23737869' opacity='.05' filter='url(%23grain)' d='M0 0h180v180H0z'/%3E%3C/svg%3E");
 }
 .research-heading { max-width: 1350px; margin: 0 auto; }
 .research-label { font-family: var(--font-mono), monospace; color: var(--site-muted); font-size: 11px; letter-spacing: .1em; }

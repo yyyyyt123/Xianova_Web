@@ -9,6 +9,7 @@ import { TransferShowcase } from "@/components/transfer/TransferShowcase";
 import {
   SITE_ORIGIN,
   buildSparkumrSoftwareJsonLd,
+  buildTransferFaqJsonLd,
   buildTransferVideosJsonLd,
   localizedUrl,
 } from "@/lib/seo";
@@ -67,6 +68,8 @@ export default async function HomePage({ params }: Props) {
   const { locale } = await Promise.resolve(params);
   const lang = locale === "zh" ? "zh" : "en";
   setRequestLocale(locale);
+  const transfer = await getTranslations({ locale, namespace: "transfer" });
+  const faqs = transfer.raw("faqs") as { question: string; answer: string }[];
 
   return (
     <>
@@ -75,6 +78,7 @@ export default async function HomePage({ params }: Props) {
         dangerouslySetInnerHTML={{
           __html: JSON.stringify([
             buildSparkumrSoftwareJsonLd(lang),
+            buildTransferFaqJsonLd(faqs),
             buildTransferVideosJsonLd(lang),
           ]),
         }}

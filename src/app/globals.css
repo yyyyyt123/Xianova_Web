@@ -3,14 +3,17 @@
 @tailwind utilities;
 
 :root {
-  --background: #fafafa;
+  --background: #f9fbfc;
   --foreground: #1b2c38;
   --deep: #080d16;
   --sky: #84c3ff;
   --brand-rgb: 53 73 87;
   --brand: rgb(var(--brand-rgb));
   --brand-hover: var(--foreground);
-  --line: #d8d8d8;
+  --hero-emphasis: #3e6577;
+  --hero-link: #1b6578;
+  --hero-link-hover: #144c5d;
+  --line: #d1dde5;
   --text-secondary: #526775;
   --text-tertiary: #576b78;
   --text-emphasis: var(--brand);
