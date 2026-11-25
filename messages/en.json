@@ -10,8 +10,7 @@
     "news": "News",
     "about": "About",
     "careers": "Careers",
-    "contact": "Contact",
-    "cta": "Partner with us"
+    "contact": "Contact"
   },
   "news": {
     "title": "News",
@@ -153,7 +152,7 @@
     "exploreResearch": "Explore our approach",
     "inAction": "UNDERSTANDING IN ACTION",
     "demoTitle": "Generalization, in the real world.",
-    "allDemos": "Explore all demonstrations",
+    "technologyAndDemos": "Explore the technology and demos",
     "selectDemo": "Choose a demonstration",
     "playDemo": "Play demonstration",
     "videoError": "This video is unavailable. Try another demonstration or come back later.",

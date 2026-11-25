@@ -10,8 +10,7 @@
     "news": "新闻动态",
     "about": "关于我们",
     "careers": "加入我们",
-    "contact": "联系我们",
-    "cta": "联系合作"
+    "contact": "联系我们"
   },
   "news": {
     "title": "新闻动态",
@@ -125,7 +124,7 @@
     "exploreResearch": "了解我们的技术思路",
     "inAction": "从理解到行动",
     "demoTitle": "让泛化发生在真实世界。",
-    "allDemos": "查看全部技术演示",
+    "technologyAndDemos": "了解技术原理与演示",
     "selectDemo": "选择演示视频",
     "playDemo": "播放演示",
     "videoError": "视频暂时无法播放，请稍后重试或切换其他演示。",

@@ -72,6 +72,11 @@ function TransferPlayer({
   const loadedRef = useRef(false);
   const speedRef = useRef(1);
   const positionRef = useRef(0);
+  const scrubbingRef = useRef(false);
+  const resumeAfterScrubRef = useRef(false);
+  const scrubInFlightRef = useRef(false);
+  const pendingScrubTimeRef = useRef<number | null>(null);
+  const scrubTokenRef = useRef(0);
   const [playing, setPlaying] = useState(false);
   const [loading, setLoading] = useState(false);
   const [loaded, setLoaded] = useState(false);
@@ -101,6 +106,10 @@ function TransferPlayer({
     wantsPlayback.current = false;
     stalled.current = false;
     starting.current = false;
+    scrubbingRef.current = false;
+    resumeAfterScrubRef.current = false;
+    pendingScrubTimeRef.current = null;
+    scrubTokenRef.current++;
     playToken.current++;
     abort.current?.abort();
     human.current?.pause();
@@ -122,6 +131,10 @@ function TransferPlayer({
     document.addEventListener("fullscreenchange", full);
     return () => {
       wantsPlayback.current = false;
+      scrubbingRef.current = false;
+      resumeAfterScrubRef.current = false;
+      scrubInFlightRef.current = false;
+      pendingScrubTimeRef.current = null;
       abort.current?.abort();
       sourceVideo?.pause();
       for (const el of Object.values(refsSnapshot)) el?.pause();
@@ -227,9 +240,9 @@ function TransferPlayer({
     const sync = (now: number) => {
       const source = human.current;
       const followers = getFollowers();
-      if (source && followers.length > 0 && wantsPlayback.current && !stalled.current && !source.seeking) {
+      if (source && followers.length > 0 && wantsPlayback.current && !stalled.current && !scrubbingRef.current && !source.seeking) {
         for (const el of followers) {
-          if (!el.seeking && Math.abs(source.currentTime - el.currentTime) > .085) {
+          if (!el.seeking && el.readyState >= 2 && Math.abs(source.currentTime - el.currentTime) > .14) {
             el.currentTime = source.currentTime;
           }
         }
@@ -247,14 +260,18 @@ function TransferPlayer({
   }
 
   function buffer() {
-    if (!wantsPlayback.current || !loaded || starting.current) return;
+    if (!wantsPlayback.current || !loaded || starting.current || scrubbingRef.current) return;
+    const source = human.current;
+    const followers = getFollowers();
+    if (source?.seeking || followers.some(el => el.seeking)) return;
     stalled.current = true;
-    human.current?.pause();
-    for (const el of getFollowers()) el.pause();
+    source?.pause();
+    for (const el of followers) el.pause();
     setLoading(true);
   }
 
   async function resume() {
+    if (scrubbingRef.current) return;
     const source = human.current;
     const followers = getFollowers();
     if (!stalled.current || !wantsPlayback.current || !source || followers.length === 0) return;
@@ -277,7 +294,25 @@ function TransferPlayer({
     }
   }
 
-  function seek(seconds: number) {
+  const waitSeeked = useCallback((video: HTMLVideoElement, timeoutMs = 260) => {
+    if (!video.seeking) return Promise.resolve();
+    return new Promise<void>(resolve => {
+      let done = false;
+      const finish = () => {
+        if (done) return;
+        done = true;
+        window.clearTimeout(timer);
+        video.removeEventListener("seeked", finish);
+        video.removeEventListener("error", finish);
+        resolve();
+      };
+      const timer = window.setTimeout(finish, timeoutMs);
+      video.addEventListener("seeked", finish, { once: true });
+      video.addEventListener("error", finish, { once: true });
+    });
+  }, []);
+
+  const seek = useCallback((seconds: number) => {
     const source = human.current;
     const followers = getFollowers();
     if (!source || followers.length === 0 || !loaded) return;
@@ -285,6 +320,86 @@ function TransferPlayer({
     source.currentTime = time;
     for (const el of followers) el.currentTime = time;
     setPosition(time);
+  }, [duration, getFollowers, loaded]);
+
+  const flushScrubQueue = useCallback(async () => {
+    if (scrubInFlightRef.current) return;
+    scrubInFlightRef.current = true;
+    const token = scrubTokenRef.current;
+
+    try {
+      while (pendingScrubTimeRef.current !== null && token === scrubTokenRef.current) {
+        const targetTime = pendingScrubTimeRef.current;
+        pendingScrubTimeRef.current = null;
+        const source = human.current;
+        const followers = getFollowers();
+        if (!source || followers.length === 0) break;
+
+        const all = [source, ...followers];
+        for (const v of all) v.currentTime = targetTime;
+        await Promise.all(all.map(v => waitSeeked(v, 240)));
+      }
+    } finally {
+      scrubInFlightRef.current = false;
+    }
+  }, [getFollowers, waitSeeked]);
+
+  function startScrub() {
+    if (!loaded || scrubbingRef.current) return;
+    scrubbingRef.current = true;
+    resumeAfterScrubRef.current = wantsPlayback.current;
+    scrubTokenRef.current++;
+    // Pause active streams while scrubbing so playback never advances between drag frames.
+    human.current?.pause();
+    for (const el of getFollowers()) el.pause();
+  }
+
+  function scrubTo(seconds: number) {
+    if (!loaded) return;
+    const time = Math.min(Math.max(0, seconds), Math.max(0, duration - .05));
+    setPosition(time);
+    if (!scrubbingRef.current) {
+      seek(time);
+      return;
+    }
+    pendingScrubTimeRef.current = time;
+    void flushScrubQueue();
+  }
+
+  function commitScrub(seconds: number) {
+    if (!scrubbingRef.current) return;
+    scrubbingRef.current = false;
+    const shouldResume = resumeAfterScrubRef.current && wantsPlayback.current;
+    resumeAfterScrubRef.current = false;
+
+    const time = Math.min(Math.max(0, seconds), Math.max(0, duration - .05));
+    setPosition(time);
+    pendingScrubTimeRef.current = time;
+
+    const token = ++scrubTokenRef.current;
+    void (async () => {
+      const source = human.current;
+      const followers = getFollowers();
+      if (!source || followers.length === 0) return;
+
+      const all = [source, ...followers];
+      for (const v of all) v.currentTime = time;
+      pendingScrubTimeRef.current = null;
+      await Promise.all(all.map(v => waitSeeked(v, 500)));
+
+      if (token !== scrubTokenRef.current) return;
+      if (shouldResume && wantsPlayback.current) {
+        try {
+          await Promise.all(all.map(v => v.play()));
+          if (token === scrubTokenRef.current && wantsPlayback.current) {
+            setPlaying(true);
+            setLoading(false);
+          }
+        } catch {
+          if (token === scrubTokenRef.current) { pause(); setFailed(true); }
+        }
+      }
+    })();
   }
 
   function ended() { pause(); setPosition(duration); }
@@ -324,7 +439,7 @@ function TransferPlayer({
   const videoProps = {
     muted: true,
     playsInline: true,
-    preload: "none" as const,
+    preload: "metadata" as const,
     onWaiting: buffer,
     onCanPlay: () => void resume(),
     onEnded: ended,
@@ -445,7 +560,22 @@ function TransferPlayer({
       <span className="transfer-time" aria-hidden="true">{timestamp(position)}</span>
       <label className="transfer-timeline" htmlFor={`${id}-time`}>
         <span className="sr-only">{t("timeline")}</span>
-        <input id={`${id}-time`} type="range" min="0" max={duration} step="0.01" value={Math.min(position, duration)} disabled={!loaded} onChange={event => seek(Number(event.target.value))} aria-valuetext={`${timestamp(position)} / ${timestamp(duration)}`} style={{ "--progress": `${duration ? position / duration * 100 : 0}%` } as CSSProperties} />
+        <input
+          id={`${id}-time`}
+          type="range"
+          min="0"
+          max={duration}
+          step="0.01"
+          value={Math.min(position, duration)}
+          disabled={!loaded}
+          onPointerDown={startScrub}
+          onPointerUp={event => commitScrub(Number(event.currentTarget.value))}
+          onPointerCancel={event => commitScrub(Number(event.currentTarget.value))}
+          onBlur={event => commitScrub(Number(event.currentTarget.value))}
+          onChange={event => scrubTo(Number(event.target.value))}
+          aria-valuetext={`${timestamp(position)} / ${timestamp(duration)}`}
+          style={{ "--progress": `${duration ? position / duration * 100 : 0}%` } as CSSProperties}
+        />
       </label>
       <span className="transfer-time transfer-total" aria-hidden="true">{timestamp(duration)}</span>
       <label className="transfer-speed"><span className="sr-only">{t("speed")}</span><select value={speed} onChange={event => rate(Number(event.target.value))} aria-label={t("speed")}><option value="0.5">0.5×</option><option value="1">1×</option><option value="1.5">1.5×</option></select></label>
@@ -454,8 +584,8 @@ function TransferPlayer({
     <div className="transfer-telemetry" aria-label={t("visualization")}>
       <span>
         {mode === "matrix"
-          ? `1440×1440 · 24 FPS · H.264 · ${t("matrixSummaryTel")}`
-          : `1440×1440 · 24 FPS · H.264 · ${robotMeta.name} (${robotMeta.dof} ${t("dofUnit")}) · ${t("platformTelemetry")}`}
+          ? `960×960 · 24 FPS · H.264 · ${t("matrixSummaryTel")}`
+          : `960×960 · 24 FPS · H.264 · ${robotMeta.name} (${robotMeta.dof} ${t("dofUnit")}) · ${t("platformTelemetry")}`}
       </span>
       <span className="transfer-shortcuts">{t("shortcuts")}</span>
     </div>
@@ -472,7 +602,6 @@ export function TransferShowcase() {
   const [mode, setMode] = useState<Mode>("matrix");
   const [swapped, setSwapped] = useState(false);
   const demo = TRANSFER_DEMOS.find(item => item.id === task)!;
-  const faqs = t.raw("faqs") as { question: string; answer: string }[];
   const caption = useId();
 
   function handleRobotTab(nextRobot: TransferRobot) {
@@ -486,12 +615,12 @@ export function TransferShowcase() {
   }
 
   return <section className="transfer-section editorial-section" id="cross-embodiment" aria-labelledby={`${caption}-title`}>
-    <div className="editorial-wrap">
-      <FadeIn><div className="transfer-section-heading">
-        <div><p className="editorial-label"><span aria-hidden="true">↳</span>XIANOVA / CROSS-EMBODIMENT</p><p className="transfer-leading">{t("leading")}</p><h2 id={`${caption}-title`}>{t("titleOne")}<br /><span>{t("titleTwo")}</span></h2></div>
-        <div className="transfer-section-aside"><p>{t("description")}</p><span>{t("technicalTitle")}</span></div>
-      </div></FadeIn>
-      <div className="transfer-benchmarks" aria-label={t("collection")}><span><b>{TRANSFER_DEMOS.length}</b>{t("tasksCount")}</span><span><b>{String(TRANSFER_ROBOTS.length).padStart(2, "0")}</b>{t("robotsCount")}</span><span className="transfer-benchmark-belief">{t("sharedSource")}<span aria-hidden="true">↗</span></span></div>
+    <div className="editorial-wrap transfer-layout">
+      <FadeIn className="transfer-section-heading">
+        <p className="editorial-label"><span aria-hidden="true">↳</span>XIANOVA / CROSS-EMBODIMENT</p>
+        <p className="transfer-leading">{t("leading")}</p>
+        <h2 id={`${caption}-title`}>{t("titleOne")}<br /><span>{t("titleTwo")}</span></h2>
+      </FadeIn>
       <div className="transfer-workspace">
         <aside className="transfer-task-panel" aria-label={t("chooseTask")}>
           <div className="transfer-task-heading"><span>{t("taskLibrary")}</span><span>01—{String(TRANSFER_DEMOS.length).padStart(2, "0")}</span></div>
@@ -499,7 +628,7 @@ export function TransferShowcase() {
           <div className="transfer-task-list">{TRANSFER_DEMOS.map((item, index) => <button type="button" key={item.id} aria-pressed={task === item.id} onClick={() => setTask(item.id)}><span className="transfer-task-number">{String(index + 1).padStart(2, "0")}</span><span>{item.title[locale]}<small>{item.tags[locale][0]}</small></span><span className="transfer-task-arrow" aria-hidden="true">↗</span></button>)}</div>
         </aside>
         <div className="transfer-main">
-          <div className="transfer-toolbar">
+          <div className="transfer-toolbar" data-mode={mode}>
             <div className="transfer-robots" role="group" aria-label={t("chooseRobot")}>
               {TRANSFER_ROBOTS.map(item => (
                 <button
@@ -536,19 +665,12 @@ export function TransferShowcase() {
           <div className="transfer-caption" id={caption}><div><span className="transfer-task-code">TASK / {String(TRANSFER_DEMOS.indexOf(demo) + 1).padStart(2, "0")}</span><h3>{demo.title[locale]}</h3></div><div><p>{demo.description[locale]}</p><div className="transfer-tags">{demo.tags[locale].map(tag => <span key={tag}>{tag}</span>)}</div></div></div>
         </div>
       </div>
+      <FadeIn className="transfer-section-aside">
+        <p>{t("description")}</p><span>{t("technicalTitle")}</span>
+      </FadeIn>
+      <div className="transfer-benchmarks" aria-label={t("collection")}><span><b>{TRANSFER_DEMOS.length}</b>{t("tasksCount")}</span><span><b>{String(TRANSFER_ROBOTS.length).padStart(2, "0")}</b>{t("robotsCount")}</span><span className="transfer-benchmark-belief">{t("sharedSource")}<span aria-hidden="true">↗</span></span></div>
       <div className="transfer-footnote"><p>{t("sourceNote")}</p><span>{t("interactionHint")}</span></div>
       <div className="transfer-pipeline" aria-label={t("pipelineLabel")}>{["observe", "structure", "retarget", "execute"].map((step, index) => <div key={step}><span>0{index + 1}</span><strong>{t(`pipeline.${step}`)}</strong>{index < 3 && <i aria-hidden="true">→</i>}</div>)}</div>
-      <div className="transfer-faq">
-        <div className="transfer-faq-header"><p className="editorial-label"><span aria-hidden="true">↳</span>{t("faqLabel")}</p><h3>{t("faqTitle")}</h3></div>
-        <dl className="transfer-faq-grid">
-          {faqs.map((item) => (
-            <div key={item.question} className="transfer-faq-item">
-              <dt>{item.question}</dt>
-              <dd>{item.answer}</dd>
-            </div>
-          ))}
-        </dl>
-      </div>
     </div>
   </section>;
 }

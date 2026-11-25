@@ -88,7 +88,7 @@ function TransferSketch() {
   );
 }
 
-export function ResearchNotes() {
+export function ResearchNotes({ showLink = true }: { showLink?: boolean }) {
   const t = useTranslations("researchNotes");
   const ref = useRef<HTMLElement>(null);
   const [visible, setVisible] = useState(false);
@@ -131,7 +131,7 @@ export function ResearchNotes() {
       </div>
       <div className="research-footnote">
         <span>{t("caption")}</span>
-        <Link href="/technology">{t("link")}<span aria-hidden="true">↗</span></Link>
+        {showLink && <Link href="/technology">{t("link")}<span aria-hidden="true">↗</span></Link>}
       </div>
     </section>
   );

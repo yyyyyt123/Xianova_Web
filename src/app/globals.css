@@ -3,15 +3,17 @@
 @tailwind utilities;
 
 :root {
-  --background: #f9fbfc;
+  --background: #fafafa;
   --foreground: #1b2c38;
   --deep: #080d16;
   --sky: #84c3ff;
-  --brand: #1b6578;
-  --line: #d1dde5;
+  --brand-rgb: 53 73 87;
+  --brand: rgb(var(--brand-rgb));
+  --brand-hover: var(--foreground);
+  --line: #d8d8d8;
   --text-secondary: #526775;
-  --text-tertiary: #607583;
-  --text-emphasis: #3e6577;
+  --text-tertiary: #576b78;
+  --text-emphasis: var(--brand);
   --font-space: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
   --font-noto: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Hiragino Sans GB", "Helvetica Neue", "Microsoft YaHei", sans-serif;
   --font-mono: "SF Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
@@ -35,12 +37,12 @@ html:lang(en) body {
 }
 
 ::selection {
-  background: rgba(27, 101, 120, 0.18);
-  color: #1b2c38;
+  background: rgb(var(--brand-rgb) / 18%);
+  color: var(--foreground);
 }
 
 :focus-visible {
-  outline: 2px solid #1b6578;
+  outline: 2px solid var(--brand);
   outline-offset: 3px;
 }
 
@@ -74,7 +76,7 @@ html:lang(en) body {
   }
 
   .btn-primary:hover {
-    background-color: #144c5d;
+    background-color: var(--brand-hover);
   }
 
   .btn-sky {

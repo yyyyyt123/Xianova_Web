@@ -9,22 +9,22 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        page: "#f9fbfc",
+        page: "var(--background)",
         deep: "#080D16",
         ink: {
           DEFAULT: "#1b2c38",
           soft: "#3b5669",
-          mute: "#536775",
-          faint: "#6c8292",
+          mute: "var(--text-secondary)",
+          faint: "var(--text-tertiary)",
         },
-        line: "#d1dde5",
+        line: "var(--line)",
         sky: {
           DEFAULT: "#84C3FF",
           deep: "#223A66",
         },
         brand: {
-          DEFAULT: "#1b6578",
-          soft: "#80afc2",
+          DEFAULT: "rgb(var(--brand-rgb) / <alpha-value>)",
+          soft: "#9aadb9",
         },
         surface: {
           DEFAULT: "#FFFFFF",

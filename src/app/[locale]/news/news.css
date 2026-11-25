@@ -35,11 +35,11 @@
   aspect-ratio: 2.35 / 1;
   overflow: hidden;
   background-color: var(--site-wash);
-  background-image: linear-gradient(90deg, #1b65780b 1px, transparent 1px), linear-gradient(#1b65780b 1px, transparent 1px);
+  background-image: linear-gradient(90deg, #0000000d 1px, transparent 1px), linear-gradient(#0000000d 1px, transparent 1px);
   background-size: 28px 28px;
 }
 
-.news-cover-wordmark { color: #547989; font: 500 clamp(14px, 2vw, 26px) var(--font-mono), monospace; letter-spacing: .18em; }
+.news-cover-wordmark { color: var(--site-muted); font: 500 clamp(14px, 2vw, 26px) var(--font-mono), monospace; letter-spacing: .18em; }
 .news-cover img { object-fit: cover; }
 .news-article-copy h3 { margin-top: 6px; font-size: clamp(20px, 1.8vw, 26px); font-weight: 500; line-height: 1.45; overflow-wrap: anywhere; }
 .news-article-copy h3 a:hover { color: var(--site-accent); }

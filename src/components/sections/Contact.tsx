@@ -25,7 +25,11 @@ export function Contact() {
   return <>
     <PageIntro index="05" label={t("label")} title={ui("contactTitle")} description={t("desc")} variant={2} />
     <section className="editorial-section"><div className="editorial-wrap contact-layout">
-      <div className="contact-channels"><SectionLabel number="01">{ui("startConversation")}</SectionLabel><p className="contact-small-label">{t("emailLabel")}</p><a className="contact-direct-email" href={`mailto:${footer("email")}`}>{footer("email")}<span aria-hidden="true">↗</span></a><p className="contact-address">{footer("company")}<br />{footer("address")}</p><div className="contact-careers"><p>{ui("contactCareers")}</p><ArrowLink href="/careers">{ui("joinTeam")}</ArrowLink></div></div>
+      <div className="contact-channels">
+        <SectionLabel number="01">{ui("startConversation")}</SectionLabel>
+        <p className="contact-small-label">{t("emailLabel")}</p>
+        <a className="contact-direct-email" href={`mailto:${footer("email")}`}>{footer("email")}<span aria-hidden="true">↗</span></a>
+      </div>
       <form onSubmit={submit} className="contact-form">
         <p className="contact-form-note">{ui("mailtoHint")}</p>
         <div className="contact-form-pair"><Field label={t("name")} name="name" required /><Field label={t("company")} name="company" /></div>
@@ -34,6 +38,13 @@ export function Contact() {
         <button type="submit" className="btn-primary">{ui("prepareEmail")}<span aria-hidden="true" className="ml-8">↗</span></button>
         {prepared && <p role="status" className="contact-status">{ui("emailPrepared")}</p>}
       </form>
+      <div className="contact-details">
+        <p className="contact-address">{footer("company")}<br />{footer("address")}</p>
+        <div className="contact-careers">
+          <p>{ui("contactCareers")}</p>
+          <ArrowLink href="/careers">{ui("joinTeam")}</ArrowLink>
+        </div>
+      </div>
     </div></section>
   </>;
 }

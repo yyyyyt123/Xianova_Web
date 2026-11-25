@@ -2,7 +2,7 @@
  * These previews are kinematic visualizations, not hardware demonstrations.
  * Original source/license and exact processing records live outside public/.
  */
-export const TRANSFER_MEDIA_VERSION = "sparkumr-cinema-20261123";
+export const TRANSFER_MEDIA_VERSION = "sparkumr-fast-20261124";
 export const TRANSFER_MEDIA_ORIGIN = (
   process.env.NEXT_PUBLIC_TRANSFER_MEDIA_ORIGIN ||
   "https://media.sparklingrobo.com"

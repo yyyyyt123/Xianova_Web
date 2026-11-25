@@ -16,7 +16,8 @@ export function Header() {
   const [open, setOpen] = useState(false);
   const toggle = useRef<HTMLButtonElement>(null);
   const otherLocale = locale === "zh" ? "en" : "zh";
-  const links = [["/technology", "technology"], ["/solutions", "solutions"], ["/news", "news"], ["/about", "about"], ["/careers", "careers"], ["/contact", "contact"]] as const;
+  const links = [["/technology", "technology"], ["/solutions", "solutions"], ["/news", "news"], ["/about", "about"], ["/careers", "careers"]] as const;
+  const mobileLinks = [...links, ["/contact", "contact"] as const];
 
   function switchLocale() {
     document.cookie = `NEXT_LOCALE=${otherLocale}; path=/; max-age=31536000; samesite=lax`;
@@ -53,13 +54,13 @@ export function Header() {
         <nav className="site-desktop-nav" aria-label={ui("navigation")}>
           {links.map(([href, key]) => <Link href={href} key={href} aria-current={pathname.startsWith(href) ? "page" : undefined}>{t(key)}</Link>)}
           <button type="button" onClick={switchLocale} className="site-locale" aria-label={ui("switchLanguage")}>{otherLocale.toUpperCase()}</button>
-          <Link href="/contact" className="site-partner">{t("cta")}<span aria-hidden="true">↗</span></Link>
+          <Link href="/contact" className="site-partner" aria-current={pathname === "/contact" ? "page" : undefined}>{t("contact")}<span aria-hidden="true">↗</span></Link>
         </nav>
         <button ref={toggle} type="button" className={`site-menu-toggle${open ? " is-open" : ""}`} aria-label={open ? ui("closeMenu") : ui("openMenu")} aria-expanded={open} aria-controls={open ? "site-mobile-menu" : undefined} onClick={() => setOpen(value => !value)}><span /><span /></button>
       </div>
       {open && <nav id="site-mobile-menu" className="site-mobile-nav" aria-label={ui("navigation")}>
-        {links.map(([href, key], index) => <Link href={href} key={href} onClick={() => setOpen(false)} aria-current={pathname.startsWith(href) ? "page" : undefined}><span>0{index + 1}</span>{t(key)}<span aria-hidden="true">↗</span></Link>)}
-        <div><button type="button" onClick={switchLocale}>{otherLocale === "zh" ? "中文" : "EN"}</button><Link href="/contact" onClick={() => setOpen(false)}>{t("cta")} ↗</Link></div>
+        {mobileLinks.map(([href, key], index) => <Link href={href} key={href} onClick={() => setOpen(false)} aria-current={pathname.startsWith(href) ? "page" : undefined}><span>0{index + 1}</span>{t(key)}<span aria-hidden="true">↗</span></Link>)}
+        <div><button type="button" onClick={switchLocale}>{otherLocale === "zh" ? "中文" : "EN"}</button></div>
       </nav>}
     </header>
   </>;

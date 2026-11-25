@@ -43,7 +43,7 @@ export default async function LocaleLayout({ children, params }: Props) {
         <script id="brand-opening-boot" dangerouslySetInnerHTML={{ __html: OPENING_BOOT_SCRIPT }} />
         <meta name="description" content={t("description")} />
         <meta name="keywords" content={t("keywords")} />
-        <meta name="theme-color" content="#f9fbfc" />
+        <meta name="theme-color" content="#fafafa" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
