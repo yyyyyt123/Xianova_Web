@@ -7,7 +7,7 @@ const articles = [
   },
   {
     id: "5zbmuRgvaLyn7DQm6MTDtQ",
-    title: "WRC2026｜夏仙创新携手帕西尼展出 SparkInfinity数据泛化方案",
+    title: "WRC2026｜夏仙创新携手帕西尼展出 SparkInfinity 数据泛化方案",
     date: "2026-08-26",
     summary: "夏仙创新携手帕西尼亮相 2026 世界机器人大会，展示 SparkInfinity 如何把一次人类示教扩展到不同物体、场景和机器人本体。",
   },
@@ -25,13 +25,13 @@ const articles = [
   },
   {
     id: "RIK8GwPqcD65JWVBNcTJuw",
-    title: "法国南部大区代表团主席Christian ESTROSI参观夏仙创新具身操作零样本泛化演示",
+    title: "法国南部大区代表团主席 Christian ESTROSI 参观夏仙创新具身操作零样本泛化演示",
     date: "2026-08-13",
     summary: "法国南部大区代表团到访璞跃中国大湾区国际创新中心，现场观看夏仙创新的具身操作零样本泛化演示。",
   },
   {
     id: "ry1Dnm_zGZENZVTLzDABtA",
-    title: "夏仙创新受邀出席APEC技术向善研讨会：让具身智能回归“以人为本”",
+    title: "夏仙创新受邀出席 APEC 技术向善研讨会：让具身智能回归“以人为本”",
     date: "2026-07-17",
     summary: "夏仙创新受邀参加在深圳前海举行的 APEC 技术向善研讨会，与各经济体代表探讨具身智能如何服务人的需求。",
   },

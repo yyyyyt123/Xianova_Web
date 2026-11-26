@@ -1,7 +1,7 @@
 {
   "meta": {
-    "title": "夏仙创新 Xianova Robotics | 跨本体全身移动操作与机器人零样本泛化",
-    "description": "夏仙创新（Xianova Robotics）专注机器人操作零样本泛化与人—人形跨本体全身移动操作迁移，自研 ORGA 架构与 SparkUMR 工具链，支持将人类示教精确迁移至 Fourier GR3、Unitree G1、Robotera L3 等多种人形本体。",
+    "title": "夏仙创新 Xianova Robotics",
+    "description": "夏仙创新（深圳）科技有限公司专注机器人操作零样本泛化与人—人形跨本体全身移动操作迁移，自研 ORGA 架构与 SparkUMR 工具链，支持将人类示教精确迁移至 Fourier GR3、Unitree G1、Robotera L3 等多种人形本体。",
     "keywords": "跨本体,跨本体迁移,跨本体动作迁移,人-人形动作重定向,全身移动操作,具身智能,零样本泛化,机器人操作,SparkUMR,ORGA,Xianova,夏仙创新"
   },
   "nav": {
@@ -69,10 +69,10 @@
     "networkError": "暂时无法确认提交结果，请稍后重试或通过下方邮箱联系我们。",
     "applicationNumber": "申请编号",
     "receiptHelp": "申请记录与邮件发送状态分别保存。邮件受理不代表已读；请保留编号，便于招聘人员核查。",
-    "retryHelp": "请选择简历后补传。原申请不重复创建，发送间隔至少60秒，首次登记后30分钟内最多共3次尝试。",
+    "retryHelp": "请选择简历后补传。原申请不重复创建，发送间隔至少 60 秒，首次登记后 30 分钟内最多共 3 次尝试。",
     "retry": "为原申请补传简历",
     "contactHelp": "如有应聘相关问题，欢迎通过邮箱联系我们：",
-    "fileErrors": {"required":"请选择一份简历。","empty":"不能上传空文件。","large":"简历超过大小限制，最多10 MiB；该文件尚未上传。","type":"仅支持 PDF 或 DOCX 文件。"},
+    "fileErrors": {"required":"请选择一份简历。","empty":"不能上传空文件。","large":"简历超过大小限制，最多 10 MiB；该文件尚未上传。","type":"仅支持 PDF 或 DOCX 文件。"},
     "types": {"FULL_TIME":"全职","INTERNSHIP":"实习","PART_TIME":"兼职","CONTRACT":"合同制"},
     "states": {"PENDING":"申请已登记，等待处理","SENDING":"申请已登记，正在发送简历邮件","SMTP_ACCEPTED":"申请已提交，发信服务器已受理","FAILED":"申请已登记，简历邮件发送失败","UNKNOWN":"申请已登记，邮件结果待核查","REUPLOAD_REQUIRED":"申请已登记，需要重新上传简历"}
   },
@@ -283,10 +283,10 @@
   },
   "about": {
     "metaTitle": "关于我们 | 夏仙创新 Xianova Robotics",
-    "metaDesc": "夏仙创新专注机器人操作零样本泛化，提出以物体为中心的 ORGA 架构。",
+    "metaDesc": "夏仙创新（深圳）科技有限公司专注机器人操作零样本泛化，提出以物体为中心的 ORGA 架构。",
     "label": "关于我们",
     "title": "关于夏仙创新",
-    "company": "夏仙创新专注机器人操作零样本泛化，提出以物体为中心的 ORGA 架构，让机器人从少量示教中理解物体结构、空间约束与交互关系，而非死记动作轨迹，从而在新物体、新场景、新本体中举一反三完成操作。"
+    "company": "夏仙创新（深圳）科技有限公司专注机器人操作零样本泛化，提出以物体为中心的 ORGA 架构，让机器人从少量示教中理解物体结构、空间约束与交互关系，而非死记动作轨迹，从而在新物体、新场景、新本体中举一反三完成操作。"
   },
   "contact": {
     "metaTitle": "联系我们 | 夏仙创新 Xianova Robotics",
@@ -364,8 +364,7 @@
     ]
   },
   "footer": {
-    "company": "深圳夏仙创新科技有限公司",
-    "companyEn": "Xianova Robotics",
+    "company": "夏仙创新（深圳）科技有限公司",
     "email": "support@xianova.ai",
     "address": "中国 · 深圳",
     "icp": "备案号待定",

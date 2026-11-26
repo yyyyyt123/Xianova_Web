@@ -1,6 +1,6 @@
-# Xianova Robotics（夏仙创新）— Full Technical & Benchmark Reference
+# 夏仙创新（深圳）科技有限公司 Xianova Robotics — Full Technical & Benchmark Reference
 
-- Organization: Shenzhen Xianova Innovation Technology Co., Ltd. (深圳夏仙创新科技有限公司 / Xianova Robotics)
+- Organization: 夏仙创新（深圳）科技有限公司 (Shenzhen Xianova Innovation Technology Co., Ltd. / Xianova Robotics)
 - Website: https://www.xianova.ai
 - Contact: support@xianova.ai
 - Location: Shenzhen, China (中国 · 深圳)

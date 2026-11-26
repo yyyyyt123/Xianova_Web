@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import type { Metadata } from "next";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
@@ -19,6 +20,16 @@ export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
 
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "meta" });
+
+  return {
+    description: t("description"),
+    keywords: t("keywords").split(","),
+  };
+}
+
 /**
  * Locale layout with fonts, header, footer, and intl provider.
  * @param children, page content
@@ -34,15 +45,12 @@ export default async function LocaleLayout({ children, params }: Props) {
 
   setRequestLocale(locale);
   const messages = await getMessages();
-  const t = await getTranslations({ locale, namespace: "meta" });
 
   return (
     <html lang={locale} suppressHydrationWarning>
       <head>
         <style id="brand-opening-boot-style" dangerouslySetInnerHTML={{ __html: OPENING_BOOT_STYLES }} />
         <script id="brand-opening-boot" dangerouslySetInnerHTML={{ __html: OPENING_BOOT_SCRIPT }} />
-        <meta name="description" content={t("description")} />
-        <meta name="keywords" content={t("keywords")} />
         <meta name="theme-color" content="#f9fbfc" />
         <script
           type="application/ld+json"

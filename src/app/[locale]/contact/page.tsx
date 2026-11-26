@@ -2,6 +2,7 @@ import { setRequestLocale, getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
 import { Contact } from "@/components/sections/Contact";
 import { routing } from "@/i18n/routing";
+import { localizedSiteName } from "@/lib/seo";
 
 type Props = {
   params: Promise<{ locale: string }> | { locale: string };
@@ -28,7 +29,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: t("metaDesc"),
       locale: locale === "zh" ? "zh_CN" : "en_US",
       type: "website",
-      siteName: "Xianova Robotics",
+      siteName: localizedSiteName(locale),
     },
   };
 }

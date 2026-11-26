@@ -9,6 +9,12 @@ type Props = { params: { locale: string } };
 // Regenerate on demand and share the last successful list across both locales.
 export const revalidate = 600;
 
+const mixedScriptBoundary = new RegExp(String.raw`\p{Script=Han}(?=[A-Za-z])|[A-Za-z](?=\p{Script=Han})`, "gu");
+
+function spaceMixedText(text: string) {
+  return text.replace(mixedScriptBoundary, "$& ");
+}
+
 export async function generateMetadata({ params: { locale } }: Props): Promise<Metadata> {
   const t = await getTranslations({ locale, namespace: "news" });
   return {
@@ -49,6 +55,7 @@ export default async function NewsPage({ params: { locale } }: Props) {
             <ul className="news-list">
               {feed.articles.map((article) => {
                 const date = article.date && dateFormat.format(new Date(article.date));
+                const title = spaceMixedText(article.title);
                 return (
                   <li key={article.id}>
                     <article className="news-article">
@@ -57,10 +64,10 @@ export default async function NewsPage({ params: { locale } }: Props) {
                         {date && <time dateTime={article.date}>{article.dateIsUpdate ? t("updated", { date }) : date}</time>}
                         <h3 lang={article.language}>
                           {article.url ? (
-                            <a href={article.url} target="_blank" rel="noopener noreferrer">{article.title}</a>
-                          ) : article.title}
+                            <a href={article.url} target="_blank" rel="noopener noreferrer">{title}</a>
+                          ) : title}
                         </h3>
-                        {article.summary && <p lang={article.language}>{article.summary}</p>}
+                        {article.summary && <p lang={article.language}>{spaceMixedText(article.summary)}</p>}
                         {article.url && (
                           <a className="arrow-link news-article-link" href={article.url} target="_blank" rel="noopener noreferrer">
                             {t("read")}<span aria-hidden="true">↗</span>
