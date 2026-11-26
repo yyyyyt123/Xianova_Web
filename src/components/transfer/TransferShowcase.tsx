@@ -4,7 +4,7 @@ import { useCallback, useEffect, useId, useMemo, useRef, useState, type CSSPrope
 import { useLocale, useTranslations } from "next-intl";
 import { TRANSFER_DEMOS, TRANSFER_ROBOTS, TRANSFER_MEDIA_VERSION, TRANSFER_MEDIA_ORIGIN, type TransferDemo, type TransferRobot } from "@/lib/transfer-demos";
 import { publicAsset } from "@/lib/public-asset";
-import { FadeIn } from "../FadeIn";
+import { SparkUMRHeading } from "../Editorial";
 import { useBufferedVideoSources } from "../useBufferedVideoSources";
 import "./transfer-showcase.css";
 
@@ -585,13 +585,13 @@ function TransferPlayer({
   </div>;
 }
 
-/** A task-first, synchronized human-to-humanoid comparison, shared across pages. */
+/** SparkUMR's synchronized human-to-humanoid task comparisons. */
 export function TransferShowcase() {
   const t = useTranslations("transfer");
   const locale = useLocale() === "zh" ? "zh" : "en";
   const [task, setTask] = useState(TRANSFER_DEMOS[0].id);
   const [robot, setRobot] = useState<TransferRobot>("fourier_gr3");
-  const [mode, setMode] = useState<Mode>("matrix");
+  const [mode, setMode] = useState<Mode>("split");
   const [swapped, setSwapped] = useState(false);
   const demo = TRANSFER_DEMOS.find(item => item.id === task)!;
   const caption = useId();
@@ -608,15 +608,11 @@ export function TransferShowcase() {
 
   return <section className="transfer-section editorial-section" id="cross-embodiment" aria-labelledby={`${caption}-title`}>
     <div className="editorial-wrap transfer-layout">
-      <FadeIn className="transfer-section-heading">
-        <p className="editorial-label"><span aria-hidden="true">↳</span>XIANOVA / CROSS-EMBODIMENT</p>
-        <h2 id={`${caption}-title`}>
-          <span className="transfer-leading">{t("leading")}</span>{" "}
-          {t("titleOne")}<br />
-          <span className="transfer-title-accent">{t("titleTwo")}</span>
-        </h2>
-      </FadeIn>
-      <div className="transfer-workspace">
+      <div className="transfer-section-heading">
+        <SparkUMRHeading as="h1" id={`${caption}-title`} />
+      </div>
+      <div className="transfer-workspace" role="region" aria-labelledby={`${caption}-comparison`}>
+        <h2 className="sr-only" id={`${caption}-comparison`}>{t("comparisonTitle")}</h2>
         <aside className="transfer-task-panel" aria-label={t("chooseTask")}>
           <div className="transfer-task-heading"><span>{t("taskLibrary")}</span><span>01—{String(TRANSFER_DEMOS.length).padStart(2, "0")}</span></div>
           <label className="transfer-mobile-select"><span className="sr-only">{t("chooseTask")}</span><select value={task} onChange={event => setTask(event.target.value)}>{TRANSFER_DEMOS.map((item, index) => <option key={item.id} value={item.id}>{String(index + 1).padStart(2, "0")} · {item.title[locale]}</option>)}</select></label>
@@ -660,10 +656,10 @@ export function TransferShowcase() {
           <div className="transfer-caption" id={caption}><div><span className="transfer-task-code">TASK / {String(TRANSFER_DEMOS.indexOf(demo) + 1).padStart(2, "0")}</span><h3>{demo.title[locale]}</h3></div><div><p>{demo.description[locale]}</p><div className="transfer-tags">{demo.tags[locale].map(tag => <span key={tag}>{tag}</span>)}</div></div></div>
         </div>
       </div>
-      <FadeIn className="transfer-section-aside">
-        <p>{t("description")}</p><span>{t("technicalTitle")}</span>
-      </FadeIn>
-      <div className="transfer-benchmarks" aria-label={t("collection")}><span><b>{TRANSFER_DEMOS.length}</b>{t("tasksCount")}</span><span><b>{String(TRANSFER_ROBOTS.length).padStart(2, "0")}</b>{t("robotsCount")}</span><span className="transfer-benchmark-belief">{t("sharedSource")}<span aria-hidden="true">↗</span></span></div>
+      <div className="transfer-section-aside">
+        <p>{t("description")}</p>
+      </div>
+      <div className="transfer-benchmarks" aria-label={t("collection")}><span><b>{TRANSFER_DEMOS.length}</b>{t("tasksCount")}</span><span><b>{TRANSFER_ROBOTS.length}</b>{t("robotsCount")}</span></div>
       <div className="transfer-footnote"><p>{t("sourceNote")}</p><span>{t("interactionHint")}</span></div>
       <div className="transfer-pipeline" aria-label={t("pipelineLabel")}>{["observe", "structure", "retarget", "execute"].map((step, index) => <div key={step}><span>0{index + 1}</span><strong>{t(`pipeline.${step}`)}</strong>{index < 3 && <i aria-hidden="true">→</i>}</div>)}</div>
     </div>

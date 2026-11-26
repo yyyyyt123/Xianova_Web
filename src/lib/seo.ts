@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { TRANSFER_DEMOS, TRANSFER_MEDIA_ORIGIN, TRANSFER_MEDIA_VERSION } from "./transfer-demos";
 
 export const SITE_ORIGIN = (
@@ -7,6 +8,37 @@ export const SITE_ORIGIN = (
 export function localizedUrl(_locale: "zh" | "en", path = ""): string {
   const clean = path ? (path.startsWith("/") ? path : `/${path}`) : "/";
   return `${SITE_ORIGIN}${clean}`;
+}
+
+export function buildTechnicalPageMetadata(
+  locale: "zh" | "en",
+  path: "/cross-embodiment" | "/cross-scene",
+  title: string,
+  description: string,
+): Metadata {
+  const url = localizedUrl(locale, path);
+  const pageTitle = `${title} | Xianova Robotics`;
+
+  return {
+    metadataBase: new URL(SITE_ORIGIN),
+    title: pageTitle,
+    description,
+    alternates: {
+      canonical: url,
+      languages: {
+        zh: localizedUrl("zh", path),
+        en: localizedUrl("en", path),
+      },
+    },
+    openGraph: {
+      title: pageTitle,
+      description,
+      url,
+      locale: locale === "zh" ? "zh_CN" : "en_US",
+      type: "website",
+      siteName: "Xianova Robotics",
+    },
+  };
 }
 
 export function buildOrganizationJsonLd(locale: "zh" | "en") {
@@ -50,7 +82,7 @@ export function buildSparkumrSoftwareJsonLd(locale: "zh" | "en") {
       name: "Xianova Robotics",
       url: SITE_ORIGIN,
     },
-    url: `${localizedUrl(locale)}#cross-embodiment`,
+    url: localizedUrl(locale, "/cross-embodiment"),
     description: isZh
       ? "面向人—人形全身移动操作的跨本体动作迁移（Cross-Embodiment Motion Retargeting）工具链，支持将人类全身与手物接触示教精确迁移至 Fourier GR3、Unitree G1、Robotera L3 等多种人形机器人本体。"
       : "Unified human-to-humanoid cross-embodiment motion retargeting toolchain for whole-body loco-manipulation, transferring human demonstrations with contact constraints onto Fourier GR3, Unitree G1, and Robotera L3.",

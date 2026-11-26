@@ -46,7 +46,7 @@ export function HomePreview() {
             {items.map((item, i) => (
               <FadeIn key={item.href} delay={i * 0.07}>
                 <Link
-                  href={item.href as "/technology" | "/solutions" | "/about"}
+                  href={item.href as "/cross-scene" | "/solutions" | "/about"}
                   className="card-cell group relative block h-full p-7 no-underline md:p-9"
                 >
                   <span className="font-mono text-[11px] font-semibold tabular-nums text-ink-faint">

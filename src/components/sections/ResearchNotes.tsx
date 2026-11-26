@@ -131,7 +131,7 @@ export function ResearchNotes({ showLink = true }: { showLink?: boolean }) {
       </div>
       <div className="research-footnote">
         <span>{t("caption")}</span>
-        {showLink && <Link href="/technology">{t("link")}<span aria-hidden="true">↗</span></Link>}
+        {showLink && <Link href="/cross-scene">{t("link")}<span aria-hidden="true">↗</span></Link>}
       </div>
     </section>
   );

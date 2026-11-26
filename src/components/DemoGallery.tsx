@@ -5,14 +5,22 @@ import { useTranslations } from "next-intl";
 import { publicAsset } from "@/lib/public-asset";
 import { useBufferedVideoSources } from "./useBufferedVideoSources";
 
-export const DEMO_NAMES = ["human-centric-multimodal-data", "cross-scene-generalization", "cross-embodiment-paxini-t21", "sparkumr-to-fourier-gr3", "sparkumr-fourier-gr3-action", "sparkumr-astribot-q5-l3"] as const;
+type Demo = {
+  asset: string;
+  title: string;
+  description: string;
+  tab?: string;
+  comparisonLabels?: readonly [string, string];
+};
 
-/** Shared showcase for ORGA multimodal capture, cross-scene & real-robot demos; opt-in playback. */
-export function DemoGallery() {
-  const t = useTranslations("technology");
+type DemoGalleryProps = {
+  demos: readonly [Demo, ...Demo[]];
+};
+
+/** Technical demonstrations with opt-in playback. */
+export function DemoGallery({ demos }: DemoGalleryProps) {
   const ui = useTranslations("experience");
-  const demos = t.raw("demos") as { title: string; tag: string; desc: string }[];
-  const indices = [0, 1, 2];
+  const hasTabs = demos.length > 1;
   const [selected, setSelected] = useState(0);
   const [started, setStarted] = useState(false);
   const [failed, setFailed] = useState(false);
@@ -21,9 +29,8 @@ export function DemoGallery() {
   const playRequest = useRef(0);
   const tabs = useRef<(HTMLButtonElement | null)[]>([]);
   const id = useId();
-  const demoIndex = indices[selected];
-  const demo = demos[demoIndex];
-  const src = publicAsset(`/videos/${DEMO_NAMES[demoIndex]}.mp4`);
+  const demo = demos[selected];
+  const src = publicAsset(`/videos/technology/${demo.asset}.mp4`);
   const videoUrls = useMemo(() => [src], [src]);
   const videoSrc = useBufferedVideoSources(videoUrls)?.[src];
   const playLabel = videoSrc ? ui("playDemo") : ui("bufferingDemo");
@@ -49,10 +56,10 @@ export function DemoGallery() {
   }
   function navigate(event: KeyboardEvent<HTMLButtonElement>, index: number) {
     let next = index;
-    if (event.key === "ArrowRight") next = (index + 1) % indices.length;
-    else if (event.key === "ArrowLeft") next = (index + indices.length - 1) % indices.length;
+    if (event.key === "ArrowRight") next = (index + 1) % demos.length;
+    else if (event.key === "ArrowLeft") next = (index + demos.length - 1) % demos.length;
     else if (event.key === "Home") next = 0;
-    else if (event.key === "End") next = indices.length - 1;
+    else if (event.key === "End") next = demos.length - 1;
     else return;
     event.preventDefault(); choose(next); tabs.current[next]?.focus({preventScroll: true});
     tabs.current[next]?.scrollIntoView({block: "nearest", inline: "nearest"});
@@ -72,18 +79,22 @@ export function DemoGallery() {
   }
 
   return <div className="demo-gallery">
-    <div className="demo-tabs" role="tablist" aria-label={ui("selectDemo")}>
-      {indices.map((index, i) => <button ref={el => { tabs.current[i] = el; }} type="button" role="tab" key={index} id={`${id}-tab-${i}`} aria-controls={`${id}-panel`} aria-selected={selected === i} tabIndex={selected === i ? 0 : -1} onClick={() => choose(i)} onKeyDown={event => navigate(event, i)}>
-        <span className="demo-tab-index">0{i + 1}</span><span>{demos[index].tag}</span><span className="demo-tab-mark" aria-hidden="true">↗</span>
+    {hasTabs && <div className="demo-tabs" role="tablist" aria-label={ui("selectDemo")}>
+      {demos.map((item, i) => <button ref={el => { tabs.current[i] = el; }} type="button" role="tab" key={item.asset} id={`${id}-tab-${i}`} aria-controls={`${id}-panel`} aria-selected={selected === i} tabIndex={selected === i ? 0 : -1} onClick={() => choose(i)} onKeyDown={event => navigate(event, i)}>
+        {item.tab ?? item.title}
       </button>)}
-    </div>
-    <div role="tabpanel" id={`${id}-panel`} aria-labelledby={`${id}-tab-${selected}`} tabIndex={0}>
+    </div>}
+    <div role={hasTabs ? "tabpanel" : undefined} id={`${id}-panel`} aria-labelledby={hasTabs ? `${id}-tab-${selected}` : undefined} tabIndex={hasTabs ? 0 : undefined}>
+      {demo.comparisonLabels && <div className="demo-comparison-labels">
+        {demo.comparisonLabels.map(label => <span key={label}>{label}</span>)}
+      </div>}
       <div className="demo-screen" ref={screen}>
-        <video ref={video} key={src} src={videoSrc} poster={publicAsset(`/images/demos/${DEMO_NAMES[demoIndex]}.jpg`)} controls={started} playsInline preload="auto" onPlay={() => setStarted(true)} onError={() => setFailed(true)} aria-label={demo.title} />
-        {!started && <button type="button" className="demo-play" disabled={!videoSrc} onClick={() => void play()} aria-label={`${playLabel} — ${demo.title}`}><span aria-hidden="true">▷</span><span>{playLabel}</span></button>}
-        <span className="demo-screen-label" aria-hidden="true">XIANOVA / IN THE REAL WORLD</span>
+        <video ref={video} key={src} src={videoSrc} poster={publicAsset(`/images/technology/${demo.asset}.webp`)} controls={started} playsInline preload="auto" onPlay={() => setStarted(true)} onError={() => setFailed(true)} aria-label={demo.title} />
+        {!started && <button type="button" className="demo-play" disabled={!videoSrc} onClick={() => void play()} aria-label={`${playLabel} — ${demo.title}`}>
+          <span><svg aria-hidden="true" viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path d="m6 3 11 7-11 7V3Z" /></svg>{playLabel}</span>
+        </button>}
       </div>
-      <div className="demo-caption"><h3>{demo.title}</h3><p>{demo.desc}</p></div>
+      <div className="demo-caption"><h3>{demo.title}</h3><p>{demo.description}</p></div>
       {failed && <p role="status" className="demo-error">{ui("videoError")}</p>}
     </div>
   </div>;

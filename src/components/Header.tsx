@@ -16,7 +16,14 @@ export function Header() {
   const [open, setOpen] = useState(false);
   const toggle = useRef<HTMLButtonElement>(null);
   const otherLocale = locale === "zh" ? "en" : "zh";
-  const links = [["/technology", "technology"], ["/solutions", "solutions"], ["/news", "news"], ["/about", "about"], ["/careers", "careers"]] as const;
+  const links = [
+    ["/cross-embodiment", "crossEmbodiment"],
+    ["/cross-scene", "crossScene"],
+    ["/solutions", "solutions"],
+    ["/news", "news"],
+    ["/about", "about"],
+    ["/careers", "careers"],
+  ] as const;
   const mobileLinks = [...links, ["/contact", "contact"] as const];
 
   function switchLocale() {

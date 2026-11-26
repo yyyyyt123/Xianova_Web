@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import { useLocale, useTranslations } from "next-intl";
 import { FadeIn } from "./FadeIn";
 import { Link } from "@/i18n/routing";
 
@@ -44,6 +45,20 @@ export function SectionLabel({ number, children }: { number: string; children: R
   return <p className="editorial-label"><span>{number}</span>{children}</p>;
 }
 
-export function ArrowLink({ href, children, className = "" }: { href: "/technology" | "/solutions" | "/about" | "/contact" | "/careers"; children: ReactNode; className?: string }) {
+export function SparkUMRHeading({ as: Heading, id }: { as: "h1" | "h2"; id: string }) {
+  const t = useTranslations("transfer");
+  const isChinese = useLocale() === "zh";
+
+  return <div className="sparkumr-heading">
+    <p className="technology-eyebrow">SparkUMR</p>
+    <Heading id={id} className="sparkumr-technology-title">
+      <span className="sparkumr-positioning">{t("positioning")}</span>{" "}
+      {t.rich("technologyName", { phrase: content => <span className="sparkumr-title-phrase">{content}</span> })}
+    </Heading>
+    {isChinese && <p className="sparkumr-english-title" lang="en">{t("technicalTitle")}</p>}
+  </div>;
+}
+
+export function ArrowLink({ href, children, className = "" }: { href: "/cross-embodiment" | "/cross-scene" | "/solutions" | "/about" | "/contact" | "/careers"; children: ReactNode; className?: string }) {
   return <Link href={href} className={`arrow-link ${className}`}>{children}<span aria-hidden="true">↗</span></Link>;
 }
