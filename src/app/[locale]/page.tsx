@@ -10,6 +10,8 @@ import {
   SITE_ORIGIN,
   buildSparkumrSoftwareJsonLd,
   buildTransferVideosJsonLd,
+  buildWebsiteJsonLd,
+  localizedSiteName,
   localizedUrl,
 } from "@/lib/seo";
 
@@ -35,14 +37,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     metadataBase: new URL(SITE_ORIGIN),
     title: t("title"),
     description: t("description"),
-    keywords: t("keywords").split(","),
     openGraph: {
       title: t("title"),
       description: t("description"),
       url: localizedUrl(lang),
       locale: locale === "zh" ? "zh_CN" : "en_US",
       type: "website",
-      siteName: "Xianova Robotics",
+      siteName: localizedSiteName(lang),
     },
     twitter: {
       card: "summary_large_image",
@@ -74,6 +75,7 @@ export default async function HomePage({ params }: Props) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify([
+            buildWebsiteJsonLd(),
             buildSparkumrSoftwareJsonLd(lang),
             buildTransferVideosJsonLd(lang),
           ]),
