@@ -1,11 +1,12 @@
 {
   "meta": {
-    "title": "Xianova Robotics | Cross-Embodiment Loco-Manipulation & Zero-Shot Generalization",
+    "title": "Xianova Robotics | Emerging Generalization",
     "description": "Xianova Robotics builds ORGA and SparkUMR for zero-shot robot manipulation generalization and human-to-humanoid cross-embodiment loco-manipulation transfer across Fourier GR3, Unitree G1, and Robotera L3.",
     "keywords": "cross-embodiment,cross-embodiment transfer,human-to-humanoid retargeting,loco-manipulation,embodied AI,zero-shot generalization,robot manipulation,SparkUMR,ORGA,Xianova Robotics"
   },
   "nav": {
-    "technology": "Technology",
+    "crossEmbodiment": "Cross-Embodiment Generalization",
+    "crossScene": "Cross-Scene Generalization",
     "solutions": "Solutions",
     "news": "News",
     "about": "About",
@@ -112,9 +113,8 @@
   "particleHero": {
     "visualSettings": "Visual settings",
     "visualSettingsShort": "Visuals",
-    "titleLineOne": "Teach robots to",
-    "titleLineTwo": "generalize.",
-    "rotatingWords": ["generalize.", "adapt to objects.", "adapt to scenes.", "transfer skills."],
+    "headline": "Emerging Generalization",
+    "capabilityDefinition": "Zero-shot manipulation generalization across modalities, embodiments, and scenes.",
     "exploration": "Explore generalization",
     "chooseShape": "Choose a particle form",
     "shapes": [
@@ -126,6 +126,39 @@
     "pause": "Pause motion",
     "play": "Play motion",
     "fallback": "Static illustration on this device"
+  },
+  "homeTechnology": {
+    "renderedPreview": "Rendered comparison of a pouring task",
+    "playPreview": "Play preview",
+    "previewError": "The preview is unavailable. Try again.",
+    "crossEmbodimentDescription": "Compare human and humanoid motion, from whole-body movement to hand–object interaction.",
+    "viewCrossEmbodiment": "View all cross-embodiment demos",
+    "viewCrossScene": "View all cross-scene demos",
+    "humanSource": "Human demonstration",
+    "sparkumrPreview": "SparkUMR retargets a human desk-organizing task to Fourier GR3",
+    "crossSceneDescription": "See how T21 pours after the cup and bottle change positions.",
+    "referenceLayout": "Reference layout",
+    "adjustedLayout": "Adjusted layout"
+  },
+  "technicalPages": {
+    "embodiment": {
+      "intro": "Compare how different robot embodiments perform the same task from a single human demonstration.",
+      "demoTitle": "Cross-Embodiment Renderings",
+      "pourTitle": "One pouring demonstration, two robot embodiments",
+      "pourDescription": "Watch L7 and Bot2 side by side as each picks up the bottle, pours, and puts it back."
+    },
+    "scene": {
+      "intro": "See how a demonstrated manipulation skill adapts to new objects and layouts, and how ORGA extracts transferable geometric relationships.",
+      "demoTitle": "Scene Comparisons",
+      "layoutTab": "Layout comparison",
+      "layoutTitle": "Pouring with a different tabletop layout",
+      "layoutDescription": "Compare two renderings of the same T21 robot and see how its motion changes with the positions of the cup and bottle.",
+      "referenceLayout": "Reference layout",
+      "adjustedLayout": "Adjusted layout",
+      "reconstructionTab": "Scene reconstruction",
+      "reconstructionTitle": "From a real kitchen to a simulated scene",
+      "reconstructionDescription": "Compare the recorded kitchen, the reconstruction, and the simulation to see how the layout and moving parts are represented."
+    }
   },
   "researchNotes": {
     "title": "Understand the relation. Generalize the skill.",
@@ -197,9 +230,9 @@
     "pillars": ["Across objects", "Across scenes", "Across embodiments"],
     "entries": [
       {
-        "title": "Technology",
+        "title": "Cross-Scene Generalization",
         "desc": "ORGA — object-centric representation, geometric constraints, zero-shot transfer",
-        "href": "/technology"
+        "href": "/cross-scene"
       },
       {
         "title": "Solutions",
@@ -395,13 +428,12 @@
     "company": "Shenzhen Xianova Innovation Technology Co., Ltd.",
     "email": "support@xianova.ai",
     "address": "Shenzhen, China",
-    "icp": "ICP pending",
     "rights": "All rights reserved"
   },
   "transfer": {
-    "leading": "World-leading",
-    "titleOne": "Human–Humanoid",
-    "titleTwo": "Cross-Embodiment Transfer",
+    "positioning": "World-leading",
+    "technologyName": "Human-Humanoid Loco-Manipulation Cross-Embodiment Transfer Technology",
+    "comparisonTitle": "Synchronized Motion Comparison",
     "description": "From walking and turning to bimanual coordination. See one human demonstration take shape across different humanoid robots.",
     "technicalTitle": "Human-Humanoid Loco-Manipulation Cross-Embodiment Transfer Technology",
     "collection": "Cross-embodiment collection",

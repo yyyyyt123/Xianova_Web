@@ -3,7 +3,8 @@ import { SITE_ORIGIN } from "@/lib/seo";
 
 const ROUTES = [
   "/",
-  "/technology",
+  "/cross-embodiment",
+  "/cross-scene",
   "/solutions",
   "/news",
   "/about",
@@ -17,6 +18,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     url: `${SITE_ORIGIN}${route}`,
     lastModified,
     changeFrequency: route === "/" || route === "/news" ? "weekly" : "monthly",
-    priority: route === "/" ? 1.0 : route === "/technology" ? 0.9 : 0.8,
+    priority: route === "/" ? 1.0 : route.startsWith("/cross-") ? 0.9 : 0.8,
   }));
 }

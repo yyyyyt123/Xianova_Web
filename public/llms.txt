@@ -16,8 +16,8 @@ Xianova Robotics (夏仙创新（深圳）科技有限公司) focuses on object-
 
 ## Key Pages
 
-- [Home / Cross-Embodiment Benchmark](https://www.xianova.ai/#cross-embodiment): Interactive synchronized comparison of 10 complex whole-body manipulation tasks across human source, Fourier GR3, Unitree G1, and Robotera L3.
-- [ORGA Technology (技术架构)](https://www.xianova.ai/technology): Object-centric representation, geometric constraint learning, and cross-embodiment transfer.
+- [Cross-Embodiment Generalization (跨本体泛化)](https://www.xianova.ai/cross-embodiment): Interactive synchronized comparison of 10 complex whole-body manipulation tasks across human source, Fourier GR3, Unitree G1, and Robotera L3.
+- [Cross-Scene Generalization (跨场景泛化)](https://www.xianova.ai/cross-scene): ORGA's object-centric representation, geometric constraint learning, and demonstrations across scene layouts.
 - [Solutions (产品与方案)](https://www.xianova.ai/solutions): Embodied manipulation solutions for humanoid OEMs, data collection, and dynamic workcells.
 - [About Xianova (关于我们)](https://www.xianova.ai/about): Company profile and research team in Shenzhen, China.
 - [Contact (联系合作)](https://www.xianova.ai/contact): Technical collaboration and partnership inquiries (`support@xianova.ai`).

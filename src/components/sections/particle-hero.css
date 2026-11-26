@@ -1,5 +1,6 @@
 /* One message, one live sculpture. Controls stay tucked away until requested. */
 .particle-hero {
+  --hero-gutter: max(5.4%, (100% - 1120px) / 2);
   position: relative; isolation: isolate; height: 100svh; min-height: 620px;
   overflow: hidden; color: var(--foreground); background: var(--background);
 }
@@ -10,40 +11,41 @@
 .particle-art[data-available="true"] .particle-art-fallback { opacity: 0; }
 .particle-hero-shade {
   position: absolute; z-index: 2; inset: 0; pointer-events: none;
-  background: none;
+  background: linear-gradient(90deg, var(--background) 0%, transparent 49%);
 }
 .particle-hero-grid {
   position: absolute; inset: 0; z-index: 0; opacity: .20; pointer-events: none;
   background-image: linear-gradient(#2a4d6412 1px,transparent 1px),linear-gradient(90deg,#2a4d6412 1px,transparent 1px);
   background-size: 48px 48px; mask-image: radial-gradient(ellipse at 60% 46%,#000,transparent 86%);
 }
-.particle-hero-copy { position: absolute; z-index: 3; top: 43%; left: 8.2%; max-width: 430px; transform: translateY(-50%); pointer-events: none; }
+.particle-hero-copy { position: absolute; z-index: 3; top: 45%; left: var(--hero-gutter); width: min(48%, 640px); transform: translateY(-50%); pointer-events: none; }
 .particle-title {
+  width: fit-content; max-width: 100%;
   font-family: var(--font-space),var(--font-noto),sans-serif;
-  font-size: clamp(32px,3.4vw,52px); line-height: 1.55; font-weight: 500; letter-spacing: -.025em;
+  font-size: clamp(40px,4.15vw,60px); line-height: 1.12; font-weight: 500; letter-spacing: -.04em;
 }
-.particle-title > span { display: block; }
-.particle-title > span:last-child { color: var(--hero-emphasis); font-weight: 400; }
 html:lang(zh) .particle-title { font-family: var(--font-noto),var(--font-space),sans-serif; letter-spacing: .012em; }
-.particle-title > .particle-keywords { display: grid; }
-.particle-keyword {
-  grid-area: 1 / 1; white-space: nowrap;
+html:lang(en) .particle-title { max-width: min(100%, 14ch); }
+.particle-capability-definition {
+  max-width: 42ch; margin-top: 24px; color: var(--text-secondary);
+  font-size: clamp(16px,1.28vw,19px); line-height: 1.65; text-wrap: pretty;
 }
-.particle-keyword-character {
-  display: inline-block; white-space: pre; opacity: 0;
-  animation: particle-keyword-dissolve calc(var(--keyword-count) * 6s) cubic-bezier(.4,0,.2,1) infinite;
-  animation-delay: calc((var(--keyword-index) - var(--keyword-count)) * 6s - 1.5s + var(--character-delay));
-  animation-play-state: paused;
+.particle-hero-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 32px; }
+.particle-hero-action {
+  display: inline-flex; align-items: center; gap: 14px; min-height: 44px; padding-inline: 14px;
+  border: 1px solid var(--site-rule); border-radius: 6px; background: var(--site-surface);
+  color: var(--site-ink); font-size: 14px; font-weight: 500;
+  pointer-events: auto; transition: color .25s, border-color .25s, background-color .25s;
 }
-.particle-keyword:first-child .particle-keyword-character { opacity: 1; }
-.particle-hero[data-keywords-playing="true"] .particle-keyword-character { animation-play-state: running; }
-@keyframes particle-keyword-dissolve {
-  0% { opacity: 0; filter: blur(3px); transform: translateY(.10em); }
-  6%, 20% { opacity: 1; filter: blur(0); transform: translateY(0); }
-  24%, 100% { opacity: 0; filter: blur(3px); transform: translateY(-.06em); }
+.particle-hero-action:hover { color: var(--site-accent); border-color: var(--site-accent); }
+.particle-hero-action.is-primary {
+  color: #fff; background: var(--site-accent); border-color: var(--site-accent);
+}
+.particle-hero-action.is-primary:hover {
+  background: var(--site-ink); border-color: var(--site-ink);
 }
 .particle-hero-bottom {
-  position: absolute; z-index: 4; inset: auto 8.2% 22px; min-height: 44px;
+  position: absolute; z-index: 4; inset: auto var(--hero-gutter) 22px; min-height: 44px;
   display: flex; align-items: center; justify-content: space-between; gap: 24px;
 }
 .particle-read-on { display: inline-flex; align-items: center; gap: 15px; min-height: 44px; text-decoration: none; color: var(--text-tertiary); font-size: 12px; letter-spacing: .025em; }
@@ -71,21 +73,19 @@ html:lang(zh) .particle-title { font-family: var(--font-noto),var(--font-space),
 .particle-fallback-note { padding: 12px 2px; font-size: 11px; line-height: 1.7; }
 .particle-arrive { animation: particle-arrive .9s cubic-bezier(.22,1,.36,1) .08s both; }
 @keyframes particle-arrive { from { opacity: 0; translate: 0 14px; } to { opacity: 1; translate: 0 0; } }
-@media (max-width: 1100px) and (min-width: 768px) {
-  .particle-hero-copy { left: 6%; max-width: 340px; }
-  .particle-hero-bottom { inset-inline: 6%; }
-}
 @media (max-width: 767px) {
-  .particle-hero-copy { top: 62%; left: 24px; right: 24px; max-width: none; }
-  .particle-title { font-size: 32px; line-height: 1.5; }
-  .particle-hero-bottom { inset-inline: 24px; bottom: max(16px,env(safe-area-inset-bottom)); }
-  .particle-art-fallback { width: 160%; left: -60%; top: -130px; height: 70%; }
+  .particle-hero { --hero-gutter: 24px; min-height: 580px; }
+  .particle-hero-shade { display: none; }
+  .particle-hero-copy { top: 60%; right: var(--hero-gutter); width: auto; }
+  .particle-title { font-size: clamp(34px,8.8vw,50px); line-height: 1.12; }
+  .particle-capability-definition { margin-top: 16px; font-size: 15px; }
+  .particle-hero-actions { margin-top: 22px; gap: 8px; }
+  .particle-hero-action { font-size: 13px; }
+  .particle-hero-bottom { bottom: max(16px,env(safe-area-inset-bottom)); }
+  .particle-art-fallback { width: 169%; left: -55%; top: 82px; height: clamp(110px, 34svh, 280px); }
 }
-@media (max-width: 360px) { .particle-title { font-size: 29px; } }
 @media (prefers-reduced-motion: reduce) {
   html:has(.particle-hero) { scroll-behavior: auto; }
   .particle-arrive { animation: none; }
-  .particle-keyword-character { animation: none; opacity: 0; filter: none; transform: none; }
-  .particle-keyword:first-child .particle-keyword-character { opacity: 1; }
   .particle-hero a,.particle-hero button,.particle-read-on > span { transition: none; }
 }

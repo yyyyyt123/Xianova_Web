@@ -2,18 +2,9 @@ import { setRequestLocale } from "next-intl/server";
 import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
 import { Hero } from "@/components/sections/Hero";
-import { ResearchNotes } from "@/components/sections/ResearchNotes";
-import { HomeStatement, HomeDemonstration, HomePathways, HomeInvitation } from "@/components/sections/HomeExperience";
+import { HomeStatement, HomeTechnologyPreview, HomePathways, HomeInvitation } from "@/components/sections/HomeExperience";
 import { routing } from "@/i18n/routing";
-import { TransferShowcase } from "@/components/transfer/TransferShowcase";
-import {
-  SITE_ORIGIN,
-  buildSparkumrSoftwareJsonLd,
-  buildTransferVideosJsonLd,
-  buildWebsiteJsonLd,
-  localizedSiteName,
-  localizedUrl,
-} from "@/lib/seo";
+import { SITE_ORIGIN, buildWebsiteJsonLd, localizedSiteName, localizedUrl } from "@/lib/seo";
 
 type Props = {
   params: Promise<{ locale: string }> | { locale: string };
@@ -61,31 +52,22 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 /**
- * Home page — particle hero, research sketches and entry links.
+ * Home page with the particle hero and previews of both technical topics.
  * @param params, locale params
  */
 export default async function HomePage({ params }: Props) {
   const { locale } = await Promise.resolve(params);
-  const lang = locale === "zh" ? "zh" : "en";
   setRequestLocale(locale);
 
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify([
-            buildWebsiteJsonLd(),
-            buildSparkumrSoftwareJsonLd(lang),
-            buildTransferVideosJsonLd(lang),
-          ]),
-        }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(buildWebsiteJsonLd()) }}
       />
       <Hero />
-      <TransferShowcase />
+      <HomeTechnologyPreview />
       <HomeStatement />
-      <HomeDemonstration />
-      <ResearchNotes />
       <HomePathways />
       <HomeInvitation />
     </>

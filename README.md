@@ -83,6 +83,8 @@ do not by themselves validate grasp contact, balance, or hardware execution.
 
 ## Deploy
 
+Before publishing to development or production, review the changed UI with Awesome Design (`awesome-design-md`) and verify the rendered desktop and mobile layouts.
+
 The organization repository is the source of truth. Its `main` branch is
 automatically pushed to a public deployment mirror, which is the repository
 connected to Vercel:

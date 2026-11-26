@@ -253,9 +253,10 @@ export function createParticleField(canvas: HTMLCanvasElement): ParticleField | 
 
   const hero = canvas.closest("section");
   const heading = hero?.querySelector("h1");
+  const copy = heading?.parentElement;
   let width = 1, height = 1, dpr = 1, wanted = capacity, activeCount = capacity;
   let quality = 1, slowFrames = 0, sampleFrames = 0;
-  let titleRight = 0, titleTop = 0, titleBottom = 0;
+  let titleRight = 0, titleTop = 0, copyBottom = 0;
   let titleZone = [0, 0, 0, 0];
   let disposed = false, animated = false, visible = true;
   let frame = 0, previous = 0, time = 0, revealAge = 2;
@@ -280,10 +281,11 @@ export function createParticleField(canvas: HTMLCanvasElement): ParticleField | 
     let centreX = 1 - free - .06;
     let centreY = 0;
     if (compact) {
-      const below = height - titleBottom - 40, above = titleTop - 108;
-      const top = below >= above ? titleBottom + 12 : 108;
-      const bottom = below >= above ? height - 24 : titleTop - 24;
-      scale = clamp(Math.min((bottom - top) / (.58 * height), width * 1.02 / (.93 * height)), .3, 1.3);
+      const below = height - copyBottom - 40, above = titleTop - 108;
+      const aboveTitle = width <= 767 || aspect <= 1 || above > below;
+      const top = aboveTitle ? 100 : copyBottom + 12;
+      const bottom = aboveTitle ? titleTop - 20 : height - 24;
+      scale = clamp(Math.min((bottom - top) / (.58 * height), width * 1.02 / (.93 * height)), .22, 1.3);
       centreX = .12;
       centreY = 1 - (top + bottom) / height;
     }
@@ -353,7 +355,7 @@ export function createParticleField(canvas: HTMLCanvasElement): ParticleField | 
     if (title) {
       titleRight = title.right - rect.left;
       titleTop = title.top - rect.top;
-      titleBottom = title.bottom - rect.top;
+      copyBottom = (copy?.getBoundingClientRect().bottom ?? title.bottom) - rect.top;
       titleZone = [title.left - rect.left + title.width / 2, height - (title.top - rect.top + title.height / 2), title.width / 2, title.height / 2];
     }
     wanted = width * (width <= 1023 ? height : Math.min(height, width * .5)) * .72;

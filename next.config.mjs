@@ -6,6 +6,11 @@ const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
 const nextConfig = {
   reactStrictMode: true,
   basePath: process.env.NEXT_PUBLIC_BASE_PATH || "",
+  async redirects() {
+    return [
+      { source: "/technology", destination: "/cross-scene", permanent: true },
+    ];
+  },
   ...(process.env.XIANOVA_STANDALONE === "1" ? {
     output: "standalone",
     images: { unoptimized: true },
