@@ -2,7 +2,7 @@
 
 import { useEffect, useId, useMemo, useRef, useState, KeyboardEvent } from "react";
 import { useTranslations } from "next-intl";
-import { publicAsset } from "@/lib/public-asset";
+import { TRANSFER_MEDIA_ORIGIN } from "@/lib/transfer-demos";
 import { useBufferedVideoSources } from "./useBufferedVideoSources";
 
 type Demo = {
@@ -30,7 +30,7 @@ export function DemoGallery({ demos }: DemoGalleryProps) {
   const tabs = useRef<(HTMLButtonElement | null)[]>([]);
   const id = useId();
   const demo = demos[selected];
-  const src = publicAsset(`/videos/technology/${demo.asset}.mp4`);
+  const src = `${TRANSFER_MEDIA_ORIGIN}/videos/technology/${demo.asset}.mp4`;
   const videoUrls = useMemo(() => [src], [src]);
   const videoSrc = useBufferedVideoSources(videoUrls)?.[src];
   const playLabel = videoSrc ? ui("playDemo") : ui("bufferingDemo");
@@ -89,7 +89,7 @@ export function DemoGallery({ demos }: DemoGalleryProps) {
         {demo.comparisonLabels.map(label => <span key={label}>{label}</span>)}
       </div>}
       <div className="demo-screen" ref={screen}>
-        <video ref={video} key={src} src={videoSrc} poster={publicAsset(`/images/technology/${demo.asset}.webp`)} controls={started} playsInline preload="auto" onPlay={() => setStarted(true)} onError={() => setFailed(true)} aria-label={demo.title} />
+        <video ref={video} key={src} src={videoSrc} poster={`${TRANSFER_MEDIA_ORIGIN}/images/technology/${demo.asset}.webp`} controls={started} playsInline preload="auto" onPlay={() => setStarted(true)} onError={() => setFailed(true)} aria-label={demo.title} />
         {!started && <button type="button" className="demo-play" disabled={!videoSrc} onClick={() => void play()} aria-label={`${playLabel} — ${demo.title}`}>
           <span><svg aria-hidden="true" viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path d="m6 3 11 7-11 7V3Z" /></svg>{playLabel}</span>
         </button>}

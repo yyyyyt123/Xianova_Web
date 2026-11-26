@@ -2,7 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import { useEffect, useRef, useState } from "react";
-import { publicAsset } from "@/lib/public-asset";
+import { TRANSFER_MEDIA_ORIGIN } from "@/lib/transfer-demos";
 import { FadeIn } from "../FadeIn";
 import { ArrowLink, GeometryStudy, SectionLabel, SparkUMRHeading } from "../Editorial";
 import "./home-technology-preview.css";
@@ -58,8 +58,8 @@ function HomeTechnologyVideo({ description, labels, src, poster }: {
       <div className="home-technology-player">
         <video
           ref={video}
-          src={publicAsset(src)}
-          poster={publicAsset(poster)}
+          src={`${TRANSFER_MEDIA_ORIGIN}${src}`}
+          poster={`${TRANSFER_MEDIA_ORIGIN}${poster}`}
           preload="none"
           muted
           playsInline
