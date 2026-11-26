@@ -610,8 +610,11 @@ export function TransferShowcase() {
     <div className="editorial-wrap transfer-layout">
       <FadeIn className="transfer-section-heading">
         <p className="editorial-label"><span aria-hidden="true">↳</span>XIANOVA / CROSS-EMBODIMENT</p>
-        <p className="transfer-leading">{t("leading")}</p>
-        <h2 id={`${caption}-title`}>{t("titleOne")}<br /><span>{t("titleTwo")}</span></h2>
+        <h2 id={`${caption}-title`}>
+          <span className="transfer-leading">{t("leading")}</span>{" "}
+          {t("titleOne")}<br />
+          <span className="transfer-title-accent">{t("titleTwo")}</span>
+        </h2>
       </FadeIn>
       <div className="transfer-workspace">
         <aside className="transfer-task-panel" aria-label={t("chooseTask")}>

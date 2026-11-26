@@ -7,9 +7,9 @@
 }
 .transfer-section-heading { grid-area: heading; align-self: end; margin-bottom: 22px; }
 .transfer-section-heading .editorial-label { margin-bottom: 18px; }
-.transfer-leading { margin-bottom: 10px; color: var(--site-accent); font-size: 15px; letter-spacing: .08em; }
 .transfer-section-heading h2 { font-size: clamp(26px,2.9vw,42px); font-weight: 400; letter-spacing: -.035em; line-height: 1.45; }
-.transfer-section-heading h2 > span { color: var(--site-accent); }
+.transfer-leading { display: block; margin-bottom: 8px; color: var(--site-ink); font-size: clamp(34px,4.2vw,60px); font-weight: 650; line-height: 1.12; }
+.transfer-title-accent { color: var(--site-accent); }
 .transfer-section-aside { grid-area: aside; align-self: end; margin-bottom: 22px; padding-bottom: 4px; }
 .transfer-section-aside p { color: var(--site-muted); font-size: 14px; line-height: 1.85; max-width: 430px; }
 .transfer-section-aside > span { display: block; margin-top: 14px; font-size: 12px; line-height: 1.75; color: #496877; letter-spacing: .025em; }
@@ -162,7 +162,7 @@
   .transfer-layout { display: block; }
   .transfer-section-heading { margin-bottom: 16px; }
   .transfer-section-heading .editorial-label { display: none; }
-  .transfer-leading { font-size: 12px; margin-bottom: 6px; }
+  .transfer-leading { margin-bottom: 6px; }
   .transfer-section-heading h2 { font-size: clamp(24px,6.2vw,32px); line-height: 1.35; }
   .transfer-section-aside { margin: 18px 0 12px; padding-bottom: 0; }
   .transfer-section-aside p { font-size: 12px; }
