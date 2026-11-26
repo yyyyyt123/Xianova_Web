@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect, useId, useRef, useState, KeyboardEvent } from "react";
+import { useEffect, useId, useMemo, useRef, useState, KeyboardEvent } from "react";
 import { useTranslations } from "next-intl";
 import { publicAsset } from "@/lib/public-asset";
+import { useBufferedVideoSources } from "./useBufferedVideoSources";
 
 export const DEMO_NAMES = ["human-centric-multimodal-data", "cross-scene-generalization", "cross-embodiment-paxini-t21", "sparkumr-to-fourier-gr3", "sparkumr-fourier-gr3-action", "sparkumr-astribot-q5-l3"] as const;
 
@@ -23,6 +24,9 @@ export function DemoGallery() {
   const demoIndex = indices[selected];
   const demo = demos[demoIndex];
   const src = publicAsset(`/videos/${DEMO_NAMES[demoIndex]}.mp4`);
+  const videoUrls = useMemo(() => [src], [src]);
+  const videoSrc = useBufferedVideoSources(videoUrls)?.[src];
+  const playLabel = videoSrc ? ui("playDemo") : ui("bufferingDemo");
 
   useEffect(() => {
     const element = screen.current;
@@ -55,7 +59,7 @@ export function DemoGallery() {
   }
   async function play() {
     const element = video.current;
-    if (!element) return;
+    if (!element || !videoSrc) return;
     const request = ++playRequest.current;
     setFailed(false);
     try {
@@ -75,8 +79,8 @@ export function DemoGallery() {
     </div>
     <div role="tabpanel" id={`${id}-panel`} aria-labelledby={`${id}-tab-${selected}`} tabIndex={0}>
       <div className="demo-screen" ref={screen}>
-        <video ref={video} key={src} src={src} poster={publicAsset(`/images/demos/${DEMO_NAMES[demoIndex]}.jpg`)} controls={started} playsInline preload="none" onPlay={() => setStarted(true)} onError={() => setFailed(true)} aria-label={demo.title} />
-        {!started && <button type="button" className="demo-play" onClick={() => void play()} aria-label={`${ui("playDemo")} — ${demo.title}`}><span aria-hidden="true">▷</span><span>{ui("playDemo")}</span></button>}
+        <video ref={video} key={src} src={videoSrc} poster={publicAsset(`/images/demos/${DEMO_NAMES[demoIndex]}.jpg`)} controls={started} playsInline preload="auto" onPlay={() => setStarted(true)} onError={() => setFailed(true)} aria-label={demo.title} />
+        {!started && <button type="button" className="demo-play" disabled={!videoSrc} onClick={() => void play()} aria-label={`${playLabel} — ${demo.title}`}><span aria-hidden="true">▷</span><span>{playLabel}</span></button>}
         <span className="demo-screen-label" aria-hidden="true">XIANOVA / IN THE REAL WORLD</span>
       </div>
       <div className="demo-caption"><h3>{demo.title}</h3><p>{demo.desc}</p></div>

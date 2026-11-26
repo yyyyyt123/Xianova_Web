@@ -72,23 +72,6 @@ export function buildSparkumrSoftwareJsonLd(locale: "zh" | "en") {
   };
 }
 
-export function buildTransferFaqJsonLd(
-  faqs: { question: string; answer: string }[]
-) {
-  return {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: faqs.map((item) => ({
-      "@type": "Question",
-      name: item.question,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: item.answer,
-      },
-    })),
-  };
-}
-
 export function buildTransferVideosJsonLd(locale: "zh" | "en") {
   return {
     "@context": "https://schema.org",

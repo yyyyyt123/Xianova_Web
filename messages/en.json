@@ -155,6 +155,7 @@
     "technologyAndDemos": "Explore the technology and demos",
     "selectDemo": "Choose a demonstration",
     "playDemo": "Play demonstration",
+    "bufferingDemo": "Buffering video…",
     "videoError": "This video is unavailable. Try another demonstration or come back later.",
     "possibilities": "APPLICATIONS",
     "pathwaysTitle": "One understanding. More possibilities.",
@@ -431,7 +432,7 @@
     "play": "Play in sync",
     "pause": "Pause playback",
     "retry": "Reload videos",
-    "loading": "Preparing both views…",
+    "loading": "Buffering synchronized videos…",
     "visualization": "SPARKUMR / KINEMATIC VISUALIZATION",
     "timeline": "Synchronized playback timeline",
     "speed": "Playback speed",
@@ -449,26 +450,6 @@
       "retarget": "Embodiment adaptation",
       "execute": "Motion transfer"
     },
-    "faqLabel": "CROSS-EMBODIMENT FAQ",
-    "faqTitle": "How human–humanoid cross-embodiment transfer works",
-    "faqs": [
-      {
-        "question": "What is human–humanoid cross-embodiment loco-manipulation transfer?",
-        "answer": "Cross-embodiment transfer adapts a single human demonstration or skill representation across humanoid robots with different heights, joint DOFs, and hand morphologies without re-collecting per-robot teleoperation data. Xianova Robotics combines object-centric relation modeling with contact-constrained retargeting across seated, standing, walking, and bimanual tool-use tasks."
-      },
-      {
-        "question": "How does Xianova SparkUMR differ from naive joint-angle retargeting?",
-        "answer": "Naive joint-angle mapping breaks hand–object contacts and tilts the torso when robot proportions differ from the demonstrator. SparkUMR registers human pelvis trajectories, hand/finger contact targets, and scene props in one canonical world frame, jointly optimizing dexterous contact consistency, foot flattening, and upright posture regularization."
-      },
-      {
-        "question": "Which humanoid platforms and task categories are benchmarked?",
-        "answer": "The showcase benchmarks 10 representative whole-body manipulation tasks—including desk arrangement, seated drinking, bimanual mixing, getting out of bed to retrieve clothes, high-shelf lowering, cart transfer, and alternating-hand pushing—across Fourier GR3 (53 DOF), Unitree G1 (37 DOF), and Robotera L3 (55 DOF)."
-      },
-      {
-        "question": "How does cross-embodiment transfer connect with the ORGA architecture?",
-        "answer": "ORGA extracts object-centric geometry and interaction constraints from few demonstrations so manipulation generalizes zero-shot to new objects and layouts, while SparkUMR transfers those whole-body skills cleanly onto diverse humanoid hardware platforms."
-      }
-    ],
     "heroDescription": "Human-Humanoid Loco-Manipulation Cross-Embodiment Transfer Technology",
     "heroLink": "Explore cross-embodiment motion"
   }

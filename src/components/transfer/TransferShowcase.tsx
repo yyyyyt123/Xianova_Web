@@ -1,10 +1,11 @@
 "use client";
 
-import { useCallback, useEffect, useId, useRef, useState, type CSSProperties, type KeyboardEvent } from "react";
+import { useCallback, useEffect, useId, useMemo, useRef, useState, type CSSProperties, type KeyboardEvent } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { TRANSFER_DEMOS, TRANSFER_ROBOTS, TRANSFER_MEDIA_VERSION, TRANSFER_MEDIA_ORIGIN, type TransferDemo, type TransferRobot } from "@/lib/transfer-demos";
 import { publicAsset } from "@/lib/public-asset";
 import { FadeIn } from "../FadeIn";
+import { useBufferedVideoSources } from "../useBufferedVideoSources";
 import "./transfer-showcase.css";
 
 type Mode = "split" | "matrix" | "wipe";
@@ -37,8 +38,8 @@ function ready(video: HTMLVideoElement, signal: AbortSignal) {
     video.addEventListener("canplay", success, { once: true });
     video.addEventListener("error", failure, { once: true });
     signal.addEventListener("abort", cancel, { once: true });
-    if (video.networkState === HTMLMediaElement.NETWORK_EMPTY || video.networkState === HTMLMediaElement.NETWORK_NO_SOURCE) video.load();
-    else video.preload = "auto";
+    // Restart only a stream that still needs data and is no longer fetching.
+    if (video.networkState !== HTMLMediaElement.NETWORK_LOADING) video.load();
   });
 }
 
@@ -89,6 +90,11 @@ function TransferPlayer({
   const robotMeta = TRANSFER_ROBOTS.find(item => item.id === robot)!;
   const robotName = robotMeta.name;
   const id = useId();
+  const videoUrls = useMemo(() => [
+    media(demo.id, "human"),
+    ...TRANSFER_ROBOTS.map(({ id }) => media(demo.id, id)),
+  ], [demo.id]);
+  const videoSources = useBufferedVideoSources(videoUrls);
 
   speedRef.current = speed;
   loadedRef.current = loaded;
@@ -144,13 +150,7 @@ function TransferPlayer({
     };
   }, [pause]);
 
-  const alignAndMaybePlay = useCallback(async ({
-    forceReloadFollowers,
-    resumeIfPlaying,
-  }: {
-    forceReloadFollowers: boolean;
-    resumeIfPlaying: boolean;
-  }) => {
+  const alignAndMaybePlay = useCallback(async (resumeIfPlaying: boolean) => {
     const source = human.current;
     const followers = getFollowers();
     if (!source || followers.length === 0) return;
@@ -168,11 +168,6 @@ function TransferPlayer({
     for (const el of Object.values(robotRefs.current)) el?.pause();
 
     try {
-      source.preload = "auto";
-      for (const el of followers) {
-        if (forceReloadFollowers) el.load();
-        el.preload = "auto";
-      }
       await Promise.all([ready(source, controller.signal), ...followers.map(el => ready(el, controller.signal))]);
       if (token !== playToken.current) return;
 
@@ -188,7 +183,7 @@ function TransferPlayer({
       const clamped = Math.min(Math.max(0, base), Math.max(0, length - .05));
 
       for (const v of all) {
-        v.currentTime = clamped;
+        if (v.currentTime !== clamped) v.currentTime = clamped;
         v.playbackRate = speedRef.current;
       }
       setPosition(clamped);
@@ -214,24 +209,16 @@ function TransferPlayer({
 
   // Keep buffered human video & exact timestamp intact when switching robots or comparison views.
   useEffect(() => {
+    if (!videoSources) return;
     const key = `${mode}:${robot}`;
-    if (prevKey.current === key) return;
-    const prevRobot = prevKey.current.split(":")[1];
+    const selectionChanged = prevKey.current !== key;
     prevKey.current = key;
 
-    const followers = getFollowers();
-    if (!loadedRef.current && !wantsPlayback.current) {
-      if (prevRobot !== robot) {
-        for (const el of followers) el.load();
-      }
-      return;
-    }
-
-    void alignAndMaybePlay({
-      forceReloadFollowers: prevRobot !== robot && mode !== "matrix",
-      resumeIfPlaying: wantsPlayback.current,
-    });
-  }, [alignAndMaybePlay, getFollowers, mode, robot]);
+    const wantsToPlay = wantsPlayback.current;
+    const waitingToStart = wantsToPlay && !loadedRef.current && !starting.current;
+    const shouldAlign = selectionChanged && (loadedRef.current || wantsToPlay);
+    if (waitingToStart || shouldAlign) void alignAndMaybePlay(wantsToPlay);
+  }, [alignAndMaybePlay, mode, robot, videoSources]);
 
   useEffect(() => {
     if (!playing) return;
@@ -256,7 +243,11 @@ function TransferPlayer({
 
   function play() {
     wantsPlayback.current = true;
-    void alignAndMaybePlay({ forceReloadFollowers: false, resumeIfPlaying: true });
+    if (!videoSources) {
+      setLoading(true);
+      return;
+    }
+    void alignAndMaybePlay(true);
   }
 
   function buffer() {
@@ -439,7 +430,7 @@ function TransferPlayer({
   const videoProps = {
     muted: true,
     playsInline: true,
-    preload: "metadata" as const,
+    preload: "auto" as const,
     onWaiting: buffer,
     onCanPlay: () => void resume(),
     onEnded: ended,
@@ -452,14 +443,15 @@ function TransferPlayer({
   return <div className={`transfer-player ${fullscreen ? "is-fullscreen" : ""}`} ref={root} tabIndex={0} onKeyDown={handleKeyDown}>
     <div className={`transfer-stage is-${mode}${swapped && mode !== "matrix" ? " is-swapped" : ""}`} style={{ "--wipe": `${wipe}%` } as CSSProperties}>
       <div className="transfer-view transfer-human">
-        <video ref={human} src={media(demo.id, "human")} poster={media(demo.id, "human", "webp")} aria-label={t("sourceMotion")} {...videoProps} />
+        <video ref={human} src={videoSources?.[media(demo.id, "human")]} poster={media(demo.id, "human", "webp")} aria-label={t("sourceMotion")} {...videoProps} />
       </div>
 
       {mode !== "matrix" && (
         <div className="transfer-view transfer-target">
           <video
+            key={robot}
             ref={el => { robotRefs.current[robot] = el; }}
-            src={media(demo.id, robot)}
+            src={videoSources?.[media(demo.id, robot)]}
             poster={media(demo.id, robot, "webp")}
             aria-label={`${t("robotMotion")} ${robotName}`}
             {...videoProps}
@@ -479,7 +471,7 @@ function TransferPlayer({
             <div key={item.id} className="transfer-matrix-cell">
               <video
                 ref={el => { robotRefs.current[item.id] = el; }}
-                src={media(demo.id, item.id)}
+                src={videoSources?.[media(demo.id, item.id)]}
                 poster={media(demo.id, item.id, "webp")}
                 aria-label={`${t("robotMotion")} ${item.name}`}
                 {...videoProps}
@@ -602,7 +594,6 @@ export function TransferShowcase() {
   const [mode, setMode] = useState<Mode>("matrix");
   const [swapped, setSwapped] = useState(false);
   const demo = TRANSFER_DEMOS.find(item => item.id === task)!;
-  const faqs = t.raw("faqs") as { question: string; answer: string }[];
   const caption = useId();
 
   function handleRobotTab(nextRobot: TransferRobot) {
@@ -672,17 +663,6 @@ export function TransferShowcase() {
       <div className="transfer-benchmarks" aria-label={t("collection")}><span><b>{TRANSFER_DEMOS.length}</b>{t("tasksCount")}</span><span><b>{String(TRANSFER_ROBOTS.length).padStart(2, "0")}</b>{t("robotsCount")}</span><span className="transfer-benchmark-belief">{t("sharedSource")}<span aria-hidden="true">↗</span></span></div>
       <div className="transfer-footnote"><p>{t("sourceNote")}</p><span>{t("interactionHint")}</span></div>
       <div className="transfer-pipeline" aria-label={t("pipelineLabel")}>{["observe", "structure", "retarget", "execute"].map((step, index) => <div key={step}><span>0{index + 1}</span><strong>{t(`pipeline.${step}`)}</strong>{index < 3 && <i aria-hidden="true">→</i>}</div>)}</div>
-      <div className="transfer-faq">
-        <div className="transfer-faq-header"><p className="editorial-label"><span aria-hidden="true">↳</span>{t("faqLabel")}</p><h3>{t("faqTitle")}</h3></div>
-        <dl className="transfer-faq-grid">
-          {faqs.map((item) => (
-            <div key={item.question} className="transfer-faq-item">
-              <dt>{item.question}</dt>
-              <dd>{item.answer}</dd>
-            </div>
-          ))}
-        </dl>
-      </div>
     </div>
   </section>;
 }

@@ -2,7 +2,7 @@
 .transfer-layout {
   display: grid;
   grid-template-columns: minmax(0,1.2fr) minmax(0,1fr);
-  grid-template-areas: "heading aside" "benchmarks benchmarks" "workspace workspace" "footnote footnote" "pipeline pipeline" "faq faq";
+  grid-template-areas: "heading aside" "benchmarks benchmarks" "workspace workspace" "footnote footnote" "pipeline pipeline";
   column-gap: 13%;
 }
 .transfer-section-heading { grid-area: heading; align-self: end; margin-bottom: 22px; }
@@ -138,12 +138,6 @@
 .transfer-player:fullscreen .transfer-stage { aspect-ratio: 2/1; width: min(100%,calc((100vh - 135px) * 2)); max-height: calc(100vh - 135px); margin-inline: auto; }
 .transfer-player:fullscreen .transfer-controls { flex-shrink: 0; }
 .transfer-pipeline > div:last-child i { display: none; }
-.transfer-faq { grid-area: faq; margin-top: 48px; padding-top: 34px; border-top: 1px solid var(--site-rule); }
-.transfer-faq-header h3 { margin-top: 12px; font-size: clamp(20px,2vw,28px); font-weight: 400; color: var(--site-ink); letter-spacing: -.025em; }
-.transfer-faq-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 24px 40px; margin-top: 26px; }
-.transfer-faq-item { padding-top: 16px; border-top: 1px solid #dfe8ee; }
-.transfer-faq-item dt { font-size: 14px; font-weight: 500; line-height: 1.6; color: #244a5c; }
-.transfer-faq-item dd { margin: 8px 0 0; font-size: 12px; line-height: 1.85; color: var(--site-muted); }
 .particle-transfer-link { pointer-events: auto; display: inline-flex; align-items: center; gap: 25px; color: var(--hero-link); border-bottom: 1px solid #9bb8c6; margin-top: 32px; padding-bottom: 7px; font-size: 12px; line-height: 1.8; transition: color .2s; }
 .particle-transfer-link:hover { color: var(--hero-link-hover); }
 .particle-transfer-link > span { font-size: 17px; }
@@ -193,8 +187,6 @@
   .transfer-modes svg { flex: 0 0 13px; }
   .transfer-telemetry { padding: 7px 10px; font-size: 9px; }
   .transfer-shortcuts { display: none; }
-  .transfer-faq { margin-top: 34px; padding-top: 26px; }
-  .transfer-faq-grid { grid-template-columns: 1fr; gap: 18px; }
   .transfer-stage,.transfer-player:fullscreen .transfer-stage { grid-template-columns: 1fr; grid-template-rows: 1fr 1fr; aspect-ratio: 1/2; max-height: none; }
   .transfer-stage.is-wipe,.transfer-player:fullscreen .transfer-stage.is-wipe { grid-template-columns: 1fr; grid-template-rows: 1fr; aspect-ratio: 1/1; max-height: none; }
   .is-wipe .transfer-human,.is-wipe .transfer-target,.is-wipe .transfer-wipe-overlay { grid-column: 1; grid-row: 1; }
