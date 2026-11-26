@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { routing } from "./i18n/routing";
 
 const handleI18nRouting = createMiddleware(routing);
+const handleDefaultLocale = createMiddleware({ ...routing, localeDetection: false, localeCookie: false });
 
 export default function middleware(request: NextRequest) {
   const match = request.nextUrl.pathname.match(/^\/(zh|en)(\/.*)?$/);
@@ -17,14 +18,8 @@ export default function middleware(request: NextRequest) {
   }
 
   // First-time visitors always start in Chinese (zh) unless they explicitly switched via NEXT_LOCALE cookie.
-  if (!request.cookies.has("NEXT_LOCALE")) {
-    const headers = new Headers(request.headers);
-    headers.set("accept-language", routing.defaultLocale);
-    const wrapped = new NextRequest(request, { headers });
-    return handleI18nRouting(wrapped);
-  }
-
-  return handleI18nRouting(request);
+  const locale = request.cookies.get("NEXT_LOCALE")?.value;
+  return locale === "zh" || locale === "en" ? handleI18nRouting(request) : handleDefaultLocale(request);
 }
 
 export const config = {

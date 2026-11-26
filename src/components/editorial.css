@@ -99,12 +99,60 @@ html { scroll-padding-top: 80px; }
 .pathway-content { flex: 1; }
 .pathway-content strong { display: block; font-size: 24px; font-weight: 400; }
 .pathway-content > span { display: block; margin-top: 12px; font-size: 14px; line-height: 1.9; color: var(--site-muted); }
-.home-invitation { background: #e6f0f4; }
-.invitation-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 15%; align-items: center; }
-.home-invitation h2 { font-size: clamp(32px,3.6vw,56px); font-weight: 400; line-height: 1.5; letter-spacing: -.035em; white-space: pre-line; text-wrap: balance; }
-.home-invitation p:not(.editorial-label) { max-width: 540px; color: var(--site-muted); font-size: 15px; line-height: 1.95; margin-top: 24px; }
-.invitation-links { display: flex; flex-direction: column; }
-.invitation-links .arrow-link { border-bottom: 1px solid #334f6328; min-height: 77px; font-size: 17px; }
+.home-invitation {
+  --invitation-divider: #dedede;
+  --invitation-muted: #555b61;
+  background: #fafafa;
+  border-top-color: var(--invitation-divider);
+}
+
+.invitation-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(36px, 8vw, 112px);
+}
+
+.home-invitation .editorial-label,
+.home-invitation .editorial-label > span { color: var(--invitation-muted); }
+
+.home-invitation h2 {
+  color: var(--site-ink);
+  font-size: clamp(32px, 3.6vw, 56px);
+  font-weight: 400;
+  line-height: 1.24;
+  letter-spacing: -.035em;
+  white-space: pre-line;
+  text-wrap: balance;
+}
+
+.invitation-copy {
+  max-width: 540px;
+  margin-top: 20px;
+  color: var(--invitation-muted);
+  font-size: 15px;
+  line-height: 1.75;
+}
+
+.invitation-links {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--invitation-divider);
+}
+
+.invitation-links .arrow-link {
+  gap: 16px;
+  min-height: 64px;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--invitation-divider);
+  color: var(--site-ink);
+  font-size: 16px;
+}
+
+.invitation-links .arrow-link > span:last-child { color: var(--invitation-muted); font-size: 18px; }
+.invitation-links .arrow-link:hover,
+.invitation-links .arrow-link:focus-visible { background: #f1f1f1; }
+.invitation-links .arrow-link:focus-visible { outline-offset: -3px; }
 /* Technology, solutions and people */
 .open-columns { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 40px; margin-top: 52px; }
 .open-column { padding: 26px 0 10px; border-top: 1px solid #334f6335; }
@@ -229,7 +277,9 @@ html { scroll-padding-top: 80px; }
   .demo-tabs button { font-size: 13px; }
   .demo-caption { grid-template-columns: minmax(0,1fr); gap: 8px; padding-top: 16px; }
   .pathways-art { display: none; }.pathway-row { min-height: 130px; padding-block: 25px; gap: 17px; }.pathway-content strong { font-size: 22px; }.pathway-content > span { font-size: 12px; }
-  .home-invitation h2 { font-size: 33px; }.home-invitation p:not(.editorial-label) { font-size: 13px; }.invitation-links .arrow-link { min-height: 66px; font-size: 16px; }
+  .home-invitation h2 { font-size: clamp(28px, 8.6vw, 34px); }
+  .invitation-copy { margin-top: 16px; font-size: 14px; }
+  .invitation-links .arrow-link { min-height: 54px; }
   .open-columns { grid-template-columns: minmax(0,1fr); gap: 22px; margin-top: 32px; }.open-column { display: grid; grid-template-columns: 30px minmax(0,1fr); gap: 12px; padding-top: 23px; }.open-column > .eyebrow { padding-top: 6px; }.open-column h3 { margin: 0; font-size: 22px; }.open-column p { grid-column: 2; margin-top: 0; font-size: 13px; }
   .orga-overview > .geometry-study { max-width: 250px; margin: -20px auto; }
   .principle-row { grid-template-columns: 30px minmax(0,1fr); gap: 12px; padding-block: 26px; }.principle-row h3 { font-size: 21px; }.principle-row p { font-size: 13px; }

@@ -62,17 +62,34 @@
   background: var(--site-surface);
 }
 
-.home-technology-visual img { display: block; width: 100%; height: auto; }
+.home-technology-player {
+  position: relative;
+  aspect-ratio: 8 / 3;
+  overflow: hidden;
+  background: var(--site-wash);
+}
 
-.home-technology-labels,
-.home-technology-frames {
+.home-technology-player video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+
+.home-technology-player .demo-play:focus-visible { outline-offset: -3px; }
+
+.home-technology-playback-error {
+  padding: 10px 14px;
+  color: var(--site-muted);
+  font-size: 13px;
+}
+
+.home-technology-labels {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1px;
   background: var(--site-rule);
-}
-
-.home-technology-labels {
   border-bottom: 1px solid var(--site-rule);
   color: var(--site-muted);
   font-size: 12px;

@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 import { Hero } from "@/components/sections/Hero";
 import { HomeStatement, HomeTechnologyPreview, HomePathways, HomeInvitation } from "@/components/sections/HomeExperience";
 import { routing } from "@/i18n/routing";
-import { SITE_ORIGIN, localizedUrl } from "@/lib/seo";
+import { SITE_ORIGIN, buildWebsiteJsonLd, localizedSiteName, localizedUrl } from "@/lib/seo";
 
 type Props = {
   params: Promise<{ locale: string }> | { locale: string };
@@ -28,14 +28,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     metadataBase: new URL(SITE_ORIGIN),
     title: t("title"),
     description: t("description"),
-    keywords: t("keywords").split(","),
     openGraph: {
       title: t("title"),
       description: t("description"),
       url: localizedUrl(lang),
       locale: locale === "zh" ? "zh_CN" : "en_US",
       type: "website",
-      siteName: "Xianova Robotics",
+      siteName: localizedSiteName(lang),
     },
     twitter: {
       card: "summary_large_image",
@@ -62,6 +61,10 @@ export default async function HomePage({ params }: Props) {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(buildWebsiteJsonLd()) }}
+      />
       <Hero />
       <HomeTechnologyPreview />
       <HomeStatement />

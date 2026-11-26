@@ -1,9 +1,9 @@
-# Xianova Robotics（夏仙创新）
+# 夏仙创新（深圳）科技有限公司 Xianova Robotics
 
 > Leading Human–Humanoid Loco-Manipulation Cross-Embodiment Transfer & Zero-Shot Robot Manipulation Generalization.
 > 全球领先的人—人形全身移动操作跨本体迁移与机器人操作零样本泛化技术团队。
 
-Xianova Robotics（深圳夏仙创新科技有限公司）focuses on object-centric embodied AI and cross-embodiment manipulation transfer. Our core **ORGA** architecture and **SparkUMR** human-to-humanoid retargeting toolchain extract object structure, geometric constraints, and hand–object contact relationships from human demonstrations, transferring whole-body loco-manipulation skills across distinct humanoid embodiments without per-robot re-recording.
+Xianova Robotics (夏仙创新（深圳）科技有限公司) focuses on object-centric embodied AI and cross-embodiment manipulation transfer. Our core **ORGA** architecture and **SparkUMR** human-to-humanoid retargeting toolchain extract object structure, geometric constraints, and hand–object contact relationships from human demonstrations, transferring whole-body loco-manipulation skills across distinct humanoid embodiments without per-robot re-recording.
 
 ## Core Capabilities
 

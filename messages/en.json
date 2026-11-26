@@ -129,11 +129,13 @@
   },
   "homeTechnology": {
     "renderedPreview": "Rendered comparison of a pouring task",
+    "playPreview": "Play preview",
+    "previewError": "The preview is unavailable. Try again.",
     "crossEmbodimentDescription": "Compare human and humanoid motion, from whole-body movement to hand–object interaction.",
-    "viewCrossEmbodiment": "Explore the cross-embodiment demos",
-    "viewCrossScene": "Explore the cross-scene demos",
+    "viewCrossEmbodiment": "View all cross-embodiment demos",
+    "viewCrossScene": "View all cross-scene demos",
     "humanSource": "Human demonstration",
-    "sparkumrImageAlt": "SparkUMR retargets a human desk-organizing task to Fourier GR3",
+    "sparkumrPreview": "SparkUMR retargets a human desk-organizing task to Fourier GR3",
     "crossSceneDescription": "See how T21 pours after the cup and bottle change positions.",
     "referenceLayout": "Reference layout",
     "adjustedLayout": "Adjusted layout"
@@ -424,10 +426,8 @@
   },
   "footer": {
     "company": "Shenzhen Xianova Innovation Technology Co., Ltd.",
-    "companyEn": "Xianova Robotics",
     "email": "support@xianova.ai",
     "address": "Shenzhen, China",
-    "icp": "ICP pending",
     "rights": "All rights reserved"
   },
   "transfer": {

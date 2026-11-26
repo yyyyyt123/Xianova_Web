@@ -28,7 +28,10 @@ export function Footer() {
         <div className="footer-location"><span className="eyebrow">XIANOVA ROBOTICS</span><p>{t("company")}</p><p>{t("address")}</p><a href="#main-content" className="footer-top">{ui("backTop")} ↑</a></div>
       </div>
       <p className="footer-large-type" aria-hidden="true">XIANOVA<span>ROBOTICS</span></p>
-      <div className="footer-bottom"><span>© {new Date().getFullYear()} {t("companyEn")}. {t("rights")}</span><span>{t("icp")}</span><span>UNDERSTAND · ACT · GENERALIZE</span></div>
+      <div className="footer-bottom">
+        <span>© {new Date().getFullYear()} {t("company")} {t("rights")}</span>
+        <span>UNDERSTAND · ACT · GENERALIZE</span>
+      </div>
     </div>
   </footer>;
 }

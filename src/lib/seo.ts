@@ -5,9 +5,27 @@ export const SITE_ORIGIN = (
   process.env.NEXT_PUBLIC_SITE_ORIGIN || "https://www.xianova.ai"
 ).replace(/\/+$/, "");
 
+const COMPANY_LEGAL_NAME = "夏仙创新（深圳）科技有限公司";
+const CHINESE_BRAND_NAME = "夏仙创新";
+const ENGLISH_BRAND_NAME = "Xianova Robotics";
+
+export function localizedSiteName(locale: string): string {
+  return locale === "zh" ? `${CHINESE_BRAND_NAME} ${ENGLISH_BRAND_NAME}` : ENGLISH_BRAND_NAME;
+}
+
 export function localizedUrl(_locale: "zh" | "en", path = ""): string {
   const clean = path ? (path.startsWith("/") ? path : `/${path}`) : "/";
   return `${SITE_ORIGIN}${clean}`;
+}
+
+export function buildWebsiteJsonLd() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: localizedSiteName("zh"),
+    alternateName: [ENGLISH_BRAND_NAME, CHINESE_BRAND_NAME],
+    url: localizedUrl("zh"),
+  };
 }
 
 export function buildTechnicalPageMetadata(
@@ -17,7 +35,8 @@ export function buildTechnicalPageMetadata(
   description: string,
 ): Metadata {
   const url = localizedUrl(locale, path);
-  const pageTitle = `${title} | Xianova Robotics`;
+  const siteName = localizedSiteName(locale);
+  const pageTitle = `${title} | ${siteName}`;
 
   return {
     metadataBase: new URL(SITE_ORIGIN),
@@ -36,7 +55,7 @@ export function buildTechnicalPageMetadata(
       url,
       locale: locale === "zh" ? "zh_CN" : "en_US",
       type: "website",
-      siteName: "Xianova Robotics",
+      siteName,
     },
   };
 }
@@ -46,13 +65,13 @@ export function buildOrganizationJsonLd(locale: "zh" | "en") {
   return {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: isZh ? "夏仙创新 Xianova Robotics" : "Xianova Robotics",
-    legalName: "Shenzhen Xianova Innovation Technology Co., Ltd.",
-    alternateName: ["夏仙创新", "深圳夏仙创新科技有限公司", "Xianova"],
+    name: localizedSiteName(locale),
+    legalName: COMPANY_LEGAL_NAME,
+    alternateName: [CHINESE_BRAND_NAME, "Xianova"],
     url: SITE_ORIGIN,
     email: "support@xianova.ai",
     description: isZh
-      ? "夏仙创新专注具身智能与机器人操作零样本泛化，自主研发 ORGA 架构与 SparkUMR 人—人形全身移动操作跨本体迁移系统。"
+      ? `${COMPANY_LEGAL_NAME}专注具身智能与机器人操作零样本泛化，自主研发 ORGA 架构与 SparkUMR 人—人形全身移动操作跨本体迁移系统。`
       : "Xianova Robotics specializes in zero-shot generalization for robot manipulation, building the ORGA architecture and SparkUMR human-to-humanoid cross-embodiment loco-manipulation transfer system.",
     knowsAbout: [
       "Cross-embodiment transfer",
@@ -79,7 +98,7 @@ export function buildSparkumrSoftwareJsonLd(locale: "zh" | "en") {
     softwareVersion: "1.0.0",
     creator: {
       "@type": "Organization",
-      name: "Xianova Robotics",
+      name: localizedSiteName(locale),
       url: SITE_ORIGIN,
     },
     url: localizedUrl(locale, "/cross-embodiment"),
